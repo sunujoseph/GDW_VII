@@ -6,9 +6,8 @@ public class ShootingEnemy : Enemy
 {
 
     [SerializeField] public GameObject projectilePrefab;  // The projectile to shoot
-    //[SerializeField] public float shootInterval = 3f;     // Time between shots
-    [SerializeField] public float agroRange = 5f;
-    [SerializeField] public float fireRate = 5f;
+    [SerializeField] public float agroRange = 5f; // Detection range of enemy before they become hostile
+    [SerializeField] public float fireRate = 5f; // Fire rate of gun
     
     
     private Transform playerTransform;
@@ -51,7 +50,9 @@ public class ShootingEnemy : Enemy
         // Check if the player is within the agro range
         if (Vector2.Distance(transform.position, playerTransform.position) <= agroRange)
         {
-            isHostile = true;  // Once hostile, it stays hostile
+            // Once hostile, it stays hostile
+            // Possibly change this if we wanna tweak enemy behaviour
+            isHostile = true;  
         }
     }
 
