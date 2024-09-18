@@ -9,6 +9,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] public int maxLives = 3; // Max Lives player starts in game            
     [SerializeField] public int currentLives; // Current amount of lives the player has
 
+    // Invulnerability settings
+    [SerializeField] private float invulnerabilityTime = 5f;
+    private bool isPlayerInvulnerable = false;
+
+    private UIManager uiManager;
 
     private void Awake()
     {
@@ -29,19 +34,46 @@ public class PlayerHealth : MonoBehaviour
     {
         // Initialize player lives at game start
         currentLives = maxLives;
+
+        uiManager = FindObjectOfType<UIManager>();
+
+        if (uiManager != null)
+        {
+            uiManager.UpdateHealth(currentLives);
+        }
     }
 
     // Called when player takes damage
     public void TakeDamage(int damage)
     {
-        currentLives -= damage;
-
-        if (currentLives <= 0)
+        if (!isPlayerInvulnerable)
         {
-            GameOver();
+            currentLives -= damage;
+
+            // Update UI when health changes
+            if (uiManager != null)
+            {
+                uiManager.UpdateHealth(currentLives);
+            }
+
+            if (currentLives <= 0)
+            {
+                GameOver();
+            }
+            else
+            {
+                StartCoroutine(HandleInvulnerability());
+            }
         }
     }
 
+    // Handle invulnerability period after taking damage
+    private IEnumerator HandleInvulnerability()
+    {
+        isPlayerInvulnerable = true;  // Enable invulnerability
+        yield return new WaitForSeconds(invulnerabilityTime);  // Wait for the invulnerability period
+        isPlayerInvulnerable = false;  // Disable invulnerability
+    }
 
     // Game over called when player dies
     private void GameOver()
@@ -59,6 +91,12 @@ public class PlayerHealth : MonoBehaviour
     public void GainLife()
     {
         currentLives++;
+
+        // Update UI when health changes
+        if (uiManager != null)
+        {
+            uiManager.UpdateHealth(currentLives);
+        }
     }
 
 

@@ -12,14 +12,14 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D rb;
 
-
-  
+    PlayerHealth playerHealth;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         //pointA = transform.position;
+        playerHealth = FindObjectOfType<PlayerHealth>();
         targetPosition = transform.position; // Start moving towards pointB
     }
 
@@ -55,6 +55,12 @@ public class Enemy : MonoBehaviour
         {
             // Implement player damage here
             Debug.Log("Player hit by enemy!");
+
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(1);
+            }
+
         }
     }
 

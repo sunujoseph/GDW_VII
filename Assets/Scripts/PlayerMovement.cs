@@ -64,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        // Read the input value (Vector2) from the move action
         moveInput = context.ReadValue<Vector2>();
         horizontal = moveInput.x;
     }
@@ -90,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        // Apply vertical force for jumping
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         jumpPressed = false;
     }
