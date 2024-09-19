@@ -54,6 +54,8 @@ public class FlyingEnemy : Enemy
             if (distanceToPlayer <= agroRange)
             {
                 isHostile = true;  // Enter attack phase
+                movingRightToLeft = true;
+
             }
         }
 
@@ -64,6 +66,7 @@ public class FlyingEnemy : Enemy
     }
 
 
+   
 
 
     // Main attack behavior for the flying enemy
@@ -91,6 +94,15 @@ public class FlyingEnemy : Enemy
 
         if (movingRightToLeft)
         {
+            /*
+            if (parabolaTime == 0f)
+            {
+                // Set last known position at the start of the attack
+                lastKnownPlayerPosition = playerTransform.position;
+                lastKnownPlayerPosition.z = 0;
+            }
+            */
+
             // Parabolic movement top right to top left
             Vector3 newPos = CalculateParabolicPosition(topRight, topLeft, lastKnownPlayerPosition, parabolaTime);
             transform.position = newPos;
@@ -147,7 +159,7 @@ public class FlyingEnemy : Enemy
         if (other.CompareTag("Player"))
         {
             // Handle damage to the player here
-            Debug.Log("Player hit by Flyer!");
+            Debug.Log("Player hit by Flying Enemy!");
         }
     }
 
