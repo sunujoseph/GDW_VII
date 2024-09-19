@@ -5,58 +5,108 @@ using UnityEngine;
 
 public class FlyingEnemy : Enemy
 {
-    public float flySpeed = 5f;
-    public float attackDelay = 2f;
-    public float agroRange = 10f;
+    // Flying Enemy like the angry sun from mario
 
+    [SerializeField] public float agroRange = 5f;                // Detection range to trigger attack
+    
+
+    private bool isHostile = false;             // Whether enemy is Hostile State
+    private Vector3 lastKnownPlayerPosition;    // Track last known player position
+    private Camera mainCamera;                  
+
+    private Vector3 topRight;                   // Screen top-right position
+    private Vector3 topLeft;                    // Screen top-left position
+    private Vector3 parabolaStartPoint;
+
+    private float cornerOffset = 10f;
 
     private Transform playerTransform;
-    private bool isHostile = false;
-    //private bool isSweeping = false;
-    //private Rigidbody2D rb;
 
+
+    private float parabolaTime = 0;              // Time-based parameter for parabola calculation
+    private bool movingToPlayer = false;           // Determines if we're moving from top right to left or vice versa
 
 
     protected override void Start()
     {
         base.Start();
-        //rb = GetComponent<Rigidbody2D>();
-        //rb.gravityScale = 0;  // Disable gravity for the Angry Sun
+
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
         // Force them to stay their current position
-        pointA = transform.position;
-        pointB = transform.position;      
+        //pointA = transform.position;
+        //pointB = transform.position;
 
-
+        mainCamera = Camera.main;
     }
+
 
     protected override void Update()
     {
-        //base.Update();
-        //Debug.Log(playerTransform.position);
-        
-    }
+        //base.Update();  // Call the base class Update function for shared behavior
 
-
-
-    private void CheckAgro()
-    {
-        if (Vector2.Distance(transform.position, playerTransform.position) <= agroRange)
+        // Check agro range if not hostile yet
+        if (!isHostile)
         {
-            isHostile = true;
+            float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+            if (distanceToPlayer <= agroRange)
+            {
+                isHostile = true;  // Enter attack phase
+            }
+        }
 
-            // 
+        if (isHostile)
+        {
+            Attack();
         }
     }
 
-    private void SweepingAttack()
+    void StartAttack()
     {
-        if (isHostile) {
-            // Move towards the target position
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, patrolSpeed * Time.deltaTime);
-        }
+        // Calculate screen top-right and top-left positions
+        //Vector3 screenTopRight = new Vector3(Screen.width, Screen.height, 0);
+        //Vector3 screenTopLeft = new Vector3(0, Screen.height, 0);
+        Vector3 screenTopRight = new Vector3(Screen.width - cornerOffset, Screen.height - cornerOffset, 0);
+        Vector3 screenTopLeft = new Vector3(cornerOffset, Screen.height - cornerOffset, 0);
+
+
+        topRight = mainCamera.ScreenToWorldPoint(screenTopRight);
+        topLeft = mainCamera.ScreenToWorldPoint(screenTopLeft);
+        lastKnownPlayerPosition = playerTransform.position;
+
+        // Start from top-right of the screen
+        parabolaStartPoint = topRight;
+        parabolaTime = 0f;  // Reset parabola time
+
     }
+
+
+    // Main attack behavior for the flying enemy
+    void Attack()
+    {
+
+        // Increment the time for smooth movement along the parabola
+        parabolaTime += patrolSpeed * Time.deltaTime;
+
+        
+
+
+    }
+
+    
+
+
+
+
+    void MoveInParabola(Vector3 start, Vector3 end)
+    {
+        Vector3 midPoint = (start + end) / 2f;     
+        midPoint.y = Mathf.Max(start.y, end.y) + 5f; 
+
+        Vector3 m1 = Vector3.Lerp(start, midPoint, parabolaTime);
+        Vector3 m2 = Vector3.Lerp(midPoint, end, parabolaTime);
+        transform.position = Vector3.Lerp(m1, m2, parabolaTime);
+    }
+
 
 
     // Agro range in Editor

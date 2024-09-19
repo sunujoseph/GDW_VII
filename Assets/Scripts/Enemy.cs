@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] public Vector3 pointB;      // Patrol end position
     [SerializeField] public float patrolSpeed = 2f;  // Speed of patrol movement
 
+    [SerializeField] protected int health = 1;
+
     private Vector3 targetPosition; // Current target position for patrol
 
     private Rigidbody2D rb;
@@ -44,6 +46,23 @@ public class Enemy : MonoBehaviour
             
             
         }
+    }
+
+
+    // When Enemy takes damage
+    public virtual void TakeDamage(int amount)
+    {
+        health -= amount;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    // Call when Enemy dies
+    protected void Die()
+    {
+        Destroy(gameObject);
     }
 
 

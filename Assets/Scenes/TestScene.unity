@@ -3326,9 +3326,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointA: {x: 0, y: 0, z: 0}
   pointB: {x: 0, y: 0, z: 0}
-  patrolSpeed: 2
-  sweepSpeed: 5
-  sweepDelay: 2
+  patrolSpeed: 0.1
+  health: 1
   agroRange: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
