@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FlyingEnemy : Enemy
 {
-    public float sweepSpeed = 5f;
-    public float sweepDelay = 2f;
+    public float flySpeed = 5f;
+    public float attackDelay = 2f;
     public float agroRange = 10f;
 
 
     private Transform playerTransform;
     private bool isHostile = false;
-    private bool isSweeping = false;
+    //private bool isSweeping = false;
     //private Rigidbody2D rb;
 
 
@@ -25,20 +26,35 @@ public class FlyingEnemy : Enemy
 
         // Force them to stay their current position
         pointA = transform.position;
-        pointB = transform.position;
-
-        
+        pointB = transform.position;      
 
 
     }
 
-    
+    protected override void Update()
+    {
+        //base.Update();
+        //Debug.Log(playerTransform.position);
+        
+    }
+
+
 
     private void CheckAgro()
     {
         if (Vector2.Distance(transform.position, playerTransform.position) <= agroRange)
         {
             isHostile = true;
+
+            // 
+        }
+    }
+
+    private void SweepingAttack()
+    {
+        if (isHostile) {
+            // Move towards the target position
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, patrolSpeed * Time.deltaTime);
         }
     }
 
