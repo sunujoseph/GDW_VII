@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2899317745340670806}
   - component: {fileID: 3402058050718016914}
   - component: {fileID: 7697969783835430420}
+  - component: {fileID: 6219433166423527972}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -196,6 +197,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2c84aa4d-b4d0-45d2-8ea2-9acc78bf40ad
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 26a1c7bf-9481-4f2b-a6ee-78303508537e
+    m_ActionName: Player/Dash[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -287,6 +292,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 10
+  dashSpeed: 20
+  dashDuration: 0.2
+  dashCooldown: 1
   groundCheck: {fileID: 98240807362733789}
   groundCheckRadius: 0.2
   groundLayer:
@@ -318,6 +326,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c94a5d73e75a4a44934e624854ad957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6219433166423527972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960481409310125933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44b1581e12f9b624aafc29e5c92fa4f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  origin: {fileID: 8024250912073878338}
+  xOffset: 2
+  yOffset: 0
+  angle: 0
+  width: 5
+  height: 5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1150320381143377904
 GameObject:
   m_ObjectHideFlags: 0
