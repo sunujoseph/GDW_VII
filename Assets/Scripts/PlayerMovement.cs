@@ -14,15 +14,15 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float jumpForce = 10f;
-    [SerializeField] private float dashSpeed = 20f;
+
+
+    //[SerializeField] private float dashSpeed = 20f;
+    [SerializeField] private float dashDistance = 5f; // Dash distance in units
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashCooldown = 1f;
 
     bool isFacingRight = true;
-
-    // Check if the player is grounded
     private bool isGrounded;
-
     private bool isDashing = false;
     private bool canDash = true;
 
@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
     // For jumping
     private bool jumpPressed;
-
     private float dashTimer = 0f;
     private float cooldownTimer = 0f;
 
@@ -134,33 +133,50 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Dash Started");
 
         isDashing = true;
-        canDash = false;  // Prevent repeated dashes
+        canDash = false;
 
-        float originalGravity = rb.gravityScale;  // Save gravity scale
-        rb.gravityScale = 0f;  // Disable gravity during dash
+        Vector2 dashDirection;
+        if (moveInput != Vector2.zero)
+        {
+            dashDirection = moveInput.normalized;
+        }
+        else
+        {
+            if (isFacingRight)
+            {
+                dashDirection = Vector2.right;  // Dash to the right
+            }
+            else
+            {
+                dashDirection = Vector2.left;  // Dash to the left
+            }
+        }
 
-        // Determine dash direction: use move input or default to right
-        Vector2 dashDirection = moveInput != Vector2.zero ? moveInput.normalized : (isFacingRight ? Vector2.right : Vector2.left);
-        rb.velocity = dashDirection * dashSpeed;  // Apply dash velocity
+        Vector2 startPosition = rb.position;
+        Vector2 targetPosition = startPosition + dashDirection * dashDistance; // Calculate dash target
 
-        yield return new WaitForSeconds(dashDuration);  // Wait for dash to complete
+        float elapsedTime = 0f;
 
-        rb.gravityScale = originalGravity;  // Restore gravity
-        isDashing = false;  // End dash state
+        // Smooth the distance travel and Lerp
+        while (elapsedTime < dashDuration)
+        {
+            rb.position = Vector2.Lerp(startPosition, targetPosition, elapsedTime / dashDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        rb.position = targetPosition; // Ensure the player reach target 
 
         Debug.Log("Dash Ended");
 
-        // Start cooldown for next dash
+        isDashing = false;
+
+        // Start cooldown before dash can be used again
         yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+
         Debug.Log("Dash Cooldown Complete");
 
-
-        //  dash on ground or mid air
-        if (isGrounded) 
-        {
-            canDash = true;
-        }
-            
     }
 
     private void Flip()
