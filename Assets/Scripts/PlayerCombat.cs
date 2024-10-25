@@ -36,7 +36,13 @@ public class PlayerCombat : MonoBehaviour
 
         //look for an enemy in range of the attack (only checks object on the right layer)
         Collider2D[] targets = Physics2D.OverlapBoxAll(hitBox, new Vector2(width, height), angle, enemyLayers);
-        Debug.Log(hitBox.x + ", " + hitBox.y);
+
+        //debug info for hitbox
+        Debug.DrawLine(new Vector3(hitBox.x - width/2, hitBox.y - height/2, 0), new Vector3(hitBox.x + width / 2, hitBox.y - height/2, 0), Color.blue, 25f);
+        Debug.DrawLine(new Vector3(hitBox.x + width / 2, hitBox.y - height / 2, 0), new Vector3(hitBox.x + width / 2, hitBox.y + height / 2, 0), Color.blue, 25f);
+        Debug.DrawLine(new Vector3(hitBox.x + width / 2, hitBox.y + height / 2, 0), new Vector3(hitBox.x - width / 2, hitBox.y + height / 2, 0), Color.blue, 25f);
+        Debug.DrawLine(new Vector3(hitBox.x - width / 2, hitBox.y + height / 2, 0), new Vector3(hitBox.x - width / 2, hitBox.y - height / 2, 0), Color.blue, 25f);
+        Debug.Log(targets.Length);
 
         //apply damage to hit targets here
     }
