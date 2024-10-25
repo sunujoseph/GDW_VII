@@ -1459,7 +1459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1231298806}
   followSpeed: 5
-  screenThreshold: 0.5
+  screenThresholdX: 0.5
+  screenThresholdY: 0.5
 --- !u!114 &1180279662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2082,6 +2083,17 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &1552254882 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2899317745340670806, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+  m_PrefabInstance: {fileID: 516486040199760272}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552254877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520e881504677214eacf9a80966162e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1579656257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,6 +2911,34 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 5507444500129534915, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507444500129534915, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507444500129534915, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1552254882}
+    - target: {fileID: 5507444500129534915, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507444500129534915, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnDash
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507444500129534915, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507444500129534915, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8024250912073878338, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
