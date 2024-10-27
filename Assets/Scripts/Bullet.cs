@@ -29,10 +29,23 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
+        if (other.CompareTag("Parry"))
+        {
+            lifeCounter = 0f;  // reset counter
+            //Debug.Log("PARRY");
+        }
+
         // Destroy the bullet on player contact
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && CompareTag("EnemyProjectile"))
         {
             Debug.Log("Player hit by bullet!");
+
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Enemy") && CompareTag("PlayerProjectile"))
+        {
+            Debug.Log("Enemy hit by bullet!");
 
             Destroy(gameObject);
         }

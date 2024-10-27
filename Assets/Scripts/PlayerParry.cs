@@ -1,66 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerParry : MonoBehaviour
 {
 
-    [SerializeField] private float parryWindow = 0.3f;  
+    [SerializeField] private float parryDuration = 0.5f;  
     [SerializeField] private float parryCooldown = 1f;  
+    [SerializeField] private float parryProjectileSpeedMod = 10f;  
     [SerializeField] private Transform parryHitbox; 
 
     private bool isParrying = false; 
     private bool canParry = true;
 
 
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        // press parry button
-        StartCoroutine(Parry());
-        
+        // Set parry Hitbox not active
+        parryHitbox.gameObject.SetActive(false);
+    }
+
+
+    public void OnParry(InputAction.CallbackContext context)
+    {
+        if (context.performed && canParry)
+        {
+            StartCoroutine(Parry());
+        }
     }
 
     private IEnumerator Parry()
     {
         Debug.Log("Parry Activated!");
 
-        // Enable the parry state and enlarge the hitbox
+        // Enable the parry hitbox
+        // Set parry active
         isParrying = true;
+        canParry = false;
         parryHitbox.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(parryWindow);  // Parry window duration
+        // Parry Window Duration
+        yield return new WaitForSeconds(parryDuration);  
 
-        // Disable parry state and hitbox
+        // Disable the parry hitbox
+        // End Parry State
         isParrying = false;
         parryHitbox.gameObject.SetActive(false);
-        Debug.Log("Parry Window Ended!");
 
-        // Start parry cooldown
+        // Start Parry Cooldown
+        // Can parry set to true
         yield return new WaitForSeconds(parryCooldown);
         canParry = true;
-        Debug.Log("Parry Cooldown Complete!");
     }
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if an enemy or projectile enters the parry hitbox
         if (isParrying)
         {
             if (other.CompareTag("Enemy") || other.CompareTag("EnemyProjectile"))
             {
                 Debug.Log("Parry Successful!");
 
-                // If it's a projectile, reflect it back at the enemy
                 if (other.CompareTag("EnemyProjectile"))
                 {
-                    ReflectProjectile(other.gameObject);
+                    ReflectProjectile(other.gameObject);  // Reflect projectile 
                 }
 
-                // Destroy the enemy hurtbox or projectile to prevent damage
-                Destroy(other.gameObject);
+                // Kill enemy
+                //Destroy(other.gameObject);
             }
         }
     }
@@ -69,8 +77,22 @@ public class PlayerParry : MonoBehaviour
     {
         Debug.Log("Projectile Reflected");
 
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            // Reflection Direction
+            Vector2 reflectDirection = -rb.velocity.normalized;
+
+            // Apply the new velocity to the projectile
+            // Increase Projectile
+            rb.velocity = reflectDirection * parryProjectileSpeedMod;  
+        }
+
+        // Change the tag so it doesn't hurt the player again
+        projectile.tag = "PlayerProjectile";
+
     }
 
-
-
+    
 }

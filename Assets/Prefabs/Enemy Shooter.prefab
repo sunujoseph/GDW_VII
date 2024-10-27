@@ -177,4 +177,4 @@ MonoBehaviour:
   health: 1
   projectilePrefab: {fileID: 8473217642505165313, guid: 1ce2dbb4c07481141b20c85e4635fc5f, type: 3}
   agroRange: 5
-  fireRate: 4
+  fireRate: 1
