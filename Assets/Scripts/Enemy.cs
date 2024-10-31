@@ -65,22 +65,30 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+  
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D otherObject)
     {
-
-        // If the enemy collides with the player, deal damage
-        if (collision.gameObject.CompareTag("Player"))
+        if (otherObject.CompareTag("Player"))
         {
-            // Implement player damage here
-            Debug.Log("Player hit by enemy!");
-
-            if (playerHealth != null)
+            // If the player is invulnerable
+            if (otherObject.gameObject.layer != LayerMask.NameToLayer("Invulnerable"))
             {
-                playerHealth.TakeDamage(1);
-            }
+                Debug.Log("Player hit by enemy!");
 
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(1);
+                }
+            }
+            else
+            {
+                Debug.Log("Player is invulnerable, no damage taken.");
+            }
+        }
+        else if (otherObject.CompareTag("PlayerProjectile"))
+        {
+            TakeDamage(1);
         }
     }
 

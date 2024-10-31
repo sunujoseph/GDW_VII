@@ -9,6 +9,7 @@ TagManager:
   - EnemyProjectile
   - PlayerProjectile
   - Parry
+  - Hazard
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - UI
   - Ground
   - Enemies
-  - 
-  - 
+  - Player
+  - Invulnerable
   - 
   - 
   - 

@@ -25,16 +25,20 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private bool isDashing = false;
     private bool canDash = true;
+    private bool dashResetOnEnemyHit = false;
+
 
     // Ground check variables
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius = 0.05f;
     [SerializeField] LayerMask groundLayer;
 
+    [SerializeField] LayerMask enemyLayer;
+
     // For jumping
     private bool jumpPressed;
-    private float dashTimer = 0f;
-    private float cooldownTimer = 0f;
+    //private float dashTimer = 0f;
+    //private float cooldownTimer = 0f;
 
 
     private void Awake()
@@ -43,11 +47,6 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -59,7 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            canDash = true;
+            ResetDash();
+            //canDash = true;
         }
 
         // Handle jumping
@@ -134,6 +134,13 @@ public class PlayerMovement : MonoBehaviour
 
         isDashing = true;
         canDash = false;
+        dashResetOnEnemyHit = false;
+
+
+        // Set the player to the "Invulnerable" layer for damage immunity
+        // Dash will act as a dodge of sorts.
+        gameObject.layer = LayerMask.NameToLayer("Invulnerable");
+        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), true);
 
         Vector2 dashDirection;
         if (moveInput != Vector2.zero)
@@ -168,15 +175,38 @@ public class PlayerMovement : MonoBehaviour
         rb.position = targetPosition; // Ensure the player reach target 
 
         Debug.Log("Dash Ended");
-
         isDashing = false;
+        gameObject.layer = LayerMask.NameToLayer("Player"); // Set back to the regular layer
+        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), false);
+
+        if (!dashResetOnEnemyHit)
+        {
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
+        }
 
         // Start cooldown before dash can be used again
         yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
+        //canDash = true;
 
         Debug.Log("Dash Cooldown Complete");
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collisionEnemy)
+    {
+        if (isDashing && collisionEnemy.CompareTag("Enemy"))
+        {
+            Debug.Log("RESET DASH");
+            dashResetOnEnemyHit = true;
+            ResetDash();
+        }
+    }
+
+    private void ResetDash()
+    {
+        canDash = true;
+        dashResetOnEnemyHit = false;
     }
 
     private void Flip()
