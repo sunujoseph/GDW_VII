@@ -715,38 +715,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &504465198 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 393743157389864441, guid: d6e6f169aa2603942b5b2dd0b39e0ebb, type: 3}
-  m_PrefabInstance: {fileID: 3281893734788151804}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &504465203
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504465198}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2933,14 +2901,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2899317745340670806, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
-      propertyPath: enemyLayer.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
     - target: {fileID: 3402058050718016914, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 7858061464900431204, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: airHeight
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8024250912073878338, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3215,10 +3183,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 393743157389864441, guid: d6e6f169aa2603942b5b2dd0b39e0ebb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 504465203}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6e6f169aa2603942b5b2dd0b39e0ebb, type: 3}
 --- !u!1001 &4222379833052942145
 PrefabInstance:

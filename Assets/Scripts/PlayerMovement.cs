@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashCooldown = 1f;
 
     bool isFacingRight = true;
-    private bool isGrounded;
+    public bool isGrounded;
     private bool isDashing = false;
     private bool canDash = true;
     private bool dashResetOnEnemyHit = false;

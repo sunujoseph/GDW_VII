@@ -231,6 +231,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 198d9201-88e9-4391-beca-24234589d158
     m_ActionName: Player/Parry[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7858061464900431204}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ee8c6499-3c25-4a17-ada5-ef5b0643db68
+    m_ActionName: Player/Attack[/Keyboard/j]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -325,11 +341,15 @@ MonoBehaviour:
   dashDistance: 5
   dashDuration: 0.2
   dashCooldown: 1
+  isGrounded: 0
   groundCheck: {fileID: 98240807362733789}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &3402058050718016914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,15 +389,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  attackCooldown: 0.5
+  bounceForce: 10
   origin: {fileID: 8024250912073878338}
-  xOffset: 2
-  yOffset: 0
-  angle: 0
-  width: 1
-  height: 1
+  groundXOffset: 1.25
+  groundYOffset: 0
+  groundWidth: 1
+  groundHeight: 1
+  airXOffset: 0
+  airYOffset: 0
+  airWidth: 1.5
+  airHeight: 3
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+  hazardLayers:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &5606482480973255350
 MonoBehaviour:
   m_ObjectHideFlags: 0
