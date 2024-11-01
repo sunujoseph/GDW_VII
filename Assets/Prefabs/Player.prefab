@@ -397,15 +397,17 @@ MonoBehaviour:
   groundWidth: 1
   groundHeight: 1
   airXOffset: 0
-  airYOffset: 0
+  airYOffset: -1
   airWidth: 1.5
-  airHeight: 3
+  airHeight: 5
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
   hazardLayers:
     serializedVersion: 2
     m_Bits: 1024
+  hitstopDuration: 0.1
+  invulnerabilityDuration: 0.5
 --- !u!114 &5606482480973255350
 MonoBehaviour:
   m_ObjectHideFlags: 0
