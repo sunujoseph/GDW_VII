@@ -37,6 +37,7 @@ public class PlayerAnimator : MonoBehaviour
     private void HandleAnimations()
     {
         animator.SetFloat("xSpeed", Mathf.Abs(movement.x));
+        animator.SetFloat("ySpeed", Mathf.Abs(movement.y));
         animator.SetFloat("Direction", direction);
         animator.SetBool("inAir", inAir);
         animator.SetBool("wasHit", wasHit);
