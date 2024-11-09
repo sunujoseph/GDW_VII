@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7697969783835430420}
   - component: {fileID: 7858061464900431204}
   - component: {fileID: 5606482480973255350}
+  - component: {fileID: -867594302582547788}
   - component: {fileID: -8168411931383537013}
   m_Layer: 8
   m_Name: Player
@@ -316,7 +317,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.33333334, y: 1.0333333}
+    oldSize: {x: 0.3125, y: 0.96875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -425,6 +426,65 @@ MonoBehaviour:
   parryCooldown: 1
   parryProjectileSpeedMod: 10
   parryHitbox: {fileID: 432726578544320979}
+--- !u!114 &-867594302582547788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960481409310125933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3466b36533613f429565df0fe91debb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 0}
+  groundCheckRadius: 0.05
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  moveSpeed: 5
+  jumpForce: 10
+  dashDistance: 5
+  dashDuration: 0.2
+  dashCooldown: 1
+  isGrounded: 0
+  maxLives: 3
+  currentLives: 0
+  invulnerabilityTime: 5
+  parryDuration: 0.5
+  parryCooldown: 1
+  parryProjectileSpeedMod: 10
+  parryHitbox: {fileID: 0}
+  wasHit: 0
+  isAlive: 0
+  movement: {x: 0, y: 0}
+  inAir: 0
+  blocking: 0
+  attacking: 0
+  attackNumber: 0
+  attackCooldown: 0.5
+  bounceForce: 10
+  origin: {fileID: 8024250912073878338}
+  groundXOffset: 0
+  groundYOffset: 0
+  groundWidth: 1
+  groundHeight: 1
+  airXOffset: 0
+  airYOffset: 0
+  airWidth: 1
+  airHeight: 2
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  hazardLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  hitstopDuration: 0.1
+  invulnerabilityDuration: 0.5
 --- !u!95 &-8168411931383537013
 Animator:
   serializedVersion: 5
