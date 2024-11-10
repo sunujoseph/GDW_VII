@@ -123,8 +123,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2899317745340670806}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: -867594302582547788}
+        m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -147,8 +147,8 @@ MonoBehaviour:
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2899317745340670806}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: -867594302582547788}
+        m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
@@ -203,8 +203,8 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2899317745340670806}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: -867594302582547788}
+        m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
         m_MethodName: OnDash
         m_Mode: 0
         m_Arguments:
@@ -219,8 +219,8 @@ MonoBehaviour:
     m_ActionName: Player/Dash[/Keyboard/leftShift]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5606482480973255350}
-        m_TargetAssemblyTypeName: PlayerParry, Assembly-CSharp
+      - m_Target: {fileID: -867594302582547788}
+        m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
         m_MethodName: OnParry
         m_Mode: 0
         m_Arguments:
@@ -235,8 +235,8 @@ MonoBehaviour:
     m_ActionName: Player/Parry[/Keyboard/f]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7858061464900431204}
-        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+      - m_Target: {fileID: -867594302582547788}
+        m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
         m_MethodName: OnAttack
         m_Mode: 0
         m_Arguments:
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960481409310125933}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 520e881504677214eacf9a80966162e5, type: 3}
   m_Name: 
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960481409310125933}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44b1581e12f9b624aafc29e5c92fa4f7, type: 3}
   m_Name: 
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960481409310125933}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efea2dc7d39733e48bf462719192166b, type: 3}
   m_Name: 
@@ -438,16 +438,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3466b36533613f429565df0fe91debb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 98240807362733789}
   groundCheckRadius: 0.05
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   moveSpeed: 5
-  jumpForce: 10
+  jumpForce: 20
   dashDistance: 5
   dashDuration: 0.2
   dashCooldown: 1
@@ -458,7 +458,7 @@ MonoBehaviour:
   parryDuration: 0.5
   parryCooldown: 1
   parryProjectileSpeedMod: 10
-  parryHitbox: {fileID: 0}
+  parryHitbox: {fileID: 432726578544320979}
   wasHit: 0
   isAlive: 0
   movement: {x: 0, y: 0}
@@ -479,10 +479,10 @@ MonoBehaviour:
   airHeight: 2
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   hazardLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   hitstopDuration: 0.1
   invulnerabilityDuration: 0.5
 --- !u!95 &-8168411931383537013
