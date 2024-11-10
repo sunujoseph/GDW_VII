@@ -30,12 +30,15 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private float dashDistance = 5f; // Dash distance in units
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashCooldown = 1f;
+    [SerializeField] private float coyoteTime = 0.2f;
 
     bool isFacingRight = true;
     public bool isGrounded;
     private bool isDashing = false;
     private bool canDash = true;
     private bool dashResetOnEnemyHit = false;
+    private float coyoteTimeCounter;
+
 
     // For jumping
     private bool jumpPressed;
@@ -169,20 +172,27 @@ public class PlayerInputController : MonoBehaviour
         if (isGrounded)
         {
             ResetDash();
+            coyoteTimeCounter = coyoteTime;
+            canAttackInAir = true;
+            comboStep = 0;
             //canDash = true;
         }
+        else 
+        {
+            // Decrease the coyote time counter when not grounded
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
 
         // Handle jumping
-        if (jumpPressed && isGrounded)
+        if (jumpPressed && coyoteTimeCounter > 0f)
         {
             Jump();
         }
 
-        if (isGrounded) // use the ground check 
-        {
-            canAttackInAir = true;
-            comboStep = 0;
-        }
+        // Reset jumpPressed after processing it
+        jumpPressed = false;
+
     }
 
     private void FixedUpdate()
@@ -339,7 +349,8 @@ public class PlayerInputController : MonoBehaviour
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        jumpPressed = false;
+        coyoteTimeCounter = 0f; // Reset to avoid double jump
+        //jumpPressed = false;
     }
 
     public void OnDash(InputAction.CallbackContext context)
@@ -507,43 +518,11 @@ public class PlayerInputController : MonoBehaviour
     }
 
 
+
     private void Attack()
     {
-        //play attack animation here
+        if (!DetermineHitbox(out Vector3 hitBox, out Vector2 hitBoxSize)) return;
 
-        //update hitbox away from the player's body
-        //Vector3 hitBox = origin.position + new Vector3(xOffset, yOffset, 0);
-
-        Vector3 hitBox;
-        Vector2 hitBoxSize;
-
-
-        if (isGrounded) // Use the shared ground check
-        {
-            comboStep = (comboStep + 1) % 3;
-            hitBox = origin.position + new Vector3(groundXOffset, groundYOffset, 0);
-            hitBoxSize = new Vector2(groundWidth, groundHeight);
-
-            // PlayAnimation("AirAttack");
-            // PlayAnimation("GroundAttack" + (comboStep + 1));
-
-        }
-        else if (canAttackInAir)
-        {
-            hitBox = origin.position + new Vector3(airXOffset, airYOffset, 0);
-            hitBoxSize = new Vector2(airWidth, airHeight);
-
-            canAttackInAir = false;
-
-            // PlayAnimation("AirAttack");
-        }
-        else
-        {
-            return;
-        }
-
-        //look for an enemy in range of the attack (only checks object on the right layer)
-        //Collider2D[] hitTargets = Physics2D.OverlapBoxAll(hitBox, new Vector2(width, height), angle, enemyLayers);
         Collider2D[] hitTargets = Physics2D.OverlapBoxAll(hitBox, hitBoxSize, 0f, enemyLayers | hazardLayers);
 
         foreach (Collider2D target in hitTargets)
@@ -551,37 +530,42 @@ public class PlayerInputController : MonoBehaviour
             if (enemyLayers == (enemyLayers | (1 << target.gameObject.layer)))
             {
                 Debug.Log("Hit Enemy: " + target.name);
-                StartCoroutine(Hitstop()); // Trigger hitstop effect
+                StartCoroutine(Hitstop());
 
-
-                if (!isGrounded)
-                {
-                    Bounce();
-                    StartCoroutine(MidAirHitInvulnerability());
-                }
+                if (!isGrounded) Bounce();
             }
             else if (hazardLayers == (hazardLayers | (1 << target.gameObject.layer)))
             {
                 Debug.Log("Hit Hazard: " + target.name);
-                StartCoroutine(Hitstop()); // Trigger hitstop effect
+                StartCoroutine(Hitstop());
 
-                if (!isGrounded)
-                {
-                    Bounce();
-                    StartCoroutine(MidAirHitInvulnerability());
-                }
+                if (!isGrounded) Bounce();
             }
         }
-
-        //debug info for hitbox
-        //Debug.DrawLine(new Vector3(hitBox.x - width/2, hitBox.y - height/2, 0), new Vector3(hitBox.x + width / 2, hitBox.y - height/2, 0), Color.blue, 25f);
-        //Debug.DrawLine(new Vector3(hitBox.x + width / 2, hitBox.y - height / 2, 0), new Vector3(hitBox.x + width / 2, hitBox.y + height / 2, 0), Color.blue, 25f);
-        //Debug.DrawLine(new Vector3(hitBox.x + width / 2, hitBox.y + height / 2, 0), new Vector3(hitBox.x - width / 2, hitBox.y + height / 2, 0), Color.blue, 25f);
-        //Debug.DrawLine(new Vector3(hitBox.x - width / 2, hitBox.y + height / 2, 0), new Vector3(hitBox.x - width / 2, hitBox.y - height / 2, 0), Color.blue, 25f);
-        //Debug.Log(targets.Length);
-
-        //apply damage to hit targets here
     }
+
+
+    private bool DetermineHitbox(out Vector3 hitBox, out Vector2 hitBoxSize)
+{
+    if (isGrounded)
+    {
+        comboStep = (comboStep + 1) % 3;
+        hitBox = origin.position + new Vector3(groundXOffset, groundYOffset, 0);
+        hitBoxSize = new Vector2(groundWidth, groundHeight);
+        return true;
+    }
+    else if (canAttackInAir)
+    {
+        hitBox = origin.position + new Vector3(airXOffset, airYOffset, 0);
+        hitBoxSize = new Vector2(airWidth, airHeight);
+        canAttackInAir = false;
+        return true;
+    }
+
+    hitBox = Vector3.zero;
+    hitBoxSize = Vector2.zero;
+    return false;
+}
 
     private void Bounce()
     {
