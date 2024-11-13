@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - Enemy
+  - EnemyProjectile
+  - PlayerProjectile
+  - Parry
+  - Hazard
   layers:
   - Default
   - TransparentFX
@@ -13,10 +18,10 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
+  - Enemies
+  - Player
+  - Invulnerable
+  - Hazard
   - 
   - 
   - 
