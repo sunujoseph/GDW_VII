@@ -38,6 +38,8 @@ public class PlayerInputController : MonoBehaviour
     private bool canDash = true;
     private bool dashResetOnEnemyHit = false;
     private float coyoteTimeCounter;
+    private Vector3 lastCheckpoint; // Tracks the last checkpoint position
+
 
 
     // For jumping
@@ -64,6 +66,8 @@ public class PlayerInputController : MonoBehaviour
     [Header("Platform Parenting")]
     private int platformCount = 0;
     private Transform playerTransform;
+    private int facingDirection = 1; // 1 for right, -1 for left
+
 
     [Header("Animation States")]
     public bool wasHit;
@@ -139,6 +143,9 @@ public class PlayerInputController : MonoBehaviour
 
         // Get the Rigidbody2D component
         rb = GetComponent<Rigidbody2D>();
+
+        // Set the initial position as the starting checkpoint
+        lastCheckpoint = transform.position;
 
         //animation states
         animator = GetComponent<Animator>();
@@ -295,6 +302,12 @@ public class PlayerInputController : MonoBehaviour
         // Reset lives
         currentLives = maxLives;
 
+        // Update the UI immediately
+        if (uiManager != null)
+        {
+            uiManager.UpdateHealth(currentLives);
+        }
+
         // Restart the game
         SceneManager.LoadScene(0);
     }
@@ -436,7 +449,10 @@ public class PlayerInputController : MonoBehaviour
     private void Flip()
     {
         isFacingRight = !isFacingRight;
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        facingDirection = isFacingRight ? 1 : -1; // Update facing direction
+        //transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3(facingDirection * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
     }
 
     public void OnParry(InputAction.CallbackContext context)
@@ -550,13 +566,13 @@ public class PlayerInputController : MonoBehaviour
     if (isGrounded)
     {
         comboStep = (comboStep + 1) % 3;
-        hitBox = origin.position + new Vector3(groundXOffset, groundYOffset, 0);
+        hitBox = origin.position + new Vector3(facingDirection * groundXOffset, groundYOffset, 0);
         hitBoxSize = new Vector2(groundWidth, groundHeight);
         return true;
     }
     else if (canAttackInAir)
     {
-        hitBox = origin.position + new Vector3(airXOffset, airYOffset, 0);
+        hitBox = origin.position + new Vector3(facingDirection * airXOffset, airYOffset, 0);
         hitBoxSize = new Vector2(airWidth, airHeight);
         canAttackInAir = false;
         return true;
@@ -607,17 +623,54 @@ public class PlayerInputController : MonoBehaviour
 
     }
 
+    public void SetCheckpoint(Vector3 newCheckpoint)
+    {
+        lastCheckpoint = newCheckpoint;
+        Debug.Log("Checkpoint set to: " + lastCheckpoint);
+    }
+
+
+    public void Respawn()
+    {
+        // Reduce a life
+        currentLives--;
+
+        // Update UI when health changes
+        if (uiManager != null)
+        {
+            uiManager.UpdateHealth(currentLives);
+        }
+
+        // Check if the player has lives remaining
+        if (currentLives > 0)
+        {
+            // Respawn at the last checkpoint
+            transform.position = lastCheckpoint;
+            rb.velocity = Vector2.zero; // Reset velocity
+        }
+        else
+        {
+            // Handle game over if no lives remain
+            GameOver();
+        }
+    }
+
     //hitbox debug display
     private void OnDrawGizmosSelected()
     {
-        if (origin == null) return;
+        // Draw the ground hitbox on both sides
+        Vector3 groundHitboxPositionRight = origin.position + new Vector3(groundXOffset, groundYOffset, 0);
+        Vector3 groundHitboxPositionLeft = origin.position + new Vector3(-groundXOffset, groundYOffset, 0);
 
-        Vector3 groundHitboxPosition = origin.position + new Vector3(groundXOffset, groundYOffset, 0);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(groundHitboxPosition, new Vector3(groundWidth, groundHeight, 0));
+        Gizmos.color = Color.red; 
+        Gizmos.DrawWireCube(groundHitboxPositionRight, new Vector3(groundWidth, groundHeight, 0));
+        Gizmos.DrawWireCube(groundHitboxPositionLeft, new Vector3(groundWidth, groundHeight, 0));
 
-        Vector3 airHitboxPosition = origin.position + new Vector3(airXOffset, airYOffset, 0);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(airHitboxPosition, new Vector3(airWidth, airHeight, 0));
+        Vector3 airHitboxPositionRight = origin.position + new Vector3(airXOffset, airYOffset, 0);
+        Vector3 airHitboxPositionLeft = origin.position + new Vector3(-airXOffset, airYOffset, 0);
+
+        Gizmos.color = Color.blue; 
+        Gizmos.DrawWireCube(airHitboxPositionRight, new Vector3(airWidth, airHeight, 0));
+        Gizmos.DrawWireCube(airHitboxPositionLeft, new Vector3(airWidth, airHeight, 0));
     }
 }

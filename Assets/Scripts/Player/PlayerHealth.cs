@@ -11,9 +11,14 @@ public class PlayerHealth : MonoBehaviour
 
     // Invulnerability settings
     [SerializeField] private float invulnerabilityTime = 5f;
+    [SerializeField] private float blinkInterval = 0.2f; // Time between each blink
+
     private bool isPlayerInvulnerable = false;
 
     private UIManager uiManager;
+    private SpriteRenderer playerSpriteRenderer;
+
+    [SerializeField] private GameObject playerObject; // Reference to the player object
 
     private void Awake()
     {
@@ -40,6 +45,17 @@ public class PlayerHealth : MonoBehaviour
         if (uiManager != null)
         {
             uiManager.UpdateHealth(currentLives);
+        }
+
+        TryReassignPlayerObject();
+
+    }
+
+    private void Update()
+    {
+        if (playerObject == null || playerSpriteRenderer == null)
+        {
+            TryReassignPlayerObject();
         }
     }
 
@@ -71,7 +87,31 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator HandleInvulnerability()
     {
         isPlayerInvulnerable = true;  // Enable invulnerability
-        yield return new WaitForSeconds(invulnerabilityTime);  // Wait for the invulnerability period
+
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < invulnerabilityTime)
+        {
+            if (playerSpriteRenderer != null)
+            {
+                playerSpriteRenderer.enabled = !playerSpriteRenderer.enabled; // Toggle sprite visibility
+                //Debug.Log("Blinking: SpriteRenderer.enabled = " + playerSpriteRenderer.enabled);
+            }
+            else if (playerSpriteRenderer == null)
+            {
+                Debug.Log("Player" + playerObject.name);
+            }
+            yield return new WaitForSeconds(blinkInterval); // Wait before toggling again
+            elapsedTime += blinkInterval;
+        }
+
+        if (playerSpriteRenderer != null)
+        {
+            playerSpriteRenderer.enabled = true; // Ensure sprite is visible after blinking ends
+        }
+
+        //yield return new WaitForSeconds(invulnerabilityTime);  // Wait for the invulnerability period
         isPlayerInvulnerable = false;  // Disable invulnerability
     }
 
@@ -96,6 +136,37 @@ public class PlayerHealth : MonoBehaviour
         if (uiManager != null)
         {
             uiManager.UpdateHealth(currentLives);
+        }
+    }
+
+    private void TryReassignPlayerObject()
+    {
+        // Find player object if it's missing
+        if (playerObject == null)
+        {
+            playerObject = GameObject.FindWithTag("Player");
+            if (playerObject != null)
+            {
+                Debug.LogWarning("Player object found.");
+
+                playerSpriteRenderer = playerObject.GetComponent<SpriteRenderer>();
+                if (playerSpriteRenderer != null)
+                {
+                    Debug.Log("Player and SpriteRenderer reassigned successfully.");
+                }
+                else
+                {
+                    Debug.LogError("SpriteRenderer not found.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Player object not found.");
+            }
+        }
+        else if (playerObject != null)
+        {
+            playerSpriteRenderer = playerObject.GetComponent<SpriteRenderer>();
         }
     }
 

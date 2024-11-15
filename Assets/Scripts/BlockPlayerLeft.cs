@@ -7,10 +7,33 @@ public class BlockPlayerLeft : MonoBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] float bufferDistance = 1f;
 
+    private void Start()
+    {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+            if (mainCamera == null)
+            {
+                Debug.LogError("MainCamera is not assigned or found");
+            }
+        }
+
+    }
+
 
     // Update is called once per frame
     void Update()
     {
+
+        // Check if the camera exists
+        if (mainCamera == null)
+        {
+            Debug.LogWarning("MainCamera reference is missing. Attempting to reassign.");
+            mainCamera = Camera.main; 
+            if (mainCamera == null) return; 
+        }
+
+
         // Set buffer distance from the left wall of the camera
         // Prevents player from walking backwards
         // Like a classic mario game

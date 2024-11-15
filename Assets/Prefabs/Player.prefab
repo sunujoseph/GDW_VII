@@ -84,7 +84,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 54192248, guid: a94e9bbd298ff014c8cb32172b2b6b67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -324,7 +324,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &2899317745340670806
 MonoBehaviour:
@@ -451,6 +451,7 @@ MonoBehaviour:
   dashDistance: 5
   dashDuration: 0.2
   dashCooldown: 1
+  coyoteTime: 0.2
   isGrounded: 0
   maxLives: 3
   currentLives: 0
@@ -469,14 +470,14 @@ MonoBehaviour:
   attackCooldown: 0.5
   bounceForce: 10
   origin: {fileID: 8024250912073878338}
-  groundXOffset: 0
+  groundXOffset: 1.25
   groundYOffset: 0
   groundWidth: 1
   groundHeight: 1
   airXOffset: 0
-  airYOffset: 0
-  airWidth: 1
-  airHeight: 2
+  airYOffset: -1
+  airWidth: 1.5
+  airHeight: 5
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -610,7 +611,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

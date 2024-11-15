@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] public float patrolSpeed = 2f;  // Speed of patrol movement
 
     [SerializeField] protected int health = 1;
+    [SerializeField] public bool isPatrolActive = true;
 
     private Vector3 targetPosition; // Current target position for patrol
 
@@ -28,7 +29,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        Patrol();
+        if (isPatrolActive)
+        {
+            Patrol();
+        }
+        
     }
 
     protected void Patrol()
