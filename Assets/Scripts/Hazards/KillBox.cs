@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class KillBox : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -22,10 +12,14 @@ public class KillBox : MonoBehaviour
         // Check if the player entered the kill box
         if (other.CompareTag("Player"))
         {
-            PlayerInputController player = other.GetComponent<PlayerInputController>();
-            if (player != null)
+            PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
+            if (playerHealth != null)
             {
-                player.Respawn(); // Call the Respawn method on the player
+                playerHealth.Respawn(other.gameObject); // Pass the Player GameObject
+            }
+            else
+            {
+                Debug.LogError("PlayerHealth instance not found!");
             }
         }
     }

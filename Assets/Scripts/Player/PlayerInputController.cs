@@ -53,6 +53,12 @@ public class PlayerInputController : MonoBehaviour
     // Invulnerability settings
     [SerializeField] private float invulnerabilityTime = 5f;
     private bool isPlayerInvulnerable = false;
+    private float invulnerabilityTimer = 0f; // Tracks the remaining invulnerability time
+    private float blinkTimer = 0f; // Tracks time for blinking
+    [SerializeField] private float blinkInterval = 0.2f; // Time between each blink
+    [SerializeField] private SpriteRenderer spriteRenderer; // Assign in Inspector or find dynamically
+
+
     private UIManager uiManager;
 
     [Header("Parry")]
@@ -114,7 +120,10 @@ public class PlayerInputController : MonoBehaviour
     public float hitstopDuration = 0.1f;
 
     [Header("Invulnerability Parameters")]
-    public float invulnerabilityDuration = 0.5f; // Invulnerability after mid-air hit
+    public float invulnerabilityDuration = 0.5f;
+    
+
+
     //private bool isInvulnerable = false;
 
     private void Awake()
@@ -173,6 +182,8 @@ public class PlayerInputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //HandleInvulnerability();
+
         // Check if the player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
@@ -262,67 +273,16 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
-    // Called when player takes damage
-    public void TakeDamage(int damage)
-    {
-        if (!isPlayerInvulnerable)
-        {
-            currentLives -= damage;
 
-            // Update UI when health changes
-            if (uiManager != null)
-            {
-                uiManager.UpdateHealth(currentLives);
-            }
 
-            if (currentLives <= 0)
-            {
-                GameOver();
-            }
-            else
-            {
-                StartCoroutine(HandleInvulnerability());
-            }
-        }
-    }
 
-    // Handle invulnerability period after taking damage
-    private IEnumerator HandleInvulnerability()
-    {
-        isPlayerInvulnerable = true;  // Enable invulnerability
-        yield return new WaitForSeconds(invulnerabilityTime);  // Wait for the invulnerability period
-        isPlayerInvulnerable = false;  // Disable invulnerability
-    }
 
-    // Game over called when player dies
-    private void GameOver()
-    {
-        Debug.Log("Game Over!");
 
-        // Reset lives
-        currentLives = maxLives;
 
-        // Update the UI immediately
-        if (uiManager != null)
-        {
-            uiManager.UpdateHealth(currentLives);
-        }
+    
 
-        // Restart the game
-        SceneManager.LoadScene(0);
-    }
 
-    // If the player picks up a life pickup
-    public void GainLife()
-    {
-        currentLives++;
 
-        // Update UI when health changes
-        if (uiManager != null)
-        {
-            uiManager.UpdateHealth(currentLives);
-        }
-    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -523,6 +483,13 @@ public class PlayerInputController : MonoBehaviour
         animator.SetInteger("attackNumber", attackNumber);
     }
 
+
+
+
+
+
+
+
     public void OnAttack(InputAction.CallbackContext context)
     {
 
@@ -607,6 +574,10 @@ public class PlayerInputController : MonoBehaviour
         Time.timeScale = 0f;  // Pause the game for a sec
         yield return new WaitForSecondsRealtime(hitstopDuration);
         Time.timeScale = originalTimeScale;  // Restore the original time scale
+
+
+
+
     }
 
     private IEnumerator MidAirHitInvulnerability()
@@ -623,37 +594,8 @@ public class PlayerInputController : MonoBehaviour
 
     }
 
-    public void SetCheckpoint(Vector3 newCheckpoint)
-    {
-        lastCheckpoint = newCheckpoint;
-        Debug.Log("Checkpoint set to: " + lastCheckpoint);
-    }
+    
 
-
-    public void Respawn()
-    {
-        // Reduce a life
-        currentLives--;
-
-        // Update UI when health changes
-        if (uiManager != null)
-        {
-            uiManager.UpdateHealth(currentLives);
-        }
-
-        // Check if the player has lives remaining
-        if (currentLives > 0)
-        {
-            // Respawn at the last checkpoint
-            transform.position = lastCheckpoint;
-            rb.velocity = Vector2.zero; // Reset velocity
-        }
-        else
-        {
-            // Handle game over if no lives remain
-            GameOver();
-        }
-    }
 
     //hitbox debug display
     private void OnDrawGizmosSelected()

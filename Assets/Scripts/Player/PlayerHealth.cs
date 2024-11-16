@@ -6,71 +6,99 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     public static PlayerHealth instance;
-    [SerializeField] public int maxLives = 3; // Max Lives player starts in game            
-    [SerializeField] public int currentLives; // Current amount of lives the player has
 
-    // Invulnerability settings
+    [SerializeField] public int maxLives = 3; // Max lives
+    [SerializeField] public int currentLives; // Current lives
+
     [SerializeField] private float invulnerabilityTime = 5f;
-    [SerializeField] private float blinkInterval = 0.2f; // Time between each blink
+    [SerializeField] private float blinkInterval = 0.2f; // Blink interval
 
     private bool isPlayerInvulnerable = false;
+    private float invulnerabilityTimer;
+    private float blinkTimer;
 
     private UIManager uiManager;
     private SpriteRenderer playerSpriteRenderer;
 
-    [SerializeField] private GameObject playerObject; // Reference to the player object
+    private Vector3 lastCheckpoint; // Last checkpoint position
+
+
+    [SerializeField] private GameObject playerObject; // Reference to player object
 
     private void Awake()
     {
-        // Keep this object persistent across scenes
-        // Ensure only one instance exists
+        // Ensure singleton instance
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);  
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject);  
+            Destroy(gameObject);
         }
     }
 
     private void Start()
     {
-        // Initialize player lives at game start
         currentLives = maxLives;
-
         uiManager = FindObjectOfType<UIManager>();
-
-        if (uiManager != null)
-        {
-            uiManager.UpdateHealth(currentLives);
-        }
+        uiManager?.UpdateHealth(currentLives);
 
         TryReassignPlayerObject();
-
     }
 
     private void Update()
     {
+        HandleInvulnerability();
+
+        // Ensure player and SpriteRenderer references are assigned
         if (playerObject == null || playerSpriteRenderer == null)
         {
             TryReassignPlayerObject();
         }
     }
 
-    // Called when player takes damage
+    public void Respawn(GameObject player)
+    {
+        // Reduce a life
+        currentLives--;
+        uiManager?.UpdateHealth(currentLives);
+
+        // Check if the player has lives remaining
+        if (currentLives > 0)
+        {
+            // Respawn at the last checkpoint
+            if (player != null)
+            {
+                player.transform.position = lastCheckpoint;
+                Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.velocity = Vector2.zero; // Reset velocity
+                }
+            }
+        }
+        else
+        {
+            GameOver();
+        }
+    }
+
+    public void SetCheckpoint(Vector3 newCheckpoint)
+    {
+        lastCheckpoint = newCheckpoint;
+        Debug.Log("Checkpoint updated: " + lastCheckpoint);
+    }
+
+
+
     public void TakeDamage(int damage)
     {
         if (!isPlayerInvulnerable)
         {
             currentLives -= damage;
-
-            // Update UI when health changes
-            if (uiManager != null)
-            {
-                uiManager.UpdateHealth(currentLives);
-            }
+            uiManager?.UpdateHealth(currentLives);
 
             if (currentLives <= 0)
             {
@@ -78,64 +106,71 @@ public class PlayerHealth : MonoBehaviour
             }
             else
             {
-                StartCoroutine(HandleInvulnerability());
+                StartInvulnerability();
             }
         }
     }
 
-    // Handle invulnerability period after taking damage
-    private IEnumerator HandleInvulnerability()
+    private void HandleInvulnerability()
     {
-        isPlayerInvulnerable = true;  // Enable invulnerability
-
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < invulnerabilityTime)
+        if (isPlayerInvulnerable)
         {
-            if (playerSpriteRenderer != null)
-            {
-                playerSpriteRenderer.enabled = !playerSpriteRenderer.enabled; // Toggle sprite visibility
-                //Debug.Log("Blinking: SpriteRenderer.enabled = " + playerSpriteRenderer.enabled);
-            }
-            else if (playerSpriteRenderer == null)
-            {
-                Debug.Log("Player" + playerObject.name);
-            }
-            yield return new WaitForSeconds(blinkInterval); // Wait before toggling again
-            elapsedTime += blinkInterval;
-        }
+            invulnerabilityTimer -= Time.deltaTime;
 
-        if (playerSpriteRenderer != null)
-        {
-            playerSpriteRenderer.enabled = true; // Ensure sprite is visible after blinking ends
-        }
+            // Blink logic
+            blinkTimer -= Time.deltaTime;
+            if (blinkTimer <= 0f && playerSpriteRenderer != null)
+            {
+                playerSpriteRenderer.enabled = !playerSpriteRenderer.enabled; // Toggle visibility
+                blinkTimer = blinkInterval; // Reset blink timer
+            }
 
-        //yield return new WaitForSeconds(invulnerabilityTime);  // Wait for the invulnerability period
-        isPlayerInvulnerable = false;  // Disable invulnerability
+            // End invulnerability
+            if (invulnerabilityTimer <= 0f)
+            {
+                isPlayerInvulnerable = false;
+                if (playerSpriteRenderer != null)
+                {
+                    playerSpriteRenderer.enabled = true; // Ensure sprite is visible
+                }
+            }
+        }
     }
 
-    // Game over called when player dies
+    private void StartInvulnerability()
+    {
+        isPlayerInvulnerable = true;
+        invulnerabilityTimer = invulnerabilityTime;
+        blinkTimer = 0f; // Start blinking immediately
+    }
+
+
+
     private void GameOver()
     {
         Debug.Log("Game Over!");
 
-        // Reset lives
-        currentLives = maxLives;
+        ResetState();
 
-        // Restart the game
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Restart level
     }
 
-    // If the player picks up a life pickup
     public void GainLife()
     {
         currentLives++;
+        uiManager?.UpdateHealth(currentLives);
+    }
 
-        // Update UI when health changes
-        if (uiManager != null)
+    private void ResetState()
+    {
+        currentLives = maxLives;
+        uiManager?.UpdateHealth(currentLives);
+        lastCheckpoint = Vector3.zero;
+        isPlayerInvulnerable = false;
+
+        if (playerSpriteRenderer != null)
         {
-            uiManager.UpdateHealth(currentLives);
+            playerSpriteRenderer.enabled = true; // Ensure visibility
         }
     }
 
