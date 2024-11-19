@@ -118,6 +118,8 @@ public class PlayerInputController : MonoBehaviour
 
     [Header("Hitstop Parameters")]
     public float hitstopDuration = 0.1f;
+    private bool isHitstopping = false;
+
 
     [Header("Invulnerability Parameters")]
     public float invulnerabilityDuration = 0.5f;
@@ -182,7 +184,6 @@ public class PlayerInputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //HandleInvulnerability();
 
         // Check if the player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -215,6 +216,9 @@ public class PlayerInputController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Debug.Log("Time scale during Update: " + Time.timeScale);
+
+
         if (!isDashing)  // Disable regular movement during dash
         {
             SetPlayerVelocity();
@@ -513,14 +517,18 @@ public class PlayerInputController : MonoBehaviour
             if (enemyLayers == (enemyLayers | (1 << target.gameObject.layer)))
             {
                 Debug.Log("Hit Enemy: " + target.name);
-                StartCoroutine(Hitstop());
+                //StartCoroutine(Hitstop());
+                if (!isHitstopping) StartCoroutine(Hitstop()); 
+
 
                 if (!isGrounded) Bounce();
             }
             else if (hazardLayers == (hazardLayers | (1 << target.gameObject.layer)))
             {
                 Debug.Log("Hit Hazard: " + target.name);
-                StartCoroutine(Hitstop());
+                //StartCoroutine(Hitstop());
+                if (!isHitstopping) StartCoroutine(Hitstop()); 
+
 
                 if (!isGrounded) Bounce();
             }
@@ -570,13 +578,19 @@ public class PlayerInputController : MonoBehaviour
 
     private IEnumerator Hitstop()
     {
+        Debug.Log("Hitstop started at time: " + Time.realtimeSinceStartup);
+
+
+        if (isHitstopping) yield break; // Prevent overlapping hitstops
+        isHitstopping = true;
+
         float originalTimeScale = Time.timeScale;
+
         Time.timeScale = 0f;  // Pause the game for a sec
+
         yield return new WaitForSecondsRealtime(hitstopDuration);
         Time.timeScale = originalTimeScale;  // Restore the original time scale
-
-
-
+        isHitstopping = false;
 
     }
 
@@ -615,4 +629,8 @@ public class PlayerInputController : MonoBehaviour
         Gizmos.DrawWireCube(airHitboxPositionRight, new Vector3(airWidth, airHeight, 0));
         Gizmos.DrawWireCube(airHitboxPositionLeft, new Vector3(airWidth, airHeight, 0));
     }
+
+
+    
+
 }
