@@ -223,6 +223,9 @@ public class PlayerInputController : MonoBehaviour
         {
             SetPlayerVelocity();
         }
+
+        
+
     }
 
     //different kinds of collisions
@@ -238,6 +241,7 @@ public class PlayerInputController : MonoBehaviour
                 if (other.CompareTag("EnemyProjectile"))
                 {
                     ReflectProjectile(other.gameObject);  // Reflect projectile 
+                    if (!isHitstopping) StartCoroutine(Hitstop());
                 }
 
                 // Kill enemy
@@ -248,9 +252,14 @@ public class PlayerInputController : MonoBehaviour
         //multi dash
         if (isDashing && other.CompareTag("Enemy"))
         {
-            Debug.Log("RESET DASH");
+            //Debug.Log("RESET DASH");
             dashResetOnEnemyHit = true;
-            ResetDash();
+            //ResetDash();
+
+            //coyoteTimeCounter = coyoteTime; // Extend coyote time for floating
+
+
+            if (!isHitstopping) StartCoroutine(Hitstop());
         }
     }
 
@@ -330,6 +339,11 @@ public class PlayerInputController : MonoBehaviour
         //jumpPressed = false;
     }
 
+
+
+
+
+
     public void OnDash(InputAction.CallbackContext context)
     {
         if (context.performed && canDash)
@@ -380,24 +394,31 @@ public class PlayerInputController : MonoBehaviour
         {
             rb.position = Vector2.Lerp(startPosition, targetPosition, elapsedTime / dashDuration);
             elapsedTime += Time.deltaTime;
+
+
             yield return null;
         }
 
         rb.position = targetPosition; // Ensure the player reach target 
 
+        // Set back to the regular layer
+        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), false);
         Debug.Log("Dash Ended");
         isDashing = false;
-        gameObject.layer = LayerMask.NameToLayer("Player"); // Set back to the regular layer
-        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), false);
+        gameObject.layer = LayerMask.NameToLayer("Player");
+
 
         if (!dashResetOnEnemyHit)
         {
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
         }
+        
+
+        
 
         // Start cooldown before dash can be used again
-        yield return new WaitForSeconds(dashCooldown);
+        //yield return new WaitForSeconds(dashCooldown);
         //canDash = true;
 
         Debug.Log("Dash Cooldown Complete");
@@ -471,6 +492,8 @@ public class PlayerInputController : MonoBehaviour
         // Change the tag so it doesn't hurt the player again
         projectile.tag = "PlayerProjectile";
 
+        //if (!isHitstopping) StartCoroutine(Hitstop());
+
     }
 
     private void HandleAnimations()
@@ -518,19 +541,27 @@ public class PlayerInputController : MonoBehaviour
             {
                 Debug.Log("Hit Enemy: " + target.name);
                 //StartCoroutine(Hitstop());
-                if (!isHitstopping) StartCoroutine(Hitstop()); 
+                if (!isHitstopping) StartCoroutine(Hitstop());
 
 
-                if (!isGrounded) Bounce();
+                if (!isGrounded)
+                {
+                    Bounce();
+                    ResetDash(); // Reset the dash mechanic
+                }
             }
             else if (hazardLayers == (hazardLayers | (1 << target.gameObject.layer)))
             {
                 Debug.Log("Hit Hazard: " + target.name);
                 //StartCoroutine(Hitstop());
-                if (!isHitstopping) StartCoroutine(Hitstop()); 
+                if (!isHitstopping) StartCoroutine(Hitstop());
 
 
-                if (!isGrounded) Bounce();
+                if (!isGrounded)
+                {
+                    Bounce();
+                    ResetDash(); // Reset the dash mechanic
+                }
             }
         }
     }
