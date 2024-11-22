@@ -1998,6 +1998,8 @@ MonoBehaviour:
   followSpeed: 5
   screenThresholdX: 0.5
   screenThresholdY: 0.5
+  verticalOffset: 0
+  horizontalOffset: 0
 --- !u!114 &1180279662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4238,6 +4240,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 352434953782903553, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Color.a
+      value: 0.3254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 352434953782903553, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 352434953782903553, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 352434953782903553, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 960481409310125933, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: m_Name
       value: Player

@@ -13,7 +13,12 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] float followSpeed = 5f;
     [SerializeField] float screenThresholdX = 0.5f;
-    [SerializeField] float screenThresholdY = 0.5f; 
+    [SerializeField] float screenThresholdY = 0.5f;
+
+    // Camera offset
+    [SerializeField] float verticalOffset = 2f;  // Vertical offset from the player's position
+    [SerializeField] float horizontalOffset = 0f;  // Horizontal offset from the player's position
+
 
     private void Start()
     {
@@ -45,18 +50,22 @@ public class FollowPlayer : MonoBehaviour
             }
         }
 
+        // Get the player's position in viewport space
         Vector3 playerScreenPos = Camera.main.WorldToViewportPoint(playerTransform.position);
+
+        // Initialize the target position to the camera's current position
         Vector3 targetPosition = transform.position;
 
+        // Apply screen threshold logic for the horizontal axis
         if (playerScreenPos.x > screenThresholdX && playerTransform.position.x > transform.position.x)
         {
-            targetPosition.x = playerTransform.position.x;
+            targetPosition.x = playerTransform.position.x + horizontalOffset;
         }
 
-        // Update Y-axis for both upward and downward movement
+        // Apply screen threshold logic for the vertical axis
         if (playerScreenPos.y > screenThresholdY || playerScreenPos.y < (1 - screenThresholdY))
         {
-            targetPosition.y = playerTransform.position.y;
+            targetPosition.y = playerTransform.position.y + verticalOffset;
         }
 
         // Smoothly move the camera to the target position

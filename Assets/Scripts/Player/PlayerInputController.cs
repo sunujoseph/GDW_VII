@@ -39,6 +39,8 @@ public class PlayerInputController : MonoBehaviour
     private bool dashResetOnEnemyHit = false;
     private float coyoteTimeCounter;
     private Vector3 lastCheckpoint; // Tracks the last checkpoint position
+    private float groundedBufferTime = 0.1f; 
+    private float groundedBufferCounter = 0f;
 
 
 
@@ -194,24 +196,23 @@ public class PlayerInputController : MonoBehaviour
             coyoteTimeCounter = coyoteTime;
             canAttackInAir = true;
             comboStep = 0;
+            groundedBufferCounter = groundedBufferTime;
             //canDash = true;
         }
         else 
         {
-            
+
             // Decrease the coyote time counter when not grounded
+            groundedBufferCounter -= Time.deltaTime;
             coyoteTimeCounter -= Time.deltaTime;
         }
 
 
         // Handle jumping
-        if (jumpPressed && coyoteTimeCounter > 0f)
+        if (jumpPressed && groundedBufferCounter > 0f)
         {
             Jump();
         }
-
-        // Reset jumpPressed after processing it
-        jumpPressed = false;
 
     }
 
@@ -337,7 +338,7 @@ public class PlayerInputController : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         coyoteTimeCounter = 0f; // Reset to avoid double jump
-        //jumpPressed = false;
+        jumpPressed = false;
     }
 
 
@@ -351,6 +352,11 @@ public class PlayerInputController : MonoBehaviour
         {
             Debug.Log("Dash Triggered");
             StartCoroutine(Dash());
+
+            if (!isGrounded)
+            {
+                coyoteTimeCounter = coyoteTime;
+            }
         }
     }
 
@@ -400,10 +406,6 @@ public class PlayerInputController : MonoBehaviour
             yield return null;
         }
 
-        if (!isGrounded)
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
 
         rb.position = targetPosition; // Ensure the player reach target 
 
