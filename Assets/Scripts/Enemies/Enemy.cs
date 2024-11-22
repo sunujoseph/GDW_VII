@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     private bool isFacingRight = true;
 
     PlayerHealth playerHealth;
-    private Transform playerTransform; // Reference to the player's transform
+    private Transform playerFindTransform; // Reference to the player's transform
 
 
     // Start is called before the first frame update
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //pointA = transform.position;
         playerHealth = FindObjectOfType<PlayerHealth>();
-        playerTransform = GameObject.FindWithTag("Player").transform;
+        playerFindTransform = GameObject.FindWithTag("Player").transform;
         targetPosition = transform.position; // Start moving towards pointB
     }
 
@@ -71,11 +71,11 @@ public class Enemy : MonoBehaviour
 
     private void FacePlayer()
     {
-        if (playerTransform == null) return;
+        if (playerFindTransform == null) return;
 
         // Check if the player is to the left or right of the enemy
-        if ((playerTransform.position.x < transform.position.x && isFacingRight) ||
-            (playerTransform.position.x > transform.position.x && !isFacingRight))
+        if ((playerFindTransform.position.x < transform.position.x && isFacingRight) ||
+            (playerFindTransform.position.x > transform.position.x && !isFacingRight))
         {
             Flip();
         }
