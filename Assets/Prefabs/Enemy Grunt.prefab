@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointA: {x: 12.94, y: -3.67, z: 0}
-  pointB: {x: 18.2, y: -3.67, z: 0}
+  pointB: {x: 17.9, y: -3.67, z: 0}
   patrolSpeed: 2
   health: 1
   isPatrolActive: 1
