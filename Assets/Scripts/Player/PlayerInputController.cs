@@ -198,6 +198,7 @@ public class PlayerInputController : MonoBehaviour
         }
         else 
         {
+            
             // Decrease the coyote time counter when not grounded
             coyoteTimeCounter -= Time.deltaTime;
         }
@@ -399,6 +400,11 @@ public class PlayerInputController : MonoBehaviour
             yield return null;
         }
 
+        if (!isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+
         rb.position = targetPosition; // Ensure the player reach target 
 
         // Set back to the regular layer
@@ -407,13 +413,13 @@ public class PlayerInputController : MonoBehaviour
         isDashing = false;
         gameObject.layer = LayerMask.NameToLayer("Player");
 
-
+        /*
         if (!dashResetOnEnemyHit)
         {
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
         }
-        
+        */
 
         
 

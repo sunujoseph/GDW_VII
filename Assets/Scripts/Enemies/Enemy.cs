@@ -14,8 +14,11 @@ public class Enemy : MonoBehaviour
     private Vector3 targetPosition; // Current target position for patrol
 
     private Rigidbody2D rb;
+    private bool isFacingRight = true;
 
     PlayerHealth playerHealth;
+    private Transform playerTransform; // Reference to the player's transform
+
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -23,6 +26,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //pointA = transform.position;
         playerHealth = FindObjectOfType<PlayerHealth>();
+        playerTransform = GameObject.FindWithTag("Player").transform;
         targetPosition = transform.position; // Start moving towards pointB
     }
 
@@ -32,6 +36,10 @@ public class Enemy : MonoBehaviour
         if (isPatrolActive)
         {
             Patrol();
+        }
+        else
+        {
+            FacePlayer();
         }
         
     }
@@ -47,12 +55,31 @@ public class Enemy : MonoBehaviour
             // Swap target position between pointA and pointB
             //targetPosition = targetPosition == pointA ? pointB : pointA;
             targetPosition = targetPosition == pointA ? pointB : pointA;
-            
-            
-            
+            Flip();
+
         }
     }
 
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight; // Toggle facing direction
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1; // Invert the x scale to flip the sprite
+        transform.localScale = localScale;
+    }
+
+
+    private void FacePlayer()
+    {
+        if (playerTransform == null) return;
+
+        // Check if the player is to the left or right of the enemy
+        if ((playerTransform.position.x < transform.position.x && isFacingRight) ||
+            (playerTransform.position.x > transform.position.x && !isFacingRight))
+        {
+            Flip();
+        }
+    }
 
     // When Enemy takes damage
     public virtual void TakeDamage(int amount)
