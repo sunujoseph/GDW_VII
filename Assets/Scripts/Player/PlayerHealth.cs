@@ -22,6 +22,10 @@ public class PlayerHealth : MonoBehaviour
 
     private Vector3 lastCheckpoint; // Last checkpoint position
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip damageSound;
+    [SerializeField] private AudioClip deathSound;
+
 
     [SerializeField] private GameObject playerObject; // Reference to player object
 
@@ -97,6 +101,9 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!isPlayerInvulnerable)
         {
+            //sound 
+            SoundManager.instance.Play(damageSound, playerObject.transform, 1f);
+
             currentLives -= damage;
             uiManager?.UpdateHealth(currentLives);
 
@@ -149,6 +156,8 @@ public class PlayerHealth : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("Game Over!");
+
+        SoundManager.instance.Play(deathSound, playerObject.transform, 1f);
 
         ResetState();
 

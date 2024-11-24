@@ -412,6 +412,11 @@ MonoBehaviour:
     m_Bits: 1024
   hitstopDuration: 0.3
   invulnerabilityDuration: 0.5
+  jumpSound: {fileID: 8300000, guid: 37afe353842deed4198a69b7238a60ee, type: 3}
+  dashSound: {fileID: 8300000, guid: 9549a54ea51571342af54d61e7642ee7, type: 3}
+  landingSound: {fileID: 8300000, guid: 4eaf31527f0c54049a71c22b728c1fd8, type: 3}
+  parrySound: {fileID: 8300000, guid: bd879639d2dec1a4492d010c7ab56988, type: 3}
+  blockSound: {fileID: 8300000, guid: 1cce88d8ae92f1740a5972d54e6c65e5, type: 3}
 --- !u!95 &-8168411931383537013
 Animator:
   serializedVersion: 5
