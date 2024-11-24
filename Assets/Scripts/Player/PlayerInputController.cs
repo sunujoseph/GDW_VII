@@ -12,6 +12,8 @@ public class PlayerInputController : MonoBehaviour
     private Rigidbody2D rb;
     public static PlayerInputController instance;
 
+    
+
     // Ground check variables
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius = 0.05f;
@@ -125,7 +127,14 @@ public class PlayerInputController : MonoBehaviour
 
     [Header("Invulnerability Parameters")]
     public float invulnerabilityDuration = 0.5f;
-    
+
+    //sounds
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip dashSound;
+    [SerializeField] private AudioClip landingSound;
+    [SerializeField] private AudioClip parrySound;
+
 
 
     //private bool isInvulnerable = false;
@@ -242,6 +251,7 @@ public class PlayerInputController : MonoBehaviour
 
                 if (other.CompareTag("EnemyProjectile"))
                 {
+                    SoundManager.instance.Play(parrySound, transform, 1f);
                     ReflectProjectile(other.gameObject);  // Reflect projectile 
                     if (!isHitstopping) StartCoroutine(Hitstop());
                 }
@@ -336,6 +346,9 @@ public class PlayerInputController : MonoBehaviour
 
     private void Jump()
     {
+        //sound effect
+        SoundManager.instance.Play(jumpSound, transform, 1f);
+
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         coyoteTimeCounter = 0f; // Reset to avoid double jump
         jumpPressed = false;
@@ -363,6 +376,9 @@ public class PlayerInputController : MonoBehaviour
     private IEnumerator Dash()
     {
         Debug.Log("Dash Started");
+
+        //sound
+        SoundManager.instance.Play(dashSound, transform, 1f);
 
         isDashing = true;
         canDash = false;

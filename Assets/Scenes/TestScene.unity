@@ -1016,6 +1016,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 610420990}
+  - component: {fileID: 610420991}
   m_Layer: 0
   m_Name: SFX Manager
   m_TagString: Untagged
@@ -1038,6 +1039,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &610420991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610420989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceae12a333ec12943a09610146673cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundObject: {fileID: 2362490831585974385, guid: 544b379aa89aa05479f3134870f75731, type: 3}
 --- !u!4 &619116531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3405993468424777621, guid: e6cc7ec8ebdde654aa923a485468a733, type: 3}
@@ -4297,6 +4311,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -867594302582547788, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 37afe353842deed4198a69b7238a60ee, type: 3}
     - target: {fileID: 960481409310125933, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: m_Name
       value: Player
