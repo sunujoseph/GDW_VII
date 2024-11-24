@@ -26,7 +26,7 @@ public class SoundManager : MonoBehaviour
         //assign volume
         audiosource.volume = volume;
         //variation on pitch
-        audiosource.pitch += Random.Range(-0.15f, 0.15f);
+        audiosource.pitch += Random.Range(-0.075f, 0.075f);
         //play sound
         audiosource.Play();
         //get length of clip

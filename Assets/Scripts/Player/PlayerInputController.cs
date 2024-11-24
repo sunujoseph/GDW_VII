@@ -134,6 +134,7 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private AudioClip dashSound;
     [SerializeField] private AudioClip landingSound;
     [SerializeField] private AudioClip parrySound;
+    [SerializeField] private AudioClip blockSound;
 
 
 
@@ -475,6 +476,9 @@ public class PlayerInputController : MonoBehaviour
     private IEnumerator Parry()
     {
         Debug.Log("Parry Activated!");
+
+        //sound to show parry is ready
+        SoundManager.instance.Play(blockSound, transform, 1f);
 
         // Enable the parry hitbox
         // Set parry active

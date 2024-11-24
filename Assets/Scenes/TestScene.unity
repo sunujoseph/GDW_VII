@@ -4274,6 +4274,8 @@ MonoBehaviour:
   currentLives: 0
   invulnerabilityTime: 5
   blinkInterval: 0.2
+  damageSound: {fileID: 8300000, guid: 2578c377dc7efe347a43cac8848ff1fa, type: 3}
+  deathSound: {fileID: 8300000, guid: 19ebb23244418c0419993e02bca1d2ad, type: 3}
   playerObject: {fileID: 645708500}
 --- !u!114 &2128906751
 MonoBehaviour:
