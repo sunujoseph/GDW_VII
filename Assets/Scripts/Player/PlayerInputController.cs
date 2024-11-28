@@ -213,7 +213,6 @@ public class PlayerInputController : MonoBehaviour
         }
         else 
         {
-
             // Decrease the coyote time counter when not grounded
             groundedBufferCounter -= Time.deltaTime;
             coyoteTimeCounter -= Time.deltaTime;
@@ -267,6 +266,7 @@ public class PlayerInputController : MonoBehaviour
                 if (other.CompareTag("EnemyProjectile"))
                 {
                     SoundManager.instance.Play(parrySound, transform, 1f);
+                    isParrying = true;
                     ReflectProjectile(other.gameObject);  // Reflect projectile 
                     if (!isHitstopping) StartCoroutine(Hitstop());
                 }
@@ -284,8 +284,6 @@ public class PlayerInputController : MonoBehaviour
             //ResetDash();
 
             //coyoteTimeCounter = coyoteTime; // Extend coyote time for floating
-
-
             if (!isHitstopping) StartCoroutine(Hitstop());
         }
     }
@@ -578,6 +576,13 @@ public class PlayerInputController : MonoBehaviour
         if (!DetermineHitbox(out Vector3 hitBox, out Vector2 hitBoxSize)) return;
 
         Collider2D[] hitTargets = Physics2D.OverlapBoxAll(hitBox, hitBoxSize, 0f, enemyLayers | hazardLayers);
+        
+        //animation info
+        attacking = true;
+        if (attackNumber < 3)
+        {
+            attackNumber++;
+        }
 
         foreach (Collider2D target in hitTargets)
         {
