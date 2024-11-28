@@ -444,6 +444,7 @@ public class PlayerInputController : MonoBehaviour
         //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), false);
         Debug.Log("Dash Ended");
         isDashing = false;
+        
         gameObject.layer = LayerMask.NameToLayer("Player");
 
         /*
