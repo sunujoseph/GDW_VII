@@ -93,9 +93,13 @@ public class PlayerInputController : MonoBehaviour
     public float attackCooldown = 0.5f; // Time between attacks
     //private bool isAttacking = false;  // Prevents multiple attacks during cooldown
     private float lastAttackTime = 0f;    // Tracks time of last attack
-    [SerializeField] private int comboStep = 0; // Tracks current step in ground combo
+    private int comboStep = 0; // Tracks current step in ground combo
     private bool canAttackInAir = true;   // Allows one air attack per jump
     public float bounceForce = 10f;
+
+    [Header("Attack Combo Parameters")]
+    [SerializeField] private float comboResetTime = 1f; // Time to reset combo
+    private Coroutine comboResetCoroutine;
 
 
     [Header("Hitbox Ground Parameters")]
@@ -549,7 +553,18 @@ public class PlayerInputController : MonoBehaviour
         animator.SetBool("isBlocking", blocking);
         animator.SetBool("isParry", isParrying);
         animator.SetBool("isAttacking", attacking);
-        animator.SetInteger("attackNumber", attackNumber);
+        //animator.SetInteger("attackNumber", attackNumber);
+
+
+        if (attacking)
+        {
+            animator.SetInteger("attackNumber", attackNumber); // Match the combo step
+        }
+        else
+        {
+            animator.SetInteger("attackNumber", 0); // Reset attack number when idle
+        }
+
     }
 
 
@@ -576,13 +591,27 @@ public class PlayerInputController : MonoBehaviour
         if (!DetermineHitbox(out Vector3 hitBox, out Vector2 hitBoxSize)) return;
 
         Collider2D[] hitTargets = Physics2D.OverlapBoxAll(hitBox, hitBoxSize, 0f, enemyLayers | hazardLayers);
-        
-        //animation info
+
+        Debug.Log(attackNumber);
+
+        // Increment combo step
         attacking = true;
-        if (attackNumber < 3)
+
+        attackNumber++;
+        if (attackNumber > 3)
         {
-            attackNumber++;
+            attackNumber = 1;
         }
+
+
+        animator.SetInteger("attackNumber", attackNumber);
+
+
+        // Reset the combo reset timer
+        if (comboResetCoroutine != null) StopCoroutine(comboResetCoroutine);
+        comboResetCoroutine = StartCoroutine(ResetComboAfterDelay());
+
+        
 
         foreach (Collider2D target in hitTargets)
         {
@@ -615,18 +644,27 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+    private IEnumerator ResetComboAfterDelay()
+    {
+        yield return new WaitForSeconds(comboResetTime);
+        attackNumber = 0;
+        animator.SetInteger("attackNumber", 0); // Reset animation state
+        attacking = false; // Return to idle state
+    }
+
 
     private bool DetermineHitbox(out Vector3 hitBox, out Vector2 hitBoxSize)
 {
     if (isGrounded)
     {
-        comboStep = (comboStep + 1) % 3;
+        //comboStep = (comboStep + 1) % 3;
         hitBox = origin.position + new Vector3(facingDirection * groundXOffset, groundYOffset, 0);
         hitBoxSize = new Vector2(groundWidth, groundHeight);
         return true;
     }
     else if (canAttackInAir)
     {
+        //animator.SetTrigger("JumpAttack"); // Trigger jump attack animation
         hitBox = origin.position + new Vector3(facingDirection * airXOffset, airYOffset, 0);
         hitBoxSize = new Vector2(airWidth, airHeight);
         canAttackInAir = false;

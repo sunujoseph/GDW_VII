@@ -161,7 +161,8 @@ public class PlayerHealth : MonoBehaviour
 
         ResetState();
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Restart level
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Restart level
+        FindObjectOfType<MenuOverlayManager>().OpenGameOverMenu();
     }
 
     public void GainLife()
