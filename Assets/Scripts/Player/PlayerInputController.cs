@@ -87,6 +87,7 @@ public class PlayerInputController : MonoBehaviour
     public bool blocking;
     public bool attacking;
     public int attackNumber;
+    public float direction;
 
     [Header("Attack Parameters")]
     public float attackCooldown = 0.5f; // Time between attacks
@@ -172,6 +173,7 @@ public class PlayerInputController : MonoBehaviour
 
         //animation states
         animator = GetComponent<Animator>();
+        direction = 1;
         wasHit = false;
         isAlive = true;
         inAir = true;
@@ -224,6 +226,18 @@ public class PlayerInputController : MonoBehaviour
             Jump();
         }
 
+        //change some animation variables 
+        inAir = !isGrounded;
+        if (moveInput.x > 0)
+        {
+            direction = 1f;
+        }
+        else if (moveInput.x < 0)
+        {
+            direction = -1f;
+        }
+
+        HandleAnimations();
     }
 
     private void FixedUpdate()
@@ -526,8 +540,9 @@ public class PlayerInputController : MonoBehaviour
 
     private void HandleAnimations()
     {
-        animator.SetFloat("xSpeed", Mathf.Abs(movement.x));
-        animator.SetFloat("ySpeed", Mathf.Abs(movement.y));
+        animator.SetFloat("xSpeed", Mathf.Abs(moveInput.x));
+        animator.SetFloat("ySpeed", Mathf.Abs(moveInput.y));
+        animator.SetFloat("Direction", direction);
         animator.SetBool("inAir", inAir);
         animator.SetBool("wasHit", wasHit);
         animator.SetBool("isAlive", isAlive);
