@@ -6024,10 +6024,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2105748980450835399, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1830319852, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
     - target: {fileID: 3402058050718016914, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 7210465809775371517, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.625
+      objectReference: {fileID: 0}
     - target: {fileID: 8024250912073878338, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.84
