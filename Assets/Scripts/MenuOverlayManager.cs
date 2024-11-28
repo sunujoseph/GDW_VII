@@ -52,13 +52,29 @@ public class MenuOverlayManager : MonoBehaviour
     public void RestartLevel()
     {
         Time.timeScale = 1f;
+
+        PlayerHealth playerHealth = FindAnyObjectByType<PlayerHealth>();
+        playerHealth.ResetState();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload current level
+
+        // Find and reset the camera
+        FollowPlayer followPlayer = FindObjectOfType<FollowPlayer>();
+        if (followPlayer != null)
+        {
+            followPlayer.ResetCamera();
+        }
+
+
+        playerHealth.maxLives = 3;
+        playerHealth.currentLives = playerHealth.maxLives;
+        playerHealth.uiManager.UpdateHealth(playerHealth.currentLives);
     }
 
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f; 
-        //SceneManager.LoadScene("MainMenu"); 
+        SceneManager.LoadScene("MainMenu"); 
     }
 
 }

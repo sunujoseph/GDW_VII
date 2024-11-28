@@ -19,9 +19,16 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] float verticalOffset = 2f;  // Vertical offset from the player's position
     [SerializeField] float horizontalOffset = 0f;  // Horizontal offset from the player's position
 
+    public Vector3 startingPosition;
+
 
     private void Start()
     {
+
+        startingPosition = new Vector3(playerTransform.position.x + horizontalOffset,
+                                               playerTransform.position.y + verticalOffset,
+                                               transform.position.z);
+
         if (playerTransform == null)
         {
             GameObject player = GameObject.FindWithTag("Player"); // Look for the player by tag
@@ -84,6 +91,16 @@ public class FollowPlayer : MonoBehaviour
         else
         {
             Debug.LogWarning("Player object not found");
+        }
+    }
+
+    public void ResetCamera()
+    {
+        // Reset camera position to player's starting position
+        if (playerTransform != null)
+        {
+            
+            transform.position = startingPosition;
         }
     }
 

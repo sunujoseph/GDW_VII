@@ -6,6 +6,8 @@ public class BlockPlayerLeft : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
     [SerializeField] float bufferDistance = 1f;
+    private Vector3 initialCameraPosition; // Store the camera's initial position
+
 
     private void Start()
     {
@@ -18,6 +20,18 @@ public class BlockPlayerLeft : MonoBehaviour
             }
         }
 
+
+        initialCameraPosition = mainCamera.transform.position;
+
+    }
+
+    private void OnEnable()
+    {
+        // Reset camera position when the scene is reloaded
+        if (mainCamera != null)
+        {
+            mainCamera.transform.position = initialCameraPosition;
+        }
     }
 
 

@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     private float invulnerabilityTimer;
     private float blinkTimer;
 
-    private UIManager uiManager;
+    public UIManager uiManager;
     private SpriteRenderer playerSpriteRenderer;
 
     private Vector3 lastCheckpoint; // Last checkpoint position
@@ -158,11 +158,24 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Game Over!");
 
         SoundManager.instance.Play(deathSound, playerObject.transform, 1f);
+        // Player Animation Here
 
-        ResetState();
+
+        //ResetState();
 
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Restart level
-        FindObjectOfType<MenuOverlayManager>().OpenGameOverMenu();
+
+        // Access the MenuOverlayManager to open the Game Over menu
+        MenuOverlayManager menuOverlayManager = FindObjectOfType<MenuOverlayManager>();
+        if (menuOverlayManager != null)
+        {
+            menuOverlayManager.OpenGameOverMenu();
+        }
+        else
+        {
+            Debug.LogError("MenuOverlayManager not found");
+        }
+
     }
 
     public void GainLife()
@@ -171,17 +184,29 @@ public class PlayerHealth : MonoBehaviour
         uiManager?.UpdateHealth(currentLives);
     }
 
-    private void ResetState()
+    public void ResetState()
     {
         currentLives = maxLives;
         uiManager?.UpdateHealth(currentLives);
-        lastCheckpoint = Vector3.zero;
+
+        FollowPlayer followPlayer = FindAnyObjectByType<FollowPlayer>();
+
+        lastCheckpoint = followPlayer.startingPosition;
+
+
         isPlayerInvulnerable = false;
 
         if (playerSpriteRenderer != null)
         {
             playerSpriteRenderer.enabled = true; // Ensure visibility
         }
+
+        // Move the player to the starting position
+        if (playerObject != null)
+        {
+            playerObject.transform.position = lastCheckpoint; // Reset player position
+        }
+
     }
 
     private void TryReassignPlayerObject()
