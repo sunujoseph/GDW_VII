@@ -542,7 +542,7 @@ public class PlayerInputController : MonoBehaviour
     private void HandleAnimations()
     {
         animator.SetFloat("xSpeed", Mathf.Abs(moveInput.x));
-        animator.SetFloat("ySpeed", Mathf.Abs(moveInput.y));
+        animator.SetFloat("ySpeed", rb.velocity.y);
         animator.SetFloat("Direction", direction);
         animator.SetBool("inAir", inAir);
         animator.SetBool("wasHit", wasHit);
