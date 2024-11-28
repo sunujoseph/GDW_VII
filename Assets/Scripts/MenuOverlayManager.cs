@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuOverlayManager : MonoBehaviour
 {
+    public static MenuOverlayManager instance;
+
+
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
 
@@ -17,6 +20,19 @@ public class MenuOverlayManager : MonoBehaviour
         // Disable menus at Start
         if (pauseMenu != null) pauseMenu.SetActive(false);
         if (gameOverMenu != null) gameOverMenu.SetActive(false);
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Persist across scenes
+        }
+        else
+        {
+            Destroy(gameObject); // Ensure only one instance exists
+        }
     }
 
 
@@ -69,6 +85,9 @@ public class MenuOverlayManager : MonoBehaviour
         playerHealth.maxLives = 3;
         playerHealth.currentLives = playerHealth.maxLives;
         playerHealth.uiManager.UpdateHealth(playerHealth.currentLives);
+
+        if (pauseMenu != null) pauseMenu.SetActive(false);
+        if (gameOverMenu != null) gameOverMenu.SetActive(false);
     }
 
     public void QuitToMainMenu()

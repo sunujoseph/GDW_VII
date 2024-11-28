@@ -91,16 +91,25 @@ public class PlayerHealth : MonoBehaviour
 
     public void SetCheckpoint(Vector3 newCheckpoint)
     {
-        lastCheckpoint = newCheckpoint;
-        Debug.Log("Checkpoint updated: " + lastCheckpoint);
+        if (newCheckpoint != Vector3.zero)
+        {
+            lastCheckpoint = newCheckpoint;
+            Debug.Log("Checkpoint updated: " + lastCheckpoint);
+        }
     }
 
 
 
     public void TakeDamage(int damage)
     {
+        if (currentLives < 0)
+        {
+            return;
+        }
+
         if (!isPlayerInvulnerable)
         {
+
             //sound 
             SoundManager.instance.Play(damageSound, playerObject.transform, 1f);
 
@@ -161,9 +170,6 @@ public class PlayerHealth : MonoBehaviour
         // Player Animation Here
 
 
-        //ResetState();
-
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Restart level
 
         // Access the MenuOverlayManager to open the Game Over menu
         MenuOverlayManager menuOverlayManager = FindObjectOfType<MenuOverlayManager>();
@@ -177,6 +183,8 @@ public class PlayerHealth : MonoBehaviour
         }
 
     }
+
+
 
     public void GainLife()
     {
