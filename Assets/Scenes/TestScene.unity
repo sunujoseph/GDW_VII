@@ -3560,6 +3560,7 @@ MonoBehaviour:
   screenThresholdY: 0.5
   verticalOffset: 0
   horizontalOffset: 0
+  startingPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1180279662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6011,6 +6012,7 @@ MonoBehaviour:
   currentLives: 0
   invulnerabilityTime: 5
   blinkInterval: 0.2
+  uiManager: {fileID: 0}
   damageSound: {fileID: 8300000, guid: 2578c377dc7efe347a43cac8848ff1fa, type: 3}
   deathSound: {fileID: 8300000, guid: 19ebb23244418c0419993e02bca1d2ad, type: 3}
   playerObject: {fileID: 645708500}
@@ -6139,11 +6141,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3698489899882877273, guid: 4c289c5832794204bbb56ca78efaa5ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 107.63
+      value: 106.13
       objectReference: {fileID: 0}
     - target: {fileID: 3698489899882877273, guid: 4c289c5832794204bbb56ca78efaa5ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.57
+      value: -1.01
       objectReference: {fileID: 0}
     - target: {fileID: 3698489899882877273, guid: 4c289c5832794204bbb56ca78efaa5ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6176,6 +6178,10 @@ PrefabInstance:
     - target: {fileID: 3698489899882877273, guid: 4c289c5832794204bbb56ca78efaa5ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869937949893264093, guid: 4c289c5832794204bbb56ca78efaa5ec, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7933187839158643254, guid: 4c289c5832794204bbb56ca78efaa5ec, type: 3}
       propertyPath: m_Name

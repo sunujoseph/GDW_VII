@@ -27,7 +27,7 @@ public class FollowPlayer : MonoBehaviour
 
         startingPosition = new Vector3(playerTransform.position.x + horizontalOffset,
                                                playerTransform.position.y + verticalOffset,
-                                               transform.position.z);
+                                               0);
 
         if (playerTransform == null)
         {
