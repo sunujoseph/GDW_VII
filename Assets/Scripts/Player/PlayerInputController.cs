@@ -92,7 +92,7 @@ public class PlayerInputController : MonoBehaviour
     public float attackCooldown = 0.5f; // Time between attacks
     //private bool isAttacking = false;  // Prevents multiple attacks during cooldown
     private float lastAttackTime = 0f;    // Tracks time of last attack
-    private int comboStep = 0;            // Tracks current step in ground combo
+    [SerializeField] private int comboStep = 0;            // Tracks current step in ground combo
     private bool canAttackInAir = true;   // Allows one air attack per jump
     public float bounceForce = 10f;
 
