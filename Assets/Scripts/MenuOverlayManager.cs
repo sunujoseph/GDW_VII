@@ -11,6 +11,7 @@ public class MenuOverlayManager : MonoBehaviour
 
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private BlockPlayerLeft playerObject;
 
     private bool isPaused = false;
 
@@ -39,10 +40,24 @@ public class MenuOverlayManager : MonoBehaviour
     private void Update()
     {
 
+        if (playerObject == null)
+        {
+            playerObject = FindAnyObjectByType<BlockPlayerLeft>();
+        }
+
         // Pause Menu Toggle
         if (Input.GetKeyDown(KeyCode.Escape) && gameOverMenu.activeSelf == false)
         {
             TogglePause();
+        }
+
+        if (isPaused)
+        {
+            playerObject.GetComponent<BlockPlayerLeft>().isBlockActive = false;
+        }
+        else if (!isPaused)
+        {
+            playerObject.GetComponent<BlockPlayerLeft>().isBlockActive = true;
         }
 
     }
@@ -88,6 +103,7 @@ public class MenuOverlayManager : MonoBehaviour
 
         if (pauseMenu != null) pauseMenu.SetActive(false);
         if (gameOverMenu != null) gameOverMenu.SetActive(false);
+        if (isPaused == true) isPaused = false;
     }
 
     public void QuitToMainMenu()

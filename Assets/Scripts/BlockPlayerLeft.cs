@@ -6,6 +6,7 @@ public class BlockPlayerLeft : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
     [SerializeField] float bufferDistance = 1f;
+    [SerializeField] public bool isBlockActive = true;
     private Vector3 initialCameraPosition; // Store the camera's initial position
 
 
@@ -51,13 +52,18 @@ public class BlockPlayerLeft : MonoBehaviour
         // Set buffer distance from the left wall of the camera
         // Prevents player from walking backwards
         // Like a classic mario game
-        Vector3 leftBoundary = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.5f, mainCamera.nearClipPlane));
-        leftBoundary.x += bufferDistance;
 
-        // Clamp the position
-        Vector3 clampedPosition = transform.position;
-        clampedPosition.x = Mathf.Max(clampedPosition.x, leftBoundary.x);
+        if (isBlockActive)
+        {
+            Vector3 leftBoundary = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.5f, mainCamera.nearClipPlane));
+            leftBoundary.x += bufferDistance;
 
-        transform.position = clampedPosition;
+            // Clamp the position
+            Vector3 clampedPosition = transform.position;
+            clampedPosition.x = Mathf.Max(clampedPosition.x, leftBoundary.x);
+
+            transform.position = clampedPosition;
+        }
+        
     }
 }
