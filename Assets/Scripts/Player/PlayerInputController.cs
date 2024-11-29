@@ -627,6 +627,7 @@ public class PlayerInputController : MonoBehaviour
                     Bounce();
                     ResetDash(); // Reset the dash mechanic
                 }
+                Destroy(target.gameObject);
             }
             else if (hazardLayers == (hazardLayers | (1 << target.gameObject.layer)))
             {
