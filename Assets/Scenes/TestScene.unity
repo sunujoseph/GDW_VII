@@ -6071,6 +6071,10 @@ PrefabInstance:
       propertyPath: jumpSound
       value: 
       objectReference: {fileID: 8300000, guid: 37afe353842deed4198a69b7238a60ee, type: 3}
+    - target: {fileID: -867594302582547788, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: hitstopDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 352434953782903553, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: m_Enabled
       value: 0

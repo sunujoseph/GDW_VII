@@ -347,6 +347,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a39b647c-9441-401c-8f17-6ac14cd3b0ec",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Parry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "cf24d006-d02b-49ce-b957-bdbeff26be2d",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
