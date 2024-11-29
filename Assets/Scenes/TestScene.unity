@@ -6071,6 +6071,22 @@ PrefabInstance:
       propertyPath: jumpSound
       value: 
       objectReference: {fileID: 8300000, guid: 37afe353842deed4198a69b7238a60ee, type: 3}
+    - target: {fileID: 352434953782903553, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 432726578544320979, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 432726578544320979, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 432726578544320979, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 960481409310125933, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6079,13 +6095,49 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1830319852, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
+    - target: {fileID: 2303054438332003936, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Name
+      value: Attack
+      objectReference: {fileID: 0}
     - target: {fileID: 3402058050718016914, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 5507465205319846302, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507465205319846302, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558763848977198794, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558763848977198794, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451118885051360075, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6549516607697113795, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Name
+      value: Air Attack
+      objectReference: {fileID: 0}
     - target: {fileID: 7210465809775371517, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 0.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 7577363558491342385, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662494419879136107, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8024250912073878338, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: m_LocalPosition.x
