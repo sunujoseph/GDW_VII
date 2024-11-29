@@ -627,7 +627,9 @@ public class PlayerInputController : MonoBehaviour
                     Bounce();
                     ResetDash(); // Reset the dash mechanic
                 }
-                Destroy(target.gameObject);
+                
+                target.gameObject.GetComponent<Enemy>().TakeDamage(1);
+                //Destroy(target.gameObject);
             }
             else if (hazardLayers == (hazardLayers | (1 << target.gameObject.layer)))
             {
