@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6795575683763091903}
   - component: {fileID: 7661447413553768709}
   - component: {fileID: 3832713691014199571}
+  - component: {fileID: -3885836088128806489}
   m_Layer: 7
   m_Name: Enemy Shooter
   m_TagString: Enemy
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 2674968717432224f9d397f876fc9684, type: 3}
+  m_Sprite: {fileID: -1495587873, guid: 70760b6dcc545f849ade5cfdb485a1fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -150,7 +151,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.6875, y: 0.53125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -179,3 +180,24 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8473217642505165313, guid: 1ce2dbb4c07481141b20c85e4635fc5f, type: 3}
   agroRange: 5
   fireRate: 1
+--- !u!95 &-3885836088128806489
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4253745545901723110}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a5ba199a4a3f3ce47ba7c97adb8528f9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

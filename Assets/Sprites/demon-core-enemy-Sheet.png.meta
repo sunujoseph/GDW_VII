@@ -1,0 +1,1060 @@
+fileFormatVersion: 2
+guid: 70760b6dcc545f849ade5cfdb485a1fb
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 5
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43a39c9b9872aa84fa7fd0971f8d1139
+      internalID: -1495587873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 5
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fab39afca625c54479f9079051105455
+      internalID: -975371025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 5
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42958a182dbd02e48bced8ff9f21d04c
+      internalID: 1204950919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 5
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aadbbf0c4e744f64ebb0ec23e740bf7c
+      internalID: -1960803826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 5
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16767b512ad86e84da02c7e6d3f269f8
+      internalID: -1173792277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 5
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ea528d7d2d757140892800dabf5e9c5
+      internalID: -47175141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 5
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3a2eac11f2712547bc1dfc9aa5fabc9
+      internalID: -2012308825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 5
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d6d55c5fc0e2564781d2de8eedec674
+      internalID: 325139951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 5
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 868cfbf9451e9804bb908cc34a4677d9
+      internalID: -103916593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 5
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccce1e42b2803b64ebbcba81d1efd080
+      internalID: 1785505580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 5
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c0f0a7c174e10743ab40ede996095b8
+      internalID: -1046886775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 5
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00d4169b607281b4e8d415501fef842a
+      internalID: -907096783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 5
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c5ff91cd456c0042aed70c3073eb089
+      internalID: 1928681579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 5
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 797db3e4d9085d44c98aa95aa8c73086
+      internalID: 2096570032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 5
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67fcbbbd88e4e6e44808b9889e3a6e0f
+      internalID: -2051200549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 5
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a80e6d2da162ea44282b10e34c78dc27
+      internalID: 1059437750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 5
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f20af2581f861c498fc2be781e81adf
+      internalID: 355643615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 5
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ecb2adff8bdfdd4a8d24659b5147fc7
+      internalID: 1624327841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 5
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd57cf63314b6ee4e8b3324d9e375c28
+      internalID: 1855188767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 5
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b3391ac72bb0d8419acd8bd7981b457
+      internalID: 1364706287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 5
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30d160c33864d634dbebfd3cb7421a50
+      internalID: -333664594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 5
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e7ac47436328044584216f75bc4d365
+      internalID: -748085993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 5
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11b82ed414123654686a724c88d110b9
+      internalID: 1313670762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 5
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b094d945ba0d8c04ba87207e32f073a3
+      internalID: 1277628496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 5
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c633906f48403646befeaea196fe80d
+      internalID: -1352010075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 5
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9233ac0e856ca7447b55ac9f616a0c9e
+      internalID: 1263546320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 5
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b83d7fbf50eb51d40bc4e8900f7fe6a5
+      internalID: -1688542726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 5
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4e81fbe23147824ebf976055e112feb
+      internalID: -1531154067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 5
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 588f0441eb0fd3d4c8c0d0c18821fda2
+      internalID: -1394147589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 5
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08fb3a8500bab174a928234763883e48
+      internalID: 1882094180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 5
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1f3e545c37caf24a9d03bc3973caf7a
+      internalID: -1832665600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 997
+        y: 5
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1623cb4d6fda61d4e8825dfbfe2b01c3
+      internalID: 60650482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 5
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a702c552709b7244195ae298ca9ea48d
+      internalID: 1538930316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 5
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 505ed77bd25aa23439fa551b4c31376e
+      internalID: 1693549287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 1093
+        y: 5
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76b66e7041a346e4c8dffcc73448818d
+      internalID: -1874629408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 5
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87bfdce0a52653c4cb37224c57202995
+      internalID: 1215733979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 5
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b135875ec2d28ad4da2eb2555a2dad4b
+      internalID: -307939689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 5
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c919c774d14f9a34bbba210cc021e7a1
+      internalID: 1414231874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 1221
+        y: 5
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d2a526f0eedee945842c07aef8556e3
+      internalID: -374229531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 1253
+        y: 5
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 887d6cdcb404d0d46b64160d470e14c9
+      internalID: -1152694711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 1285
+        y: 5
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75efb0498dd532a47af004da685aa5c1
+      internalID: 1796493942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 5
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3835ca3656fa84c418b4e11ac5e8cd16
+      internalID: -110237245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-core-enemy-Sheet_42
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 5
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaf83938abef5fa45b0d0be125d05d6d
+      internalID: 364024571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      demon-core-enemy-Sheet_0: -1495587873
+      demon-core-enemy-Sheet_1: -975371025
+      demon-core-enemy-Sheet_10: -1046886775
+      demon-core-enemy-Sheet_11: -907096783
+      demon-core-enemy-Sheet_12: 1928681579
+      demon-core-enemy-Sheet_13: 2096570032
+      demon-core-enemy-Sheet_14: -2051200549
+      demon-core-enemy-Sheet_15: 1059437750
+      demon-core-enemy-Sheet_16: 355643615
+      demon-core-enemy-Sheet_17: 1624327841
+      demon-core-enemy-Sheet_18: 1855188767
+      demon-core-enemy-Sheet_19: 1364706287
+      demon-core-enemy-Sheet_2: 1204950919
+      demon-core-enemy-Sheet_20: -333664594
+      demon-core-enemy-Sheet_21: -748085993
+      demon-core-enemy-Sheet_22: 1313670762
+      demon-core-enemy-Sheet_23: 1277628496
+      demon-core-enemy-Sheet_24: -1352010075
+      demon-core-enemy-Sheet_25: 1263546320
+      demon-core-enemy-Sheet_26: -1688542726
+      demon-core-enemy-Sheet_27: -1531154067
+      demon-core-enemy-Sheet_28: -1394147589
+      demon-core-enemy-Sheet_29: 1882094180
+      demon-core-enemy-Sheet_3: -1960803826
+      demon-core-enemy-Sheet_30: -1832665600
+      demon-core-enemy-Sheet_31: 60650482
+      demon-core-enemy-Sheet_32: 1538930316
+      demon-core-enemy-Sheet_33: 1693549287
+      demon-core-enemy-Sheet_34: -1874629408
+      demon-core-enemy-Sheet_35: 1215733979
+      demon-core-enemy-Sheet_36: -307939689
+      demon-core-enemy-Sheet_37: 1414231874
+      demon-core-enemy-Sheet_38: -374229531
+      demon-core-enemy-Sheet_39: -1152694711
+      demon-core-enemy-Sheet_4: -1173792277
+      demon-core-enemy-Sheet_40: 1796493942
+      demon-core-enemy-Sheet_41: -110237245
+      demon-core-enemy-Sheet_42: 364024571
+      demon-core-enemy-Sheet_5: -47175141
+      demon-core-enemy-Sheet_6: -2012308825
+      demon-core-enemy-Sheet_7: 325139951
+      demon-core-enemy-Sheet_8: -103916593
+      demon-core-enemy-Sheet_9: 1785505580
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
