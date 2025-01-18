@@ -64,7 +64,15 @@ public class FollowPlayer : MonoBehaviour
         Vector3 targetPosition = transform.position;
 
         // Apply screen threshold logic for the horizontal axis
+        /*
         if (playerScreenPos.x > screenThresholdX && playerTransform.position.x > transform.position.x)
+        {
+            targetPosition.x = playerTransform.position.x + horizontalOffset;
+        }
+        */
+
+        // Apply screen threshold logic for the vertical axis
+        if (playerScreenPos.x > screenThresholdX || playerScreenPos.x < (1 - screenThresholdX))
         {
             targetPosition.x = playerTransform.position.x + horizontalOffset;
         }

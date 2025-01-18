@@ -21,6 +21,7 @@ public class MenuOverlayManager : MonoBehaviour
         // Disable menus at Start
         if (pauseMenu != null) pauseMenu.SetActive(false);
         if (gameOverMenu != null) gameOverMenu.SetActive(false);
+        if (isPaused == true) isPaused = false;
     }
 
     private void Awake()
@@ -53,11 +54,11 @@ public class MenuOverlayManager : MonoBehaviour
 
         if (isPaused)
         {
-            playerObject.GetComponent<BlockPlayerLeft>().isBlockActive = false;
+            playerObject.isBlockActive = false;
         }
         else if (!isPaused)
         {
-            playerObject.GetComponent<BlockPlayerLeft>().isBlockActive = true;
+            playerObject.isBlockActive = true;
         }
 
     }
@@ -109,7 +110,9 @@ public class MenuOverlayManager : MonoBehaviour
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f; 
-        SceneManager.LoadScene("MainMenu"); 
+        SceneManager.LoadScene("MainMenu");
+        if (isPaused == true) isPaused = false;
+
     }
 
 }
