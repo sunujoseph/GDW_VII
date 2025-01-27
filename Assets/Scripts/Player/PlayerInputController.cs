@@ -397,14 +397,18 @@ public class PlayerInputController : MonoBehaviour
         //sound
         SoundManager.instance.Play(dashSound, transform, 1f);
 
+        // Store original gravity to restore later
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0; // Temporarily disable gravity
+
         isDashing = true;
         canDash = false;
-        dashResetOnEnemyHit = false;
+        gameObject.layer = LayerMask.NameToLayer("Invulnerable");
 
 
+        //dashResetOnEnemyHit = false;
         // Set the player to the "Invulnerable" layer for damage immunity
         // Dash will act as a dodge of sorts.
-        gameObject.layer = LayerMask.NameToLayer("Invulnerable");
         //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), true);
 
         Vector2 dashDirection;
@@ -414,36 +418,26 @@ public class PlayerInputController : MonoBehaviour
         }
         else
         {
-            if (isFacingRight)
-            {
-                dashDirection = Vector2.right;  // Dash to the right
-            }
-            else
-            {
-                dashDirection = Vector2.left;  // Dash to the left
-            }
+            // Default to horizontal direction
+            dashDirection = isFacingRight ? Vector2.right : Vector2.left;
         }
 
-        Vector2 startPosition = rb.position;
-        Vector2 targetPosition = startPosition + dashDirection * dashDistance; // Calculate dash target
+        //Vector2 startPosition = rb.position;
+        //Vector2 targetPosition = startPosition + dashDirection * dashDistance; // Calculate dash target
 
-        float elapsedTime = 0f;
+        // Apply dash force
+        rb.velocity = dashDirection * (dashDistance / dashDuration);
 
-        // Smooth the distance travel and Lerp
-        while (elapsedTime < dashDuration)
-        {
-            rb.position = Vector2.Lerp(startPosition, targetPosition, elapsedTime / dashDuration);
-            elapsedTime += Time.deltaTime;
+        // Wait for the dash duration
+        yield return new WaitForSeconds(dashDuration);
 
+        // Restore gravity
+        rb.gravityScale = originalGravity;
 
-            yield return null;
-        }
-
-
-        rb.position = targetPosition; // Ensure the player reach target 
-
+        //rb.position = targetPosition; // Ensure the player reach target 
         // Set back to the regular layer
         //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), false);
+
         Debug.Log("Dash Ended");
         isDashing = false;
         
