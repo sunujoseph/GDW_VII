@@ -406,10 +406,6 @@ public class PlayerInputController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Invulnerable");
 
 
-        //dashResetOnEnemyHit = false;
-        // Set the player to the "Invulnerable" layer for damage immunity
-        // Dash will act as a dodge of sorts.
-        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), true);
 
         Vector2 dashDirection;
         if (moveInput != Vector2.zero)
@@ -434,28 +430,14 @@ public class PlayerInputController : MonoBehaviour
         // Restore gravity
         rb.gravityScale = originalGravity;
 
-        //rb.position = targetPosition; // Ensure the player reach target 
-        // Set back to the regular layer
-        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), false);
+        
 
         Debug.Log("Dash Ended");
         isDashing = false;
         
         gameObject.layer = LayerMask.NameToLayer("Player");
 
-        /*
-        if (!dashResetOnEnemyHit)
-        {
-            yield return new WaitForSeconds(dashCooldown);
-            canDash = true;
-        }
-        */
-
-        
-
-        // Start cooldown before dash can be used again
-        //yield return new WaitForSeconds(dashCooldown);
-        //canDash = true;
+     
 
         Debug.Log("Dash Cooldown Complete");
 

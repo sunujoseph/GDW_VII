@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected int health = 1;
     [SerializeField] public bool isPatrolActive = true;
 
+    [SerializeField] public bool canDamagePlayer = true; // New flag for damage behavior
+
+
     private Vector3 targetPosition; // Current target position for patrol
 
     private Rigidbody2D rb;
@@ -104,7 +107,7 @@ public class Enemy : MonoBehaviour
         if (otherObject.CompareTag("Player"))
         {
             // If the player is invulnerable
-            if (otherObject.gameObject.layer != LayerMask.NameToLayer("Invulnerable"))
+            if (canDamagePlayer && otherObject.gameObject.layer != LayerMask.NameToLayer("Invulnerable"))
             {
                 Debug.Log("Player hit by enemy!");
 
