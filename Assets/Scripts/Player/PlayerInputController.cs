@@ -96,6 +96,8 @@ public class PlayerInputController : MonoBehaviour
     private int comboStep = 0; // Tracks current step in ground combo
     private bool canAttackInAir = true;   // Allows one air attack per jump
     public float bounceForce = 10f;
+    [SerializeField] private Transform attackHitbox;
+    [SerializeField] private Transform jumpAttackHitbox;
 
     [Header("Attack Combo Parameters")]
     [SerializeField] private float comboResetTime = 1f; // Time to reset combo
@@ -240,6 +242,9 @@ public class PlayerInputController : MonoBehaviour
             direction = -1f;
         }
 
+
+        
+
         HandleAnimations();
     }
 
@@ -253,7 +258,6 @@ public class PlayerInputController : MonoBehaviour
             SetPlayerVelocity();
         }
 
-        
 
     }
 
@@ -564,63 +568,66 @@ public class PlayerInputController : MonoBehaviour
 
     private void Attack()
     {
-        if (!DetermineHitbox(out Vector3 hitBox, out Vector2 hitBoxSize)) return;
 
-        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(hitBox, hitBoxSize, 0f, enemyLayers | hazardLayers);
+
+        // Determine which hitbox to use
+        Transform currentHitbox = isGrounded ? attackHitbox : jumpAttackHitbox;
+
+        // Enable hitbox
+        //currentHitbox.gameObject.SetActive(true);
 
         Debug.Log(attackNumber);
 
         // Increment combo step
         attacking = true;
-
         attackNumber++;
         if (attackNumber > 3)
         {
             attackNumber = 1;
         }
 
-
         animator.SetInteger("attackNumber", attackNumber);
-
 
         // Reset the combo reset timer
         if (comboResetCoroutine != null) StopCoroutine(comboResetCoroutine);
         comboResetCoroutine = StartCoroutine(ResetComboAfterDelay());
 
-        
+
+
+        Collider2D[] hitTargets = Physics2D.OverlapBoxAll(
+            currentHitbox.position,
+            currentHitbox.GetComponent<BoxCollider2D>().bounds.size,
+            0f,
+            enemyLayers | hazardLayers
+        );
+
+        bool hitEnemy = false;
 
         foreach (Collider2D target in hitTargets)
         {
             if (enemyLayers == (enemyLayers | (1 << target.gameObject.layer)))
             {
                 Debug.Log("Hit Enemy: " + target.name);
-                //StartCoroutine(Hitstop());
                 if (!isHitstopping) StartCoroutine(Hitstop());
 
-
-                if (!isGrounded)
-                {
-                    Bounce();
-                    ResetDash(); // Reset the dash mechanic
-                }
-                
                 target.gameObject.GetComponent<Enemy>().TakeDamage(1);
-                //Destroy(target.gameObject);
+                hitEnemy = true;
             }
             else if (hazardLayers == (hazardLayers | (1 << target.gameObject.layer)))
             {
                 Debug.Log("Hit Hazard: " + target.name);
-                //StartCoroutine(Hitstop());
                 if (!isHitstopping) StartCoroutine(Hitstop());
-
-
-                if (!isGrounded)
-                {
-                    Bounce();
-                    ResetDash(); // Reset the dash mechanic
-                }
+                hitEnemy = true;
             }
         }
+
+        if (!isGrounded && hitEnemy)
+        {
+            Bounce();
+            ResetDash(); 
+        }
+
+
     }
 
     private IEnumerator ResetComboAfterDelay()
