@@ -103,26 +103,6 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private float comboResetTime = 1f; // Time to reset combo
     private Coroutine comboResetCoroutine;
 
-
-    [Header("Hitbox Ground Parameters")]
-    public Transform origin;
-    public float groundXOffset;
-    public float groundYOffset;
-    public float groundWidth = 1f;
-    public float groundHeight = 1f;
-
-    [Header("Hitbox Ground Parameters")]
-    public float airXOffset;
-    public float airYOffset;
-    public float airWidth = 1f;
-    public float airHeight = 2f;
-
-    //public float xOffset;
-    //public float yOffset;
-    //public float angle = 0f;
-    //public float width = 1f;
-    //public float height = 1f;
-
     [Header("Hitbox Layers")]
     public LayerMask enemyLayers;
     public LayerMask hazardLayers;
@@ -633,28 +613,6 @@ public class PlayerInputController : MonoBehaviour
     }
 
 
-    private bool DetermineHitbox(out Vector3 hitBox, out Vector2 hitBoxSize)
-{
-    if (isGrounded)
-    {
-        //comboStep = (comboStep + 1) % 3;
-        hitBox = origin.position + new Vector3(facingDirection * groundXOffset, groundYOffset, 0);
-        hitBoxSize = new Vector2(groundWidth, groundHeight);
-        return true;
-    }
-    else if (canAttackInAir)
-    {
-        //animator.SetTrigger("JumpAttack"); // Trigger jump attack animation
-        hitBox = origin.position + new Vector3(facingDirection * airXOffset, airYOffset, 0);
-        hitBoxSize = new Vector2(airWidth, airHeight);
-        canAttackInAir = false;
-        return true;
-    }
-
-    hitBox = Vector3.zero;
-    hitBoxSize = Vector2.zero;
-    return false;
-}
 
     private void Bounce()
     {
@@ -709,24 +667,7 @@ public class PlayerInputController : MonoBehaviour
     
 
 
-    //hitbox debug display
-    private void OnDrawGizmosSelected()
-    {
-        // Draw the ground hitbox on both sides
-        Vector3 groundHitboxPositionRight = origin.position + new Vector3(groundXOffset, groundYOffset, 0);
-        Vector3 groundHitboxPositionLeft = origin.position + new Vector3(-groundXOffset, groundYOffset, 0);
-
-        Gizmos.color = Color.red; 
-        Gizmos.DrawWireCube(groundHitboxPositionRight, new Vector3(groundWidth, groundHeight, 0));
-        Gizmos.DrawWireCube(groundHitboxPositionLeft, new Vector3(groundWidth, groundHeight, 0));
-
-        Vector3 airHitboxPositionRight = origin.position + new Vector3(airXOffset, airYOffset, 0);
-        Vector3 airHitboxPositionLeft = origin.position + new Vector3(-airXOffset, airYOffset, 0);
-
-        Gizmos.color = Color.blue; 
-        Gizmos.DrawWireCube(airHitboxPositionRight, new Vector3(airWidth, airHeight, 0));
-        Gizmos.DrawWireCube(airHitboxPositionLeft, new Vector3(airWidth, airHeight, 0));
-    }
+    
 
 
     
