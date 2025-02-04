@@ -410,23 +410,17 @@ public class PlayerInputController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Invulnerable");
 
 
+        // Dash Horizontal
+        Vector2 dashDirection = isFacingRight ? Vector2.right : Vector2.left;
 
-        Vector2 dashDirection;
-        if (moveInput != Vector2.zero)
-        {
-            dashDirection = moveInput.normalized;
-        }
-        else
-        {
-            // Default to horizontal direction
-            dashDirection = isFacingRight ? Vector2.right : Vector2.left;
-        }
 
         //Vector2 startPosition = rb.position;
         //Vector2 targetPosition = startPosition + dashDirection * dashDistance; // Calculate dash target
 
         // Apply dash force
-        rb.velocity = dashDirection * (dashDistance / dashDuration);
+        //rb.velocity = dashDirection * (dashDistance / dashDuration);
+        // Apply horizontal dash force while keeping Y velocity unchanged
+        rb.velocity = new Vector2(dashDirection.x * (dashDistance / dashDuration), 0);
 
         // Wait for the dash duration
         yield return new WaitForSeconds(dashDuration);
