@@ -246,6 +246,12 @@ public class PlayerInputController : MonoBehaviour
         
 
         HandleAnimations();
+
+        //adjust hitbox to match current sprite
+        //Vector2 s = gameObject.GetComponent<SpriteRenderer>().sprite.bounds.size;
+
+        //gameObject.GetComponent<BoxCollider2D>().size = s;
+        //gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
     }
 
     private void FixedUpdate()
