@@ -17,11 +17,13 @@ public class PlayerAnimator : MonoBehaviour
     public bool attacking;
     public int attackNumber;
     public float direction;
+    public bool hitBelow;
 
     public virtual void Init()
     {
         animator = GetComponent<Animator>();
         wasHit = false;
+        hitBelow = false;
         isAlive = true;
         dash = false;
         inAir = true;
@@ -47,5 +49,6 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetBool("isParry", parry);
         animator.SetBool("isAttacking", attacking);
         animator.SetInteger("attackNumber", attackNumber);
+        animator.SetBool("hitBelow", hitBelow);
     }
 }
