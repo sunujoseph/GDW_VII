@@ -177,6 +177,7 @@ MonoBehaviour:
   patrolSpeed: 2
   health: 1
   isPatrolActive: 1
+  canDamagePlayer: 1
 --- !u!95 &-5222277745278193112
 Animator:
   serializedVersion: 5
@@ -187,7 +188,7 @@ Animator:
   m_GameObject: {fileID: 8569991578984166143}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 356a37b5b238c0345b4e0abf51a53042, type: 2}
+  m_Controller: {fileID: 9100000, guid: a06e75862d43aa348818642eb269f564, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

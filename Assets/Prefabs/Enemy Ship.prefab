@@ -177,6 +177,7 @@ MonoBehaviour:
   patrolSpeed: 2
   health: 1
   isPatrolActive: 1
+  canDamagePlayer: 1
 --- !u!95 &6187955739921020233
 Animator:
   serializedVersion: 5
