@@ -6,12 +6,15 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float bulletTime = 10f; // Life Time of Bullet
     private float lifeCounter = 0f;  // Counter tracking bullet's current life time
+    [SerializeField] private int bulletDamage = 1; // Damage bullet deals
+    PlayerHealth playerHealth;
 
 
     // Start is called before the first frame update
     void Start()
     {
         lifeCounter = 0f;  // Initialize counter
+        playerHealth = FindObjectOfType<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -40,6 +43,12 @@ public class Bullet : MonoBehaviour
         if (bulletTarget.CompareTag("Player") && CompareTag("EnemyProjectile"))
         {
             Debug.Log("Player hit by bullet!");
+
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(1);
+            }
+
 
             Destroy(gameObject);
         }

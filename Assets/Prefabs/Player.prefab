@@ -402,15 +402,6 @@ MonoBehaviour:
   attackHitbox: {fileID: 7662494419879136107}
   jumpAttackHitbox: {fileID: 5507465205319846302}
   comboResetTime: 1
-  origin: {fileID: 8024250912073878338}
-  groundXOffset: 1.25
-  groundYOffset: 0
-  groundWidth: 1
-  groundHeight: 1
-  airXOffset: 0
-  airYOffset: -1
-  airWidth: 1.5
-  airHeight: 5
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -509,7 +500,7 @@ Transform:
   m_GameObject: {fileID: 2303054438332003936}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0308, y: 0, z: 0}
+  m_LocalPosition: {x: 0.57, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
