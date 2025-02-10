@@ -392,7 +392,9 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   inAir: 0
   blocking: 0
+  reflect: 0
   attacking: 0
+  hitBelow: 0
   attackNumber: 0
   direction: 0
   attackCooldown: 0.5
@@ -413,6 +415,12 @@ MonoBehaviour:
   landingSound: {fileID: 8300000, guid: 4eaf31527f0c54049a71c22b728c1fd8, type: 3}
   parrySound: {fileID: 8300000, guid: bd879639d2dec1a4492d010c7ab56988, type: 3}
   blockSound: {fileID: 8300000, guid: 1cce88d8ae92f1740a5972d54e6c65e5, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 4100efd8b86bd8341a86d706991f08c1, type: 3}
+  - {fileID: 8300000, guid: 0b39cb7bfe4b3ff46a16aaf130c6a4d4, type: 3}
+  - {fileID: 8300000, guid: 59978dd6a92d8684cb4389046c7b6068, type: 3}
+  - {fileID: 8300000, guid: 4aaf12e646015d2409ca1c01b30aeeac, type: 3}
+  - {fileID: 8300000, guid: 0cd20453f8430e14fa407f37c4d56ab1, type: 3}
 --- !u!95 &-8168411931383537013
 Animator:
   serializedVersion: 5
@@ -423,7 +431,7 @@ Animator:
   m_GameObject: {fileID: 960481409310125933}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6c2fc539a1778b84bb583fd85a073b3d, type: 2}
+  m_Controller: {fileID: 9100000, guid: b19de62d7dc2f8e4b9dd81068e3ce076, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

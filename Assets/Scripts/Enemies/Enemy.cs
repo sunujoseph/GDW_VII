@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] public bool canDamagePlayer = true; // New flag for damage behavior
 
+    //sounds
+    [SerializeField] public AudioClip damageSound;
+    [SerializeField] public AudioClip deathSound;
+    [SerializeField] public AudioClip attackSound;
+
 
     private Vector3 targetPosition; // Current target position for patrol
 
@@ -91,6 +96,11 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            SoundManager.instance.Play(deathSound, transform, 1.0f);
+        }
+        else
+        {
+            SoundManager.instance.Play(damageSound, transform, 1.0f);
         }
     }
 

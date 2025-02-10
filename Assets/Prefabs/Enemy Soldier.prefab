@@ -177,6 +177,10 @@ MonoBehaviour:
   patrolSpeed: 2
   health: 1
   isPatrolActive: 1
+  canDamagePlayer: 1
+  damageSound: {fileID: 8300000, guid: d4cd3d4daa7f92140abb45bcd325c36a, type: 3}
+  deathSound: {fileID: 8300000, guid: def0d12e78add214fb3d485aa4317c47, type: 3}
+  attackSound: {fileID: 8300000, guid: a074c459981124949945666263395d6c, type: 3}
 --- !u!95 &4800945762478685090
 Animator:
   serializedVersion: 5
@@ -187,7 +191,7 @@ Animator:
   m_GameObject: {fileID: 4478942857023103741}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b422a61d5101cdf4b95e7938164bcd0b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 588a33ab92ac96c4395cda50ff366b0a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

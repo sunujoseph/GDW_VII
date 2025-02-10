@@ -85,7 +85,9 @@ public class PlayerInputController : MonoBehaviour
     public Vector2 movement;
     public bool inAir;
     public bool blocking;
+    public bool reflect;
     public bool attacking;
+    public bool hitBelow;
     public int attackNumber;
     public float direction;
 
@@ -122,6 +124,7 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private AudioClip landingSound;
     [SerializeField] private AudioClip parrySound;
     [SerializeField] private AudioClip blockSound;
+    [SerializeField] private AudioClip[] attackSounds;
 
 
 
@@ -164,6 +167,8 @@ public class PlayerInputController : MonoBehaviour
         isAlive = true;
         inAir = true;
         blocking = false;
+        reflect = false;
+        hitBelow = false;
         attacking = false;
         attackNumber = 0;
 
@@ -195,6 +200,12 @@ public class PlayerInputController : MonoBehaviour
             canAttackInAir = true;
             comboStep = 0;
             groundedBufferCounter = groundedBufferTime;
+            hitBelow = false;
+            if (inAir)
+            {
+                attacking = false;
+                SoundManager.instance.Play(landingSound, transform, 0.2f);
+            }
             //canDash = true;
         }
         else 
@@ -226,6 +237,12 @@ public class PlayerInputController : MonoBehaviour
         
 
         HandleAnimations();
+
+        //adjust hitbox to match current sprite
+        //Vector2 s = gameObject.GetComponent<SpriteRenderer>().sprite.bounds.size;
+
+        //gameObject.GetComponent<BoxCollider2D>().size = s;
+        //gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0, 0);
     }
 
     private void FixedUpdate()
@@ -254,7 +271,7 @@ public class PlayerInputController : MonoBehaviour
                 if (other.CompareTag("EnemyProjectile"))
                 {
                     SoundManager.instance.Play(parrySound, transform, 1f);
-                    isParrying = true;
+                    //isParrying = true;
                     ReflectProjectile(other.gameObject);  // Reflect projectile 
                     if (!isHitstopping) StartCoroutine(Hitstop());
                 }
@@ -348,7 +365,7 @@ public class PlayerInputController : MonoBehaviour
     private void Jump()
     {
         //sound effect
-        SoundManager.instance.Play(jumpSound, transform, 1f);
+        SoundManager.instance.Play(jumpSound, transform, 0.5f);
 
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         coyoteTimeCounter = 0f; // Reset to avoid double jump
@@ -480,6 +497,8 @@ public class PlayerInputController : MonoBehaviour
 
         if (rb != null)
         {
+            reflect = true;
+
             // Reflection Direction
             Vector2 reflectDirection = -rb.velocity.normalized;
 
@@ -492,7 +511,6 @@ public class PlayerInputController : MonoBehaviour
         projectile.tag = "PlayerProjectile";
 
         //if (!isHitstopping) StartCoroutine(Hitstop());
-
     }
 
     private void HandleAnimations()
@@ -504,9 +522,10 @@ public class PlayerInputController : MonoBehaviour
         animator.SetBool("wasHit", wasHit);
         animator.SetBool("isAlive", isAlive);
         animator.SetBool("isDashing", isDashing);
-        animator.SetBool("isBlocking", blocking);
         animator.SetBool("isParry", isParrying);
         animator.SetBool("isAttacking", attacking);
+        animator.SetBool("Reflect", reflect);
+        animator.SetBool("hitBelow", hitBelow);
         //animator.SetInteger("attackNumber", attackNumber);
 
 
@@ -554,6 +573,7 @@ public class PlayerInputController : MonoBehaviour
 
         // Increment combo step
         attacking = true;
+        SoundManager.instance.Play(attackSounds[0], transform, 1.0f);
         attackNumber++;
         if (attackNumber > 3)
         {
@@ -592,13 +612,17 @@ public class PlayerInputController : MonoBehaviour
                 Debug.Log("Hit Hazard: " + target.name);
                 if (!isHitstopping) StartCoroutine(Hitstop());
                 hitEnemy = true;
+                SoundManager.instance.Play(attackSounds[4], transform, 1.0f);
             }
+                
         }
 
         if (!isGrounded && hitEnemy)
         {
             Bounce();
-            ResetDash(); 
+            ResetDash();
+            hitBelow = true;
+            SoundManager.instance.Play(attackSounds[4], transform, 1.0f);
         }
 
 
@@ -669,7 +693,20 @@ public class PlayerInputController : MonoBehaviour
 
     
 
+    public void StopReflect()
+    {
+        reflect = false;
+    }
 
-    
+    public void StopAttack()
+    {
+        hitBelow = false;
+        attacking = false;
+    }
+
+    public void PlayAttackSound()
+    {
+        SoundManager.instance.Play(attackSounds[attackNumber], transform, 1.0f);
+    }
 
 }

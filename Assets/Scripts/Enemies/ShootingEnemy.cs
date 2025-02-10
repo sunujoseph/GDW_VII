@@ -63,6 +63,7 @@ public class ShootingEnemy : Enemy
             Vector2 direction = (playerTransform.position - transform.position).normalized;
             GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
             projectile.GetComponent<Rigidbody2D>().velocity = direction * 5f;
+            SoundManager.instance.Play(attackSound, transform, 1.0f);
         }
     }
 
