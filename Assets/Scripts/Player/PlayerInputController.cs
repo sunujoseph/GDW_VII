@@ -85,7 +85,9 @@ public class PlayerInputController : MonoBehaviour
     public Vector2 movement;
     public bool inAir;
     public bool blocking;
+    public bool reflect;
     public bool attacking;
+    public bool hitBelow;
     public int attackNumber;
     public float direction;
 
@@ -184,6 +186,8 @@ public class PlayerInputController : MonoBehaviour
         isAlive = true;
         inAir = true;
         blocking = false;
+        reflect = false;
+        hitBelow = false;
         attacking = false;
         attackNumber = 0;
 
@@ -215,6 +219,11 @@ public class PlayerInputController : MonoBehaviour
             canAttackInAir = true;
             comboStep = 0;
             groundedBufferCounter = groundedBufferTime;
+            hitBelow = false;
+            if (inAir)
+            {
+                attacking = false;
+            }
             //canDash = true;
         }
         else 
@@ -280,7 +289,7 @@ public class PlayerInputController : MonoBehaviour
                 if (other.CompareTag("EnemyProjectile"))
                 {
                     SoundManager.instance.Play(parrySound, transform, 1f);
-                    isParrying = true;
+                    //isParrying = true;
                     ReflectProjectile(other.gameObject);  // Reflect projectile 
                     if (!isHitstopping) StartCoroutine(Hitstop());
                 }
@@ -512,6 +521,8 @@ public class PlayerInputController : MonoBehaviour
 
         if (rb != null)
         {
+            reflect = true;
+
             // Reflection Direction
             Vector2 reflectDirection = -rb.velocity.normalized;
 
@@ -524,7 +535,6 @@ public class PlayerInputController : MonoBehaviour
         projectile.tag = "PlayerProjectile";
 
         //if (!isHitstopping) StartCoroutine(Hitstop());
-
     }
 
     private void HandleAnimations()
@@ -539,6 +549,8 @@ public class PlayerInputController : MonoBehaviour
         animator.SetBool("isBlocking", blocking);
         animator.SetBool("isParry", isParrying);
         animator.SetBool("isAttacking", attacking);
+        animator.SetBool("Reflect", reflect);
+        animator.SetBool("hitBelow", hitBelow);
         //animator.SetInteger("attackNumber", attackNumber);
 
 
@@ -630,7 +642,8 @@ public class PlayerInputController : MonoBehaviour
         if (!isGrounded && hitEnemy)
         {
             Bounce();
-            ResetDash(); 
+            ResetDash();
+            hitBelow = true;
         }
 
 
@@ -740,7 +753,15 @@ public class PlayerInputController : MonoBehaviour
         Gizmos.DrawWireCube(airHitboxPositionLeft, new Vector3(airWidth, airHeight, 0));
     }
 
+    public void StopReflect()
+    {
+        reflect = false;
+    }
 
-    
+    public void StopAttack()
+    {
+        hitBelow = false;
+        attacking = false;
+    }
 
 }

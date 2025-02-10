@@ -12,8 +12,8 @@ public class PlayerAnimator : MonoBehaviour
     public Vector2 movement;
     public bool dash;
     public bool inAir;
-    public bool blocking;
     public bool parry;
+    public bool reflect;
     public bool attacking;
     public int attackNumber;
     public float direction;
@@ -27,9 +27,9 @@ public class PlayerAnimator : MonoBehaviour
         isAlive = true;
         dash = false;
         inAir = true;
-        blocking = false;
         parry = false;
         attacking = false;
+        reflect = false;
         attackNumber = 0;
 
 
@@ -45,10 +45,10 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetBool("wasHit", wasHit);
         animator.SetBool("isAlive", isAlive);
         animator.SetBool("isDashing", dash);
-        animator.SetBool("isBlocking", blocking);
         animator.SetBool("isParry", parry);
         animator.SetBool("isAttacking", attacking);
         animator.SetInteger("attackNumber", attackNumber);
         animator.SetBool("hitBelow", hitBelow);
+        animator.SetBool("Reflect", reflect);
     }
 }
