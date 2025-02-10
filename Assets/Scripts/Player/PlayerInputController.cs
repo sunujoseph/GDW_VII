@@ -144,6 +144,7 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private AudioClip landingSound;
     [SerializeField] private AudioClip parrySound;
     [SerializeField] private AudioClip blockSound;
+    [SerializeField] private AudioClip[] attackSounds;
 
 
 
@@ -223,6 +224,7 @@ public class PlayerInputController : MonoBehaviour
             if (inAir)
             {
                 attacking = false;
+                SoundManager.instance.Play(landingSound, transform, 0.2f);
             }
             //canDash = true;
         }
@@ -383,7 +385,7 @@ public class PlayerInputController : MonoBehaviour
     private void Jump()
     {
         //sound effect
-        SoundManager.instance.Play(jumpSound, transform, 1f);
+        SoundManager.instance.Play(jumpSound, transform, 0.5f);
 
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         coyoteTimeCounter = 0f; // Reset to avoid double jump
@@ -546,7 +548,6 @@ public class PlayerInputController : MonoBehaviour
         animator.SetBool("wasHit", wasHit);
         animator.SetBool("isAlive", isAlive);
         animator.SetBool("isDashing", isDashing);
-        animator.SetBool("isBlocking", blocking);
         animator.SetBool("isParry", isParrying);
         animator.SetBool("isAttacking", attacking);
         animator.SetBool("Reflect", reflect);
@@ -598,6 +599,7 @@ public class PlayerInputController : MonoBehaviour
 
         // Increment combo step
         attacking = true;
+        SoundManager.instance.Play(attackSounds[0], transform, 1.0f);
         attackNumber++;
         if (attackNumber > 3)
         {
@@ -636,7 +638,9 @@ public class PlayerInputController : MonoBehaviour
                 Debug.Log("Hit Hazard: " + target.name);
                 if (!isHitstopping) StartCoroutine(Hitstop());
                 hitEnemy = true;
+                SoundManager.instance.Play(attackSounds[4], transform, 1.0f);
             }
+                
         }
 
         if (!isGrounded && hitEnemy)
@@ -644,6 +648,7 @@ public class PlayerInputController : MonoBehaviour
             Bounce();
             ResetDash();
             hitBelow = true;
+            SoundManager.instance.Play(attackSounds[4], transform, 1.0f);
         }
 
 
@@ -762,6 +767,11 @@ public class PlayerInputController : MonoBehaviour
     {
         hitBelow = false;
         attacking = false;
+    }
+
+    public void PlayAttackSound()
+    {
+        SoundManager.instance.Play(attackSounds[attackNumber], transform, 1.0f);
     }
 
 }

@@ -178,6 +178,9 @@ MonoBehaviour:
   health: 1
   isPatrolActive: 0
   canDamagePlayer: 1
+  damageSound: {fileID: 8300000, guid: d4cd3d4daa7f92140abb45bcd325c36a, type: 3}
+  deathSound: {fileID: 8300000, guid: def0d12e78add214fb3d485aa4317c47, type: 3}
+  attackSound: {fileID: 8300000, guid: a074c459981124949945666263395d6c, type: 3}
   projectilePrefab: {fileID: 8473217642505165313, guid: 1ce2dbb4c07481141b20c85e4635fc5f, type: 3}
   agroRange: 5
   fireRate: 1
