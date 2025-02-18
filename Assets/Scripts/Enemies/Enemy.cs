@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] public float patrolSpeed = 2f;  // Speed of patrol movement
 
     [SerializeField] protected int health = 1;
+    [SerializeField] public float toughness = 1f;
     [SerializeField] public bool isPatrolActive = true;
 
     [SerializeField] public bool canDamagePlayer = true; // New flag for damage behavior
@@ -23,9 +24,12 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isFacingRight = true;
+    private bool isStunned = false;
 
     PlayerHealth playerHealth;
     private Transform playerFindTransform; // Reference to the player's transform
+
+    public bool isAlive = true;
 
 
     // Start is called before the first frame update
@@ -90,26 +94,83 @@ public class Enemy : MonoBehaviour
     }
 
     // When Enemy takes damage
-    public virtual void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount, float knockbackForce, float breakDamage)
     {
+        if (isStunned)
+        {
+            // double damage
+        }
+        else
+        {
+            // normal
+        }
+
         health -= amount;
         if (health <= 0)
         {
-            Die();
+            Die(knockbackForce);
             SoundManager.instance.Play(deathSound, transform, 1.0f);
         }
         else
         {
             SoundManager.instance.Play(damageSound, transform, 1.0f);
+            
+        }
+    }
+
+    public virtual void TakeBreakDmage(float breakDamage)
+    {
+        toughness -= breakDamage;
+        if (toughness <= 0)
+        {
+            Stunned();
         }
     }
 
     // Call when Enemy dies
-    protected void Die()
+    protected void Die(float knockbackForce)
     {
+        isAlive = false;
+
+        // Disable enemy behavior
+        isPatrolActive = false;
+        GetComponent<Collider2D>().isTrigger = false;
+        rb.isKinematic = false;
+        rb.velocity = Vector2.zero;
+
+        rb.constraints &= ~RigidbodyConstraints2D.FreezeRotation;
+
+        gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
+
+        Vector2 knockbackDirection = (transform.position - playerFindTransform.position).normalized;
+        rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+
+        float randomSpin = Random.Range(-10f, 10f);
+        rb.AddTorque(randomSpin, ForceMode2D.Impulse);
+
+
+        // Destroy enemy after delay
+        StartCoroutine(DestroyAfterDelay(2f));
+
+        //Destroy(gameObject);
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         Destroy(gameObject);
     }
 
+    protected void Stunned()
+    {
+        // double damage
+        isStunned = true;
+    }
+
+    protected void RecoverFromStun()
+    {
+        isStunned = false;
+    }
   
 
     private void OnTriggerEnter2D(Collider2D otherObject)
@@ -133,7 +194,7 @@ public class Enemy : MonoBehaviour
         }
         else if (otherObject.CompareTag("PlayerProjectile"))
         {
-            TakeDamage(1);
+            TakeDamage(1, 1f, 1f);
         }
     }
 

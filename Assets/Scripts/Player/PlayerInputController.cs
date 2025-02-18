@@ -98,6 +98,8 @@ public class PlayerInputController : MonoBehaviour
     private int comboStep = 0; // Tracks current step in ground combo
     private bool canAttackInAir = true;   // Allows one air attack per jump
     public float bounceForce = 10f;
+    [SerializeField] private float knockbackForce = 1f;
+    [SerializeField] private float breaknessDamage = 1f;
     [SerializeField] private Transform attackHitbox;
     [SerializeField] private Transform jumpAttackHitbox;
 
@@ -158,6 +160,7 @@ public class PlayerInputController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         // Set the initial position as the starting checkpoint
+        // HERE 
         lastCheckpoint = transform.position;
 
         //animation states
@@ -474,6 +477,13 @@ public class PlayerInputController : MonoBehaviour
         canParry = false;
         parryHitbox.gameObject.SetActive(true);
 
+        // Player invlun so they dont take damage
+        int originalLayer = gameObject.layer;
+
+        // Make player Invulnerable during Parry
+        gameObject.layer = LayerMask.NameToLayer("Invulnerable");
+
+
         // Parry Window Duration
         yield return new WaitForSeconds(parryDuration);
 
@@ -481,6 +491,10 @@ public class PlayerInputController : MonoBehaviour
         // End Parry State
         isParrying = false;
         parryHitbox.gameObject.SetActive(false);
+
+        // End player invlun
+        // Restore Plyaer layer
+        gameObject.layer = originalLayer;
 
         // Start Parry Cooldown
         // Can parry set to true
@@ -604,7 +618,7 @@ public class PlayerInputController : MonoBehaviour
                 Debug.Log("Hit Enemy: " + target.name);
                 if (!isHitstopping) StartCoroutine(Hitstop());
 
-                target.gameObject.GetComponent<Enemy>().TakeDamage(1);
+                target.gameObject.GetComponent<Enemy>().TakeDamage(1, knockbackForce, breaknessDamage);
                 hitEnemy = true;
             }
             else if (hazardLayers == (hazardLayers | (1 << target.gameObject.layer)))

@@ -3807,6 +3807,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: b19de62d7dc2f8e4b9dd81068e3ce076, type: 2}
     - target: {fileID: -867594302582547788, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+      propertyPath: knockbackForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -867594302582547788, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
       propertyPath: attackSounds.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -27692,6 +27696,7 @@ MonoBehaviour:
   pointB: {x: 0, y: 0, z: 0}
   patrolSpeed: 2
   health: 1
+  toughness: 1
   isPatrolActive: 0
   canDamagePlayer: 0
   damageSound: {fileID: 0}
