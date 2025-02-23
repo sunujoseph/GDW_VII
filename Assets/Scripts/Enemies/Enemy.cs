@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -23,11 +24,11 @@ public class Enemy : MonoBehaviour
     private Vector3 targetPosition; // Current target position for patrol
 
     private Rigidbody2D rb;
-    private bool isFacingRight = true;
-    private bool isStunned = false;
+    public bool isFacingRight = true;
+    public bool isStunned = false;
 
     PlayerHealth playerHealth;
-    private Transform playerFindTransform; // Reference to the player's transform
+    public Transform playerFindTransform; // Reference to the player's transform
 
     public bool isAlive = true;
 
@@ -39,7 +40,12 @@ public class Enemy : MonoBehaviour
         //pointA = transform.position;
         playerHealth = FindObjectOfType<PlayerHealth>();
         playerFindTransform = GameObject.FindWithTag("Player").transform;
-        targetPosition = transform.position; // Start moving towards pointB
+
+        
+        pointA = transform.position;
+
+        targetPosition = pointA;
+        //targetPosition = transform.position; // Start moving towards pointB
     }
 
     // Update is called once per frame
@@ -56,6 +62,19 @@ public class Enemy : MonoBehaviour
         
     }
 
+    private void OnValidate()
+    {
+        if (!Application.isPlaying) // Only updates in Editor
+        {
+            pointA = transform.position;
+
+            #if UNITY_EDITOR
+            EditorUtility.SetDirty(this);
+            #endif
+        }
+    }
+
+
     protected void Patrol()
     {
         // Move towards the target position
@@ -64,11 +83,14 @@ public class Enemy : MonoBehaviour
         // Check if we've reached the target position and swap target between pointA and pointB
         if (Vector2.Distance(transform.position, targetPosition) <= 0.1f)
         {
-            // Swap target position between pointA and pointB
-            //targetPosition = targetPosition == pointA ? pointB : pointA;
             targetPosition = targetPosition == pointA ? pointB : pointA;
-            Flip();
 
+            // Flip only if the new direction is different
+            if ((targetPosition.x < transform.position.x && isFacingRight) ||
+                (targetPosition.x > transform.position.x && !isFacingRight))
+            {
+                Flip();
+            }
         }
     }
 
@@ -202,9 +224,12 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Draw lines between the two points for visualization in the editor
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(pointA, pointB);
+        if (isPatrolActive) // Only draw if patrol is enabled
+        {
+            // Draw lines between the two points for visualization in the editor
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(pointA, pointB);
+        }
     }
 
 }

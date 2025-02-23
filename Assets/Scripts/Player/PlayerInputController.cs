@@ -64,6 +64,8 @@ public class PlayerInputController : MonoBehaviour
 
 
     private UIManager uiManager;
+    private UICooldownManager uiCooldownManager;
+
 
     [Header("Parry")]
     [SerializeField] private float parryDuration = 0.5f;
@@ -187,6 +189,17 @@ public class PlayerInputController : MonoBehaviour
 
         //determine initial animation
         HandleAnimations();
+
+        if (uiCooldownManager == null)
+        {
+            uiCooldownManager = FindObjectOfType<UICooldownManager>();
+
+            if (uiCooldownManager == null)
+            {
+                Debug.LogError("UICooldownManager not found");
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -198,7 +211,10 @@ public class PlayerInputController : MonoBehaviour
 
         if (isGrounded)
         {
-            ResetDash();
+            if (!isDashing)
+            {
+                ResetDash();
+            }
             coyoteTimeCounter = coyoteTime;
             canAttackInAir = true;
             comboStep = 0;
@@ -210,12 +226,14 @@ public class PlayerInputController : MonoBehaviour
                 SoundManager.instance.Play(landingSound, transform, 0.2f);
             }
             //canDash = true;
+            uiCooldownManager?.UpdateJumpState(true);
         }
         else 
         {
             // Decrease the coyote time counter when not grounded
             groundedBufferCounter -= Time.deltaTime;
             coyoteTimeCounter -= Time.deltaTime;
+            uiCooldownManager?.UpdateJumpState(coyoteTimeCounter > 0);
         }
 
 
@@ -362,6 +380,7 @@ public class PlayerInputController : MonoBehaviour
         if (context.canceled)
         {
             jumpPressed = false;
+            
         }
     }
 
@@ -386,6 +405,7 @@ public class PlayerInputController : MonoBehaviour
         {
             Debug.Log("Dash Triggered");
             StartCoroutine(Dash());
+            if (uiCooldownManager != null) uiCooldownManager.StartDashCooldown(dashCooldown);
 
             if (!isGrounded)
             {
@@ -412,14 +432,6 @@ public class PlayerInputController : MonoBehaviour
 
         // Dash Horizontal
         Vector2 dashDirection = isFacingRight ? Vector2.right : Vector2.left;
-
-
-        //Vector2 startPosition = rb.position;
-        //Vector2 targetPosition = startPosition + dashDirection * dashDistance; // Calculate dash target
-
-        // Apply dash force
-        //rb.velocity = dashDirection * (dashDistance / dashDuration);
-        // Apply horizontal dash force while keeping Y velocity unchanged
         rb.velocity = new Vector2(dashDirection.x * (dashDistance / dashDuration), 0);
 
         // Wait for the dash duration
@@ -443,6 +455,7 @@ public class PlayerInputController : MonoBehaviour
 
     private void ResetDash()
     {
+
         canDash = true;
         dashResetOnEnemyHit = false;
     }
@@ -461,6 +474,7 @@ public class PlayerInputController : MonoBehaviour
         if (context.performed && canParry)
         {
             StartCoroutine(Parry());
+            if (uiCooldownManager != null) uiCooldownManager.StartParryCooldown(parryCooldown + parryDuration);
         }
     }
 
@@ -568,6 +582,9 @@ public class PlayerInputController : MonoBehaviour
         {
             Attack();
             lastAttackTime = Time.time;
+
+            uiCooldownManager?.StartAttackCooldown(attackNumber);
+
         }
     }
 
@@ -648,6 +665,7 @@ public class PlayerInputController : MonoBehaviour
         attackNumber = 0;
         animator.SetInteger("attackNumber", 0); // Reset animation state
         attacking = false; // Return to idle state
+        uiCooldownManager.ResetAttackImageAfterDelay();
     }
 
 
