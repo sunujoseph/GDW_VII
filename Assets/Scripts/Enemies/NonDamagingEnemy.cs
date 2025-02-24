@@ -10,7 +10,7 @@ public class NonDamagingEnemy : Enemy
         canDamagePlayer = false; // Ensure this enemy does not deal damage
     }
 
-    public override void TakeDamage(int amount)
+    public override void TakeDamage(int amount, float knockbackForce, float breakDamage)
     {
         Debug.Log("This enemy is invincible!");
         // Do nothing, since this enemy cannot be damaged

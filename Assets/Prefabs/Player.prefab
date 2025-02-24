@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 1830319852, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
+  m_Sprite: {fileID: -382894653, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -315,14 +315,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.625, y: 0.90625}
+    oldSize: {x: 0.59375, y: 0.90625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 1}
+  m_Size: {x: 0.6, y: 0.9}
   m_EdgeRadius: 0
 --- !u!114 &3402058050718016914
 MonoBehaviour:
@@ -399,6 +399,8 @@ MonoBehaviour:
   direction: 0
   attackCooldown: 0.5
   bounceForce: 15
+  knockbackForce: 10
+  breaknessDamage: 1
   attackHitbox: {fileID: 7662494419879136107}
   jumpAttackHitbox: {fileID: 5507465205319846302}
   comboResetTime: 1

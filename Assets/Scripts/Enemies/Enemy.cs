@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] public float patrolSpeed = 2f;  // Speed of patrol movement
 
     [SerializeField] protected int health = 1;
+    [SerializeField] public float toughness = 1f;
     [SerializeField] public bool isPatrolActive = true;
 
     [SerializeField] public bool canDamagePlayer = true; // New flag for damage behavior
@@ -22,10 +24,13 @@ public class Enemy : MonoBehaviour
     private Vector3 targetPosition; // Current target position for patrol
 
     private Rigidbody2D rb;
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
+    public bool isStunned = false;
 
-    PlayerHealth playerHealth;
-    private Transform playerFindTransform; // Reference to the player's transform
+    public PlayerHealth playerHealth;
+    public Transform playerFindTransform; // Reference to the player's transform
+
+    public bool isAlive = true;
 
 
     // Start is called before the first frame update
@@ -35,7 +40,12 @@ public class Enemy : MonoBehaviour
         //pointA = transform.position;
         playerHealth = FindObjectOfType<PlayerHealth>();
         playerFindTransform = GameObject.FindWithTag("Player").transform;
-        targetPosition = transform.position; // Start moving towards pointB
+
+        
+        pointA = transform.position;
+
+        targetPosition = pointA;
+        //targetPosition = transform.position; // Start moving towards pointB
     }
 
     // Update is called once per frame
@@ -52,6 +62,19 @@ public class Enemy : MonoBehaviour
         
     }
 
+    private void OnValidate()
+    {
+        if (!Application.isPlaying) // Only updates in Editor
+        {
+            pointA = transform.position;
+
+            #if UNITY_EDITOR
+            EditorUtility.SetDirty(this);
+            #endif
+        }
+    }
+
+
     protected void Patrol()
     {
         // Move towards the target position
@@ -60,11 +83,14 @@ public class Enemy : MonoBehaviour
         // Check if we've reached the target position and swap target between pointA and pointB
         if (Vector2.Distance(transform.position, targetPosition) <= 0.1f)
         {
-            // Swap target position between pointA and pointB
-            //targetPosition = targetPosition == pointA ? pointB : pointA;
             targetPosition = targetPosition == pointA ? pointB : pointA;
-            Flip();
 
+            // Flip only if the new direction is different
+            if ((targetPosition.x < transform.position.x && isFacingRight) ||
+                (targetPosition.x > transform.position.x && !isFacingRight))
+            {
+                Flip();
+            }
         }
     }
 
@@ -90,26 +116,135 @@ public class Enemy : MonoBehaviour
     }
 
     // When Enemy takes damage
-    public virtual void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount, float knockbackForce, float breakDamage)
     {
+        if (isStunned)
+        {
+            // double damage
+        }
+        else
+        {
+            // normal
+        }
+
         health -= amount;
         if (health <= 0)
         {
-            Die();
+            Die(knockbackForce);
             SoundManager.instance.Play(deathSound, transform, 1.0f);
         }
         else
         {
             SoundManager.instance.Play(damageSound, transform, 1.0f);
+
+            // Start knockback effect (only if still alive)
+            StartCoroutine(KnockbackEffect(knockbackForce));
+
+            // Start blinking effect
+            StartCoroutine(BlinkRed());
+
+        }
+    }
+
+    private IEnumerator KnockbackEffect(float knockbackForce)
+    {
+        float knockbackDuration = 0.2f; // Short knockback effect time
+        float elapsed = 0f;
+
+        Vector3 knockbackDirection = (transform.position - playerFindTransform.position).normalized;
+        Vector3 targetPosition = transform.position + (knockbackDirection * (knockbackForce * 0.05f));
+
+        while (elapsed < knockbackDuration)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPosition, elapsed / knockbackDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPosition; // Ensure it reaches the final position
+    }
+
+    private IEnumerator BlinkRed()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null) yield break;
+
+        canDamagePlayer = false; // Temporarily disable damage
+
+        float blinkDuration = 1.5f; // Time enemy stays invulnerable
+        float blinkInterval = 0.1f; // Time between each blink
+
+        Color originalColor = spriteRenderer.color;
+        Color blinkColor = Color.red;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < blinkDuration)
+        {
+            spriteRenderer.color = blinkColor;
+            yield return new WaitForSeconds(blinkInterval);
+            spriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(blinkInterval);
+
+            elapsedTime += blinkInterval * 2;
+        }
+
+        canDamagePlayer = true; // Re-enable damage after blinking
+    }
+
+    public virtual void TakeBreakDmage(float breakDamage)
+    {
+        toughness -= breakDamage;
+        if (toughness <= 0)
+        {
+            Stunned();
         }
     }
 
     // Call when Enemy dies
-    protected void Die()
+    protected void Die(float knockbackForce)
     {
+        isAlive = false;
+
+        // Disable enemy behavior
+        isPatrolActive = false;
+        GetComponent<Collider2D>().isTrigger = false;
+        rb.isKinematic = false;
+        rb.velocity = Vector2.zero;
+
+        rb.constraints &= ~RigidbodyConstraints2D.FreezeRotation;
+
+        gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
+
+        Vector2 knockbackDirection = (transform.position - playerFindTransform.position).normalized;
+        rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+
+        float randomSpin = Random.Range(-10f, 10f);
+        rb.AddTorque(randomSpin, ForceMode2D.Impulse);
+
+
+        // Destroy enemy after delay
+        StartCoroutine(DestroyAfterDelay(2f));
+
+        //Destroy(gameObject);
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         Destroy(gameObject);
     }
 
+    protected void Stunned()
+    {
+        // double damage
+        isStunned = true;
+    }
+
+    protected void RecoverFromStun()
+    {
+        isStunned = false;
+    }
   
 
     private void OnTriggerEnter2D(Collider2D otherObject)
@@ -133,7 +268,7 @@ public class Enemy : MonoBehaviour
         }
         else if (otherObject.CompareTag("PlayerProjectile"))
         {
-            TakeDamage(1);
+            TakeDamage(1, 1f, 1f);
         }
     }
 
@@ -141,9 +276,12 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Draw lines between the two points for visualization in the editor
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(pointA, pointB);
+        if (isPatrolActive) // Only draw if patrol is enabled
+        {
+            // Draw lines between the two points for visualization in the editor
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(pointA, pointB);
+        }
     }
 
 }

@@ -172,16 +172,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc33f907bea84e349bab001d2a636c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: 12.94, y: -3.67, z: 0}
-  pointB: {x: 17.9, y: -3.67, z: 0}
+  pointA: {x: 38.45, y: -1.8, z: 0}
+  pointB: {x: 17.9, y: -3.5, z: 0}
   patrolSpeed: 2
   health: 1
+  toughness: 1
   isPatrolActive: 1
   canDamagePlayer: 1
   damageSound: {fileID: 8300000, guid: d4cd3d4daa7f92140abb45bcd325c36a, type: 3}
   deathSound: {fileID: 8300000, guid: def0d12e78add214fb3d485aa4317c47, type: 3}
-  loudDeathSound: {fileID: 8300000, guid: 438cda47fb3250d45be35be2fe93b430, type: 3}
   attackSound: {fileID: 8300000, guid: a074c459981124949945666263395d6c, type: 3}
+  isFacingRight: 1
+  isStunned: 0
+  playerHealth: {fileID: 0}
+  playerFindTransform: {fileID: 0}
+  isAlive: 1
 --- !u!95 &-5222277745278193112
 Animator:
   serializedVersion: 5

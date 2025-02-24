@@ -33,7 +33,7 @@ public class ShootingEnemy : Enemy
             CheckAgro();
         }
 
-        if (isHostile)
+        if (isHostile & isAlive)
         {
             // Only shoot if enough time has passed since the last shot
             timeSinceLastShot += Time.deltaTime;
@@ -53,6 +53,10 @@ public class ShootingEnemy : Enemy
             // Once hostile, it stays hostile
             // Possibly change this if we wanna tweak enemy behaviour
             isHostile = true;  
+        }
+        else
+        {
+            isHostile = false;
         }
     }
 

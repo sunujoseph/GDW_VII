@@ -64,6 +64,8 @@ public class PlayerInputController : MonoBehaviour
 
 
     private UIManager uiManager;
+    private UICooldownManager uiCooldownManager;
+
 
     [Header("Parry")]
     [SerializeField] private float parryDuration = 0.5f;
@@ -98,6 +100,8 @@ public class PlayerInputController : MonoBehaviour
     private int comboStep = 0; // Tracks current step in ground combo
     private bool canAttackInAir = true;   // Allows one air attack per jump
     public float bounceForce = 10f;
+    [SerializeField] private float knockbackForce = 1f;
+    [SerializeField] private float breaknessDamage = 1f;
     [SerializeField] private Transform attackHitbox;
     [SerializeField] private Transform jumpAttackHitbox;
 
@@ -158,6 +162,7 @@ public class PlayerInputController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         // Set the initial position as the starting checkpoint
+        // HERE 
         lastCheckpoint = transform.position;
 
         //animation states
@@ -184,6 +189,17 @@ public class PlayerInputController : MonoBehaviour
 
         //determine initial animation
         HandleAnimations();
+
+        if (uiCooldownManager == null)
+        {
+            uiCooldownManager = FindObjectOfType<UICooldownManager>();
+
+            if (uiCooldownManager == null)
+            {
+                Debug.LogError("UICooldownManager not found");
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -195,7 +211,10 @@ public class PlayerInputController : MonoBehaviour
 
         if (isGrounded)
         {
-            ResetDash();
+            if (!isDashing)
+            {
+                ResetDash();
+            }
             coyoteTimeCounter = coyoteTime;
             canAttackInAir = true;
             comboStep = 0;
@@ -207,12 +226,14 @@ public class PlayerInputController : MonoBehaviour
                 SoundManager.instance.Play(landingSound, transform, 0.2f);
             }
             //canDash = true;
+            uiCooldownManager?.UpdateJumpState(true);
         }
         else 
         {
             // Decrease the coyote time counter when not grounded
             groundedBufferCounter -= Time.deltaTime;
             coyoteTimeCounter -= Time.deltaTime;
+            uiCooldownManager?.UpdateJumpState(coyoteTimeCounter > 0);
         }
 
 
@@ -359,6 +380,7 @@ public class PlayerInputController : MonoBehaviour
         if (context.canceled)
         {
             jumpPressed = false;
+            
         }
     }
 
@@ -383,6 +405,7 @@ public class PlayerInputController : MonoBehaviour
         {
             Debug.Log("Dash Triggered");
             StartCoroutine(Dash());
+            if (uiCooldownManager != null) uiCooldownManager.StartDashCooldown(dashCooldown);
 
             if (!isGrounded)
             {
@@ -409,14 +432,6 @@ public class PlayerInputController : MonoBehaviour
 
         // Dash Horizontal
         Vector2 dashDirection = isFacingRight ? Vector2.right : Vector2.left;
-
-
-        //Vector2 startPosition = rb.position;
-        //Vector2 targetPosition = startPosition + dashDirection * dashDistance; // Calculate dash target
-
-        // Apply dash force
-        //rb.velocity = dashDirection * (dashDistance / dashDuration);
-        // Apply horizontal dash force while keeping Y velocity unchanged
         rb.velocity = new Vector2(dashDirection.x * (dashDistance / dashDuration), 0);
 
         // Wait for the dash duration
@@ -440,6 +455,7 @@ public class PlayerInputController : MonoBehaviour
 
     private void ResetDash()
     {
+
         canDash = true;
         dashResetOnEnemyHit = false;
     }
@@ -458,6 +474,7 @@ public class PlayerInputController : MonoBehaviour
         if (context.performed && canParry)
         {
             StartCoroutine(Parry());
+            if (uiCooldownManager != null) uiCooldownManager.StartParryCooldown(parryCooldown + parryDuration);
         }
     }
 
@@ -474,6 +491,13 @@ public class PlayerInputController : MonoBehaviour
         canParry = false;
         parryHitbox.gameObject.SetActive(true);
 
+        // Player invlun so they dont take damage
+        int originalLayer = gameObject.layer;
+
+        // Make player Invulnerable during Parry
+        gameObject.layer = LayerMask.NameToLayer("Invulnerable");
+
+
         // Parry Window Duration
         yield return new WaitForSeconds(parryDuration);
 
@@ -481,6 +505,10 @@ public class PlayerInputController : MonoBehaviour
         // End Parry State
         isParrying = false;
         parryHitbox.gameObject.SetActive(false);
+
+        // End player invlun
+        // Restore Plyaer layer
+        gameObject.layer = originalLayer;
 
         // Start Parry Cooldown
         // Can parry set to true
@@ -554,6 +582,9 @@ public class PlayerInputController : MonoBehaviour
         {
             Attack();
             lastAttackTime = Time.time;
+
+            uiCooldownManager?.StartAttackCooldown(attackNumber);
+
         }
     }
 
@@ -604,7 +635,7 @@ public class PlayerInputController : MonoBehaviour
                 Debug.Log("Hit Enemy: " + target.name);
                 if (!isHitstopping) StartCoroutine(Hitstop());
 
-                target.gameObject.GetComponent<Enemy>().TakeDamage(1);
+                target.gameObject.GetComponent<Enemy>().TakeDamage(1, knockbackForce, breaknessDamage);
                 hitEnemy = true;
             }
             else if (hazardLayers == (hazardLayers | (1 << target.gameObject.layer)))
@@ -634,6 +665,7 @@ public class PlayerInputController : MonoBehaviour
         attackNumber = 0;
         animator.SetInteger("attackNumber", 0); // Reset animation state
         attacking = false; // Return to idle state
+        uiCooldownManager.ResetAttackImageAfterDelay();
     }
 
 
