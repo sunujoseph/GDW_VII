@@ -6,6 +6,8 @@ using TMPro;
 
 public class UICooldownManager : MonoBehaviour
 {
+    private static UICooldownManager instance;
+
     [Header("UI Cooldowns")]
     [SerializeField] private Image dashCooldownImage;
     [SerializeField] private Image parryCooldownImage;
@@ -24,9 +26,23 @@ public class UICooldownManager : MonoBehaviour
     private bool attack2Ready = true;
     private bool attack3Ready = true;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     private void Start()
     {
+
         // Ensure cooldowns start invisible
         ResetCooldowns();
     }
@@ -41,6 +57,7 @@ public class UICooldownManager : MonoBehaviour
         attack2CooldownImage.enabled = false;
         attack3CooldownImage.enabled = false;
     }
+
 
     public void InitializeCooldowns(float attackCD, float dashCD, float parryCD)
     {

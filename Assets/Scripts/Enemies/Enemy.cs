@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     public bool isFacingRight = true;
     public bool isStunned = false;
 
-    PlayerHealth playerHealth;
+    public PlayerHealth playerHealth;
     public Transform playerFindTransform; // Reference to the player's transform
 
     public bool isAlive = true;
@@ -136,8 +136,60 @@ public class Enemy : MonoBehaviour
         else
         {
             SoundManager.instance.Play(damageSound, transform, 1.0f);
-            
+
+            // Start knockback effect (only if still alive)
+            StartCoroutine(KnockbackEffect(knockbackForce));
+
+            // Start blinking effect
+            StartCoroutine(BlinkRed());
+
         }
+    }
+
+    private IEnumerator KnockbackEffect(float knockbackForce)
+    {
+        float knockbackDuration = 0.2f; // Short knockback effect time
+        float elapsed = 0f;
+
+        Vector3 knockbackDirection = (transform.position - playerFindTransform.position).normalized;
+        Vector3 targetPosition = transform.position + (knockbackDirection * (knockbackForce * 0.05f));
+
+        while (elapsed < knockbackDuration)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPosition, elapsed / knockbackDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPosition; // Ensure it reaches the final position
+    }
+
+    private IEnumerator BlinkRed()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null) yield break;
+
+        canDamagePlayer = false; // Temporarily disable damage
+
+        float blinkDuration = 1.5f; // Time enemy stays invulnerable
+        float blinkInterval = 0.1f; // Time between each blink
+
+        Color originalColor = spriteRenderer.color;
+        Color blinkColor = Color.red;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < blinkDuration)
+        {
+            spriteRenderer.color = blinkColor;
+            yield return new WaitForSeconds(blinkInterval);
+            spriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(blinkInterval);
+
+            elapsedTime += blinkInterval * 2;
+        }
+
+        canDamagePlayer = true; // Re-enable damage after blinking
     }
 
     public virtual void TakeBreakDmage(float breakDamage)

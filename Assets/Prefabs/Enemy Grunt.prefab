@@ -184,6 +184,7 @@ MonoBehaviour:
   attackSound: {fileID: 8300000, guid: a074c459981124949945666263395d6c, type: 3}
   isFacingRight: 1
   isStunned: 0
+  playerHealth: {fileID: 0}
   playerFindTransform: {fileID: 0}
   isAlive: 1
 --- !u!95 &-5222277745278193112

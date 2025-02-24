@@ -64,10 +64,15 @@ public class FighterEnemy : Enemy
         // Stop at platform edges
         if (IsAtEdge()) return;
 
-        // Move only horizontally
-        Vector3 newPosition = transform.position;
-        newPosition.x = Mathf.MoveTowards(transform.position.x, playerFindTransform.position.x, patrolSpeed * Time.deltaTime);
-        transform.position = newPosition;
+        float playerDistance = Vector2.Distance(transform.position, playerFindTransform.position);
+
+        // Move towards player and keep within range
+        if (playerDistance > attackRange)
+        {
+            Vector3 newPosition = transform.position;
+            newPosition.x = Mathf.MoveTowards(transform.position.x, playerFindTransform.position.x, patrolSpeed * Time.deltaTime);
+            transform.position = newPosition;
+        }
     }
 
     private bool IsAtEdge()
@@ -83,31 +88,27 @@ public class FighterEnemy : Enemy
     private IEnumerator PerformAttack()
     {
         isAttacking = true;
-        lastAttackTime = Time.time;
 
-        // Attack wind-up
+        // Disable attack hitbox at start
+        attackHitbox.gameObject.SetActive(false);
+
+        // Attack wind-up delay (preparing attack, hitbox inactive)
         yield return new WaitForSeconds(attackWindUpTime);
 
-        // Activate hitbox
-        Collider2D hitPlayer = Physics2D.OverlapBox(attackHitbox.position, attackHitbox.GetComponent<BoxCollider2D>().size, 0, playerLayer);
-        if (hitPlayer != null && hitPlayer.CompareTag("Player"))
-        {
-            // Deal damage
-            PlayerHealth playerHealth = hitPlayer.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(attackDamage);
-                Rigidbody2D playerRb = hitPlayer.GetComponent<Rigidbody2D>();
-                if (playerRb != null)
-                {
-                    Vector2 knockbackDir = (hitPlayer.transform.position - transform.position).normalized;
-                    playerRb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
-                }
-            }
-        }
+        // Enable attack hitbox
+        attackHitbox.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.2f); // Short delay before disabling hitbox
 
+        // Hitbox stays active for a short time
+        yield return new WaitForSeconds(1f);
+
+        // Disable attack hitbox after attack is completed
+        attackHitbox.gameObject.SetActive(false);
+
+        // Properly apply attack cooldown AFTER the attack sequence finishes
+        lastAttackTime = Time.time;
+
+        // Attack is now on cooldown
         isAttacking = false;
     }
 

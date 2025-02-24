@@ -1581,6 +1581,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3785884073424853429, guid: d6e6f169aa2603942b5b2dd0b39e0ebb, type: 3}
   m_PrefabInstance: {fileID: 1634235047}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &897570100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 709199093533216725, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+  m_PrefabInstance: {fileID: 1905094195984903083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &897570104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897570100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e391e0227be727b438af83d040916b9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
 --- !u!4 &1005380571 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3785884073424853429, guid: d6e6f169aa2603942b5b2dd0b39e0ebb, type: 3}
@@ -3775,6 +3793,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: pointA.x
       value: 6.629
       objectReference: {fileID: 0}
@@ -4107,6 +4129,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fighter Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 393373851136409906, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 709199093533216725, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 709199093533216725, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1861096977597997645, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2329159857480088286, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.08
@@ -4147,10 +4185,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6353622488454175485, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323668946630253188, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323668946630253188, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: attackWindUpTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8230418542067052725, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8230418542067052725, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.57
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 709199093533216725, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 897570104}
   m_SourcePrefab: {fileID: 100100000, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
 --- !u!4 &2105395186006807747 stripped
 Transform:
@@ -28243,6 +28304,7 @@ MonoBehaviour:
   attackSound: {fileID: 0}
   isFacingRight: 1
   isStunned: 0
+  playerHealth: {fileID: 0}
   playerFindTransform: {fileID: 0}
   isAlive: 1
 --- !u!1001 &8847334405079016572
