@@ -26,6 +26,7 @@ public class UICooldownManager : MonoBehaviour
     private bool attack2Ready = true;
     private bool attack3Ready = true;
 
+
     private void Awake()
     {
         if (instance == null)
@@ -38,13 +39,34 @@ public class UICooldownManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        CheckComponents();
     }
 
     private void Start()
     {
 
+        //Invoke("ReassignUIElements", 0.1f);
+
+        if (dashCooldownImage == null || parryCooldownImage == null || jumpCooldownImage == null)
+        {
+            //Debug.Log("help");
+            CheckComponents();
+        }
+
         // Ensure cooldowns start invisible
         ResetCooldowns();
+    }
+
+    private void Update()
+    {
+        if (dashCooldownImage == null || parryCooldownImage == null || jumpCooldownImage == null)
+        {
+            //Debug.Log("help");
+            CheckComponents();
+        }
+
+
     }
 
     private void ResetCooldowns()
@@ -68,7 +90,10 @@ public class UICooldownManager : MonoBehaviour
 
     public void StartAttackCooldown(int attackStep)
     {
-            
+
+        if (attack1CooldownImage == null) CheckComponents();
+        if (attack2CooldownImage == null) CheckComponents();
+        if (attack3CooldownImage == null) CheckComponents();
 
         switch (attackStep)
         {
@@ -126,5 +151,26 @@ public class UICooldownManager : MonoBehaviour
         image.fillAmount = 0f; // Ensure cooldown resets to zero
         onComplete?.Invoke();
     }
+
+
+    void CheckComponents()
+    {
+
+
+        if (dashCooldownImage == null) dashCooldownImage = GameObject.Find("DashFill")?.GetComponent<Image>();
+        if (parryCooldownImage == null) parryCooldownImage = GameObject.Find("ParryFill")?.GetComponent<Image>();
+        if (jumpCooldownImage == null) jumpCooldownImage = GameObject.Find("JumpFill")?.GetComponent<Image>();
+
+        if (attack1CooldownImage == null) attack1CooldownImage = GameObject.Find("AttackFill1")?.GetComponent<Image>();
+        if (attack2CooldownImage == null) attack2CooldownImage = GameObject.Find("AttackFill2")?.GetComponent<Image>();
+        if (attack3CooldownImage == null) attack3CooldownImage = GameObject.Find("AttackFill3")?.GetComponent<Image>();
+
+        // Reset fill amounts
+        if (dashCooldownImage != null) dashCooldownImage.fillAmount = 0f;
+        if (parryCooldownImage != null) parryCooldownImage.fillAmount = 0f;
+        if (jumpCooldownImage != null) jumpCooldownImage.fillAmount = 1f;
+    }
+
+
 
 }

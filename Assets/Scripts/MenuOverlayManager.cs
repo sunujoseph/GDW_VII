@@ -86,6 +86,7 @@ public class MenuOverlayManager : MonoBehaviour
         Time.timeScale = 1f;
 
         PlayerHealth playerHealth = FindAnyObjectByType<PlayerHealth>();
+        UICooldownManager uICooldownManager = FindAnyObjectByType<UICooldownManager>();
         playerHealth.ResetState();
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload current level
@@ -101,6 +102,7 @@ public class MenuOverlayManager : MonoBehaviour
         playerHealth.maxLives = 3;
         playerHealth.currentLives = playerHealth.maxLives;
         playerHealth.uiManager.UpdateHealth(playerHealth.currentLives);
+
 
         if (pauseMenu != null) pauseMenu.SetActive(false);
         if (gameOverMenu != null) gameOverMenu.SetActive(false);

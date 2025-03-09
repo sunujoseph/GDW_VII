@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject playerPrefab;
+
+   
+
+    private void Awake()
     {
-        
+        if (playerPrefab == null)
+        {
+            playerPrefab = GameObject.FindWithTag("Player");
+        }
+
+        spawnPlayer();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void spawnPlayer()
     {
-        
+        playerPrefab.transform.position = this.transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

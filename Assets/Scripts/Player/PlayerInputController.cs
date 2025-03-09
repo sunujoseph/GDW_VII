@@ -142,16 +142,23 @@ public class PlayerInputController : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            
         }
         else
         {
             Destroy(gameObject);
         }
+
+
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+
+        TryReassign();
+
         // Set parry Hitbox not active
         parryHitbox.gameObject.SetActive(false);
 
@@ -181,6 +188,7 @@ public class PlayerInputController : MonoBehaviour
         currentLives = maxLives;
 
         uiManager = FindObjectOfType<UIManager>();
+        uiCooldownManager = FindObjectOfType<UICooldownManager>();
 
         if (uiManager != null)
         {
@@ -190,21 +198,18 @@ public class PlayerInputController : MonoBehaviour
         //determine initial animation
         HandleAnimations();
 
-        if (uiCooldownManager == null)
-        {
-            uiCooldownManager = FindObjectOfType<UICooldownManager>();
-
-            if (uiCooldownManager == null)
-            {
-                Debug.LogError("UICooldownManager not found");
-            }
-        }
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(uiManager == null || uiCooldownManager == null)
+        {
+            TryReassign();
+        }
+        
 
         // Check if the player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -278,6 +283,48 @@ public class PlayerInputController : MonoBehaviour
 
 
     }
+
+
+
+    private void TryReassign()
+    {
+        if (uiManager == null)
+        {
+            Debug.LogWarning("Can't find uiManager");
+            uiManager = FindObjectOfType<UIManager>();
+
+            if (uiManager != null)
+            {
+                Debug.Log("uiManager found");
+            }
+            else
+            {
+                Debug.LogError("uiManager not found");
+            }
+        }
+
+        if (uiCooldownManager == null)
+        {
+            Debug.LogWarning("Can't find uiManagerCooldown");
+            uiCooldownManager = FindObjectOfType<UICooldownManager>();
+
+            if (uiCooldownManager != null)
+            {
+                Debug.Log("uiCooldownManager found");
+            }
+            else
+            {
+                Debug.LogError("uiCooldownManager not found");
+            }
+        }
+
+        if (uiManager != null)
+        {
+            uiManager.UpdateHealth(currentLives);
+        }
+
+    }
+
 
     //different kinds of collisions
     private void OnTriggerEnter2D(Collider2D other)
@@ -474,7 +521,14 @@ public class PlayerInputController : MonoBehaviour
         if (context.performed && canParry)
         {
             StartCoroutine(Parry());
-            if (uiCooldownManager != null) uiCooldownManager.StartParryCooldown(parryCooldown + parryDuration);
+            if (uiCooldownManager != null)
+            {
+                uiCooldownManager.StartParryCooldown(parryCooldown + parryDuration);
+            }
+            else
+            {
+                Debug.Log("AHHHHH");
+            }
         }
     }
 
