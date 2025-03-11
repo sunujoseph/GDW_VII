@@ -188,7 +188,7 @@ MonoBehaviour:
   playerFindTransform: {fileID: 0}
   isAlive: 1
   projectilePrefab: {fileID: 8473217642505165313, guid: 1ce2dbb4c07481141b20c85e4635fc5f, type: 3}
-  agroRange: 5
+  agroRange: 8
   fireRate: 1
 --- !u!95 &-3885836088128806489
 Animator:

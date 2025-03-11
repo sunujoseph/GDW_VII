@@ -98,6 +98,16 @@ public class FighterEnemy : Enemy
         // Enable attack hitbox
         attackHitbox.gameObject.SetActive(true);
 
+        if (attackHitbox.gameObject.GetComponent<Collider2D>().CompareTag("Parry"))
+        {
+            // toughness dmg
+            // end attack
+        }
+        else if (attackHitbox.gameObject.GetComponent<Collider2D>().CompareTag("Player"))
+        {
+            // Damage Player
+            // apply knockback to player
+        }
 
         // Hitbox stays active for a short time
         yield return new WaitForSeconds(1f);
@@ -124,6 +134,11 @@ public class FighterEnemy : Enemy
     private IEnumerator StunRoutine()
     {
         isStunned = true;
+
+        // Toughness bar depleted
+        // Stun effect on top of enemmy plays
+
+
         yield return new WaitForSeconds(2f);
         toughness = 3f; // Reset toughness after stun
         isStunned = false;
