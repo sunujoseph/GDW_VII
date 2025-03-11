@@ -11,7 +11,7 @@ public class MenuOverlayManager : MonoBehaviour
 
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
-    [SerializeField] private BlockPlayerLeft playerObject;
+    [SerializeField] private PlayerInputController playerObject;
 
     private bool isPaused = false;
 
@@ -43,7 +43,7 @@ public class MenuOverlayManager : MonoBehaviour
 
         if (playerObject == null)
         {
-            playerObject = FindAnyObjectByType<BlockPlayerLeft>();
+            playerObject = FindAnyObjectByType<PlayerInputController>();
         }
 
         // Pause Menu Toggle
@@ -54,11 +54,11 @@ public class MenuOverlayManager : MonoBehaviour
 
         if (isPaused)
         {
-            playerObject.isBlockActive = false;
+            //playerObject.isBlockActive = false;
         }
         else if (!isPaused)
         {
-            playerObject.isBlockActive = true;
+            //playerObject.isBlockActive = true;
         }
 
     }
