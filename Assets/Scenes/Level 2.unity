@@ -186,10 +186,6 @@ PrefabInstance:
       propertyPath: pointA.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5574969634578967858, guid: 275d5903f439f0248a8368b9cadbb9bc, type: 3}
-      propertyPath: canDamagePlayer
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
