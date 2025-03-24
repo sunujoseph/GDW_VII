@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
     public UIManager uiManager;
     private SpriteRenderer playerSpriteRenderer;
 
-    private Vector3 lastCheckpoint; // Last checkpoint position
+    public Vector3 lastCheckpoint; // Last checkpoint position
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip damageSound;
