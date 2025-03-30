@@ -1411,6 +1411,10 @@ PrefabInstance:
       propertyPath: isPatrolActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7928737814023973244, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -1520,6 +1524,10 @@ PrefabInstance:
     - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: isPatrolActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7928737814023973244, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: m_Color.b
@@ -1978,6 +1986,10 @@ PrefabInstance:
     - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: pointB.y
       value: -3.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7928737814023973244, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: m_SortingOrder
@@ -2795,6 +2807,10 @@ PrefabInstance:
       propertyPath: isPatrolActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7928737814023973244, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -3084,6 +3100,10 @@ PrefabInstance:
     - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: isPatrolActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7928737814023973244, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: m_Color.b
@@ -3572,6 +3592,10 @@ PrefabInstance:
       propertyPath: isPatrolActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7928737814023973244, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -3890,7 +3914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 924711953923466371, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.553
+      value: -3.41
       objectReference: {fileID: 0}
     - target: {fileID: 924711953923466371, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3934,7 +3958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: pointA.y
-      value: -3.553
+      value: -3.41
       objectReference: {fileID: 0}
     - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: pointA.z
@@ -3951,6 +3975,14 @@ PrefabInstance:
     - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: isPatrolActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
+      propertyPath: respectEnvironmentHitbox
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7928737814023973244, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: m_Color.b
@@ -4119,6 +4151,10 @@ PrefabInstance:
       propertyPath: pointA.z
       value: 0.047901142
       objectReference: {fileID: 0}
+    - target: {fileID: 3832713691014199571, guid: 1e5765cb0312f8848afe0ba3908beb49, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 4253745545901723110, guid: 1e5765cb0312f8848afe0ba3908beb49, type: 3}
       propertyPath: m_Name
       value: Enemy Shooter
@@ -4247,6 +4283,10 @@ PrefabInstance:
     - target: {fileID: 7323668946630253188, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
       propertyPath: attackWindUpTime
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323668946630253188, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 8230418542067052725, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
       propertyPath: m_LocalScale.x
@@ -28132,6 +28172,10 @@ PrefabInstance:
       propertyPath: pointA.y
       value: -3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5884271909428815280, guid: fc518570bb8c064478b485add534579d, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 8569991578984166143, guid: fc518570bb8c064478b485add534579d, type: 3}
       propertyPath: m_Name
       value: Enemy Grunt
@@ -28200,6 +28244,14 @@ PrefabInstance:
     - target: {fileID: 8017751609765631781, guid: c811dc349803ea14aafc98f04c1e3311, type: 3}
       propertyPath: health
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8017751609765631781, guid: c811dc349803ea14aafc98f04c1e3311, type: 3}
+      propertyPath: respectEnvironmentHitbox
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8017751609765631781, guid: c811dc349803ea14aafc98f04c1e3311, type: 3}
+      propertyPath: environmentHitboxLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -33,6 +33,8 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashCooldown = 1f;
     [SerializeField] private float coyoteTime = 0.2f;
+    [SerializeField] private float groundedBufferTime = 0.5f;
+
 
     bool isFacingRight = true;
     public bool isGrounded;
@@ -41,8 +43,8 @@ public class PlayerInputController : MonoBehaviour
     private bool dashResetOnEnemyHit = false;
     private float coyoteTimeCounter;
     private Vector3 lastCheckpoint; // Tracks the last checkpoint position
-    private float groundedBufferTime = 0.1f; 
     private float groundedBufferCounter = 0f;
+
 
 
 

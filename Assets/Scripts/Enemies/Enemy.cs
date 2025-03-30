@@ -20,6 +20,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] public AudioClip deathSound;
     [SerializeField] public AudioClip attackSound;
 
+    // Ground Layer hitbox
+    [SerializeField] private bool respectEnvironmentHitbox = true;
+    [SerializeField] private LayerMask environmentHitboxLayer;
 
     private Vector3 targetPosition; // Current target position for patrol
 
@@ -41,6 +44,11 @@ public class Enemy : MonoBehaviour
         playerHealth = FindObjectOfType<PlayerHealth>();
         playerFindTransform = GameObject.FindWithTag("Player").transform;
 
+
+        if (environmentHitboxLayer == 0)
+        {
+            environmentHitboxLayer = LayerMask.GetMask("Ground");
+        }
         
         pointA = transform.position;
 
@@ -152,16 +160,58 @@ public class Enemy : MonoBehaviour
         float elapsed = 0f;
 
         Vector3 knockbackDirection = (transform.position - playerFindTransform.position).normalized;
+        knockbackDirection.y = 0f;
+        knockbackDirection.Normalize();
+
+        //Vector3 targetPosition = transform.position + (knockbackDirection * (knockbackForce * 0.05f));
         Vector3 targetPosition = transform.position + (knockbackDirection * (knockbackForce * 0.05f));
+
+        Vector3 startPos = transform.position;
+
+        if (respectEnvironmentHitbox)
+        {
+            RaycastHit2D hit = Physics2D.BoxCast(
+            transform.position,
+            GetComponent<Collider2D>().bounds.size,
+            0f,
+            knockbackDirection,
+            Vector2.Distance(startPos, targetPosition),
+            environmentHitboxLayer
+            );
+
+            if (hit.collider != null)
+            {
+                float adjustDistance = hit.distance * 0.9f;
+                targetPosition = transform.position + knockbackDirection * adjustDistance;
+            }
+
+        }
+        
 
         while (elapsed < knockbackDuration)
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, elapsed / knockbackDuration);
+            //transform.position = Vector3.Lerp(transform.position, targetPosition, elapsed / knockbackDuration);
+            transform.position = Vector3.Lerp(startPos, targetPosition, elapsed / knockbackDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         transform.position = targetPosition; // Ensure it reaches the final position
+
+        if (isPatrolActive)
+        {
+            Vector3 closetPoint = ClosestPointOnLine(pointA, pointB, transform.position);
+            transform.position = closetPoint;
+        }
+
+    }
+
+    private Vector3 ClosestPointOnLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point)
+    {
+        Vector3 lineDir = (lineEnd - lineStart).normalized;
+        float lineLength = Vector3.Distance(lineStart, lineEnd);
+        float project = Mathf.Clamp(Vector3.Dot(point - lineStart, lineDir), 0f, lineLength);
+        return lineStart + lineDir * project;
     }
 
     private IEnumerator BlinkRed()
