@@ -15,9 +15,33 @@ public class FighterEnemy : Enemy
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Sword Settings")]
+    [SerializeField] private Transform swordTransform;
+    [SerializeField] private Vector3 swordIdlePosition;
+    [SerializeField] private Vector3 swordRaisedPosition;
+    [SerializeField] private Vector3 swordAttackPosition;
+
+    //[SerializeField] private Quaternion swordIdleRotation;
+    [SerializeField] private Quaternion swordRaisedRotation;
+    //[SerializeField] private Quaternion swordAttackRotation;
+    [SerializeField] private Vector3 swordAttackEuler;
+    private Vector3 swordIdleEuler;
+
+
     private bool isChasing = false;
     private bool isAttacking = false;
     private float lastAttackTime = 0f;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        if (swordTransform != null)
+        {
+            swordIdlePosition = swordTransform.localPosition;
+            swordIdleEuler = swordTransform.localEulerAngles;
+        }
+    }
 
     protected override void Update()
     {
@@ -43,7 +67,8 @@ public class FighterEnemy : Enemy
             ChasePlayer();
         }
 
-        if (isChasing && Vector2.Distance(transform.position, playerFindTransform.position) <= attackRange && Time.time >= lastAttackTime + attackCooldown)
+
+        if (isChasing && !isAttacking && Vector2.Distance(transform.position, playerFindTransform.position) <= attackRange && Time.time >= lastAttackTime + attackCooldown)
         {
             StartCoroutine(PerformAttack());
         }
@@ -92,8 +117,26 @@ public class FighterEnemy : Enemy
         // Disable attack hitbox at start
         attackHitbox.gameObject.SetActive(false);
 
+        // STEP 1: Raise sword
+        if (swordTransform != null)
+        {
+            swordTransform.localPosition = swordRaisedPosition;
+            swordTransform.localRotation = swordRaisedRotation;
+        }
+
+        Debug.Log("Hitbox Off");
+
         // Attack wind-up delay (preparing attack, hitbox inactive)
         yield return new WaitForSeconds(attackWindUpTime);
+
+        // STEP 2: Attack - Slash sword
+        if (swordTransform != null)
+        {
+            swordTransform.localPosition = swordAttackPosition;
+            swordTransform.localEulerAngles = swordAttackEuler;
+            
+        }
+
 
         // Enable attack hitbox
         attackHitbox.gameObject.SetActive(true);
@@ -109,11 +152,22 @@ public class FighterEnemy : Enemy
             // apply knockback to player
         }
 
+        Debug.Log("Hitbox ON");
+
         // Hitbox stays active for a short time
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         // Disable attack hitbox after attack is completed
         attackHitbox.gameObject.SetActive(false);
+
+
+        if (swordTransform != null)
+        {
+            swordTransform.localPosition = swordIdlePosition;
+            swordTransform.localEulerAngles = swordIdleEuler;
+        }
+
+        Debug.Log("Hitbox COOLDOWN");
 
         // Properly apply attack cooldown AFTER the attack sequence finishes
         lastAttackTime = Time.time;

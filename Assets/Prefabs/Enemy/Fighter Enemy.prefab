@@ -205,6 +205,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  swordTransform: {fileID: 0}
+  swordIdlePosition: {x: 0, y: 0, z: 0}
+  swordRaisedPosition: {x: 0, y: 0, z: 0}
+  swordAttackPosition: {x: 0, y: 0, z: 0}
+  swordRaisedRotation: {x: 0, y: 0, z: 0, w: 0}
+  swordAttackEuler: {x: 0, y: 0, z: 0}
 --- !u!95 &4311224803705433995
 Animator:
   serializedVersion: 5
