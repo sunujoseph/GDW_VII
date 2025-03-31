@@ -181,7 +181,7 @@ MonoBehaviour:
   health: 5
   toughness: 1
   isPatrolActive: 1
-  canDamagePlayer: 0
+  canDamagePlayer: 1
   damageSound: {fileID: 8300000, guid: d4cd3d4daa7f92140abb45bcd325c36a, type: 3}
   deathSound: {fileID: 8300000, guid: def0d12e78add214fb3d485aa4317c47, type: 3}
   attackSound: {fileID: 8300000, guid: a074c459981124949945666263395d6c, type: 3}
@@ -207,9 +207,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  enemyCollider: {fileID: 0}
-  playerCollider: {fileID: 0}
-  weaponCollider: {fileID: 0}
+  enemyMelee: {fileID: 3389430196305450130}
   swordTransform: {fileID: 7495989276658413103}
   swordIdlePosition: {x: 0.28, y: 0.36, z: 0}
   swordRaisedPosition: {x: 0.28, y: 0.9, z: 0}
@@ -248,6 +246,7 @@ GameObject:
   - component: {fileID: 8230418542067052725}
   - component: {fileID: 393373851136409906}
   - component: {fileID: 6353622488454175485}
+  - component: {fileID: 3389430196305450130}
   m_Layer: 0
   m_Name: Attack Hitbox
   m_TagString: Untagged
@@ -367,6 +366,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3389430196305450130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709199093533216725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735e5d4837240c94a873d456aff32c3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fighterEnemy: {fileID: 7323668946630253188}
 --- !u!1 &3460964443009628107
 GameObject:
   m_ObjectHideFlags: 0

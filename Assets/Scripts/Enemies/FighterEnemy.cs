@@ -17,9 +17,7 @@ public class FighterEnemy : Enemy
     [SerializeField] private LayerMask groundLayer;
 
     [Header("Collider Settings")]
-    [SerializeField] private Collider2D enemyCollider;
-    [SerializeField] private Collider2D playerCollider;
-    [SerializeField] private Collider2D weaponCollider;
+    [SerializeField] private EnemyMelee enemyMelee;
 
     [Header("Sword Settings")]
     [SerializeField] private Transform swordTransform;
@@ -152,6 +150,26 @@ public class FighterEnemy : Enemy
 
         Debug.Log("Hitbox ON");
 
+        // HERE
+        // move hitbox slightly back and forth
+        Vector3 originalPosition = attackHitbox.localPosition;
+        float moveAmount = 0.05f; // Tiny nudge
+        float moveSpeed = 20f;    // Fast oscillation
+        float elapsed = 0f;
+        float duration = 0.2f;    // Time to do this "jiggle"
+
+        while (elapsed < duration)
+        {
+            float offset = Mathf.Sin(Time.time * moveSpeed) * moveAmount;
+            attackHitbox.localPosition = originalPosition + new Vector3(offset, 0, 0);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Reset position
+        attackHitbox.localPosition = originalPosition;
+
+
         // Hitbox stays active for a short time
         yield return new WaitForSeconds(2f);
 
@@ -222,60 +240,8 @@ public class FighterEnemy : Enemy
         }
     }
 
-    void ActivateTrigger()
-    {
-        // Get the trigger's Collider2D
-        //Collider2D enemyCollider = enemyObject.GetComponent<Collider2D>();
-        //Collider2D playerCollider = player.GetComponent<Collider2D>();
-        //Collider2D weaponCollider = player.GetComponent<Collider2D>();
-
-
-        // Check if the player's collider is touching the trigger's collider
-        if (enemyCollider.IsTouching(playerCollider))
-        {
-
-            if (enemyCollider.CompareTag("Parry"))
-            {
-                // end attack
-            }
-            else if (enemyCollider.CompareTag("Player"))
-            {
-
-                // If the player is invulnerable
-                if (playerCollider.gameObject.layer != LayerMask.NameToLayer("Invulnerable"))
-                {
-                    Debug.Log("Player hit by FIGHTER!");
-
-                    if (playerHealth != null)
-                    {
-                        playerHealth.TakeDamage(1);
-                    }
-                }
-                else
-                {
-                    Debug.Log("Player is invulnerable, FIGHTER did no damage.");
-                }
-            }
-        }
-
-        if (weaponCollider.IsTouching(playerCollider))
-        {
-
-            if (weaponCollider.CompareTag("Parry"))
-            {
-                // toughness dmg
-                // end attack
-                Debug.Log("PARRY");
-            }
-            else if (weaponCollider.CompareTag("Player"))
-            {
-                // Damage Player
-                // apply knockback to player
-                Debug.Log("Player hit by Melee!");
-            }
-        }
-    }
-
+    
+   
     
 
 
