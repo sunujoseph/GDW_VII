@@ -50,6 +50,7 @@ public class PlayerInputController : MonoBehaviour
 
     // For jumping
     private bool jumpPressed;
+    private bool canJump;
     //private float dashTimer = 0f;
     //private float cooldownTimer = 0f;
 
@@ -185,6 +186,7 @@ public class PlayerInputController : MonoBehaviour
         hitBelow = false;
         attacking = false;
         attackNumber = 0;
+        canJump = true;
 
         // Initialize player lives at game start
         currentLives = maxLives;
@@ -218,6 +220,7 @@ public class PlayerInputController : MonoBehaviour
 
         if (isGrounded)
         {
+            canJump = true;
             if (!isDashing)
             {
                 ResetDash();
@@ -237,6 +240,7 @@ public class PlayerInputController : MonoBehaviour
         }
         else 
         {
+
             // Decrease the coyote time counter when not grounded
             groundedBufferCounter -= Time.deltaTime;
             coyoteTimeCounter -= Time.deltaTime;
@@ -245,9 +249,10 @@ public class PlayerInputController : MonoBehaviour
 
 
         // Handle jumping
-        if (jumpPressed && groundedBufferCounter > 0f)
+        if (jumpPressed && groundedBufferCounter > 0f && canJump == true)
         {
             Jump();
+            canJump = false;
         }
 
         //change some animation variables 

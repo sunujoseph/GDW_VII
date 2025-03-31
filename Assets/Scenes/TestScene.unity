@@ -296,6 +296,28 @@ MonoBehaviour:
   pointA: {x: 10.5, y: -1.5, z: 0}
   pointB: {x: 10.5, y: -6, z: 0}
   speed: 2
+--- !u!1 &102686294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 709199093533216725, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+  m_PrefabInstance: {fileID: 1905094195984903083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &102686296 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6353622488454175485, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+  m_PrefabInstance: {fileID: 1905094195984903083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &102686298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102686294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735e5d4837240c94a873d456aff32c3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &112210391
 GameObject:
   m_ObjectHideFlags: 0
@@ -4100,10 +4122,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7323668946630253188, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: enemyCollider
+      value: 
+      objectReference: {fileID: 3164444363045207771}
+    - target: {fileID: 7323668946630253188, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 7525850197911044827}
+    - target: {fileID: 7323668946630253188, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: weaponCollider
+      value: 
+      objectReference: {fileID: 102686296}
+    - target: {fileID: 7323668946630253188, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      propertyPath: canDamagePlayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 709199093533216725, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 102686298}
   m_SourcePrefab: {fileID: 100100000, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
 --- !u!4 &2105395186006807747 stripped
 Transform:
@@ -27792,6 +27833,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2329159857480088286, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
   m_PrefabInstance: {fileID: 1905094195984903083}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &3164444363045207771 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5869674389449760747, guid: e0801d7b35406f94a9c1654a188bb48f, type: 3}
+  m_PrefabInstance: {fileID: 1905094195984903083}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3281893734788151804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28137,6 +28183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3466b36533613f429565df0fe91debb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &7525850197911044827 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7210465809775371517, guid: 728c4a860a5910344adebdbfc14d4b9b, type: 3}
+  m_PrefabInstance: {fileID: 516486040199760272}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8847334405079016572
 PrefabInstance:
   m_ObjectHideFlags: 0

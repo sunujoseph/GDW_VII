@@ -295,10 +295,14 @@ public class Enemy : MonoBehaviour
     {
         isStunned = false;
     }
-  
 
-    private void OnTriggerEnter2D(Collider2D otherObject)
+
+
+
+    protected virtual void OnTriggerEnter2D(Collider2D otherObject)
     {
+
+
         if (otherObject.CompareTag("Player"))
         {
             // If the player is invulnerable

@@ -207,6 +207,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  enemyCollider: {fileID: 0}
+  playerCollider: {fileID: 0}
+  weaponCollider: {fileID: 0}
   swordTransform: {fileID: 7495989276658413103}
   swordIdlePosition: {x: 0.28, y: 0.36, z: 0}
   swordRaisedPosition: {x: 0.28, y: 0.9, z: 0}
