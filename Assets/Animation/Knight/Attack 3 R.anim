@@ -22,15 +22,15 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 17586486, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
-    - time: 0.033333335
-      value: {fileID: 538808216, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
     - time: 0.083333336
-      value: {fileID: -1690781526, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
+      value: {fileID: 538808216, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
     - time: 0.16666667
+      value: {fileID: -1690781526, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
+    - time: 0.21666667
       value: {fileID: -609339761, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
-    - time: 0.25
+    - time: 0.28333333
       value: {fileID: 1962012542, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
-    - time: 0.41666666
+    - time: 0.33333334
       value: {fileID: 1069624587, guid: 4910bd744f313a044818f11bc9bb9032, type: 3}
     attribute: m_Sprite
     path: 
@@ -65,7 +65,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.43333334
+    m_StopTime: 0.35000002
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -85,7 +85,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.083333336
+  - time: 0.16666667
     functionName: PlayAttackSound
     data: 
     objectReferenceParameter: {fileID: 0}
