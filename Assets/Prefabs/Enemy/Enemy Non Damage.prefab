@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 502f909eb91ab1840b0a383c4f290967, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,12 +172,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98276c98bdd16e94695f721c9c2f77c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: 0, y: 0, z: 0}
+  pointA: {x: 0.08, y: -2.34, z: 0.047901142}
   pointB: {x: 0, y: 0, z: 0}
   patrolSpeed: 2
   health: 1
+  toughness: 1
   isPatrolActive: 0
   canDamagePlayer: 0
+  damageSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  respectEnvironmentHitbox: 1
+  environmentHitboxLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isFacingRight: 1
+  isStunned: 0
+  playerHealth: {fileID: 0}
+  playerFindTransform: {fileID: 0}
+  isAlive: 1
 --- !u!95 &8748408864001208839
 Animator:
   serializedVersion: 5

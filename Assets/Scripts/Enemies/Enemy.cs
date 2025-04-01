@@ -34,6 +34,9 @@ public class Enemy : MonoBehaviour
     public Transform playerFindTransform; // Reference to the player's transform
 
     public bool isAlive = true;
+    Material mat;
+    float fade;
+    bool isDissolving;
 
 
     // Start is called before the first frame update
@@ -43,6 +46,9 @@ public class Enemy : MonoBehaviour
         //pointA = transform.position;
         playerHealth = FindObjectOfType<PlayerHealth>();
         playerFindTransform = GameObject.FindWithTag("Player").transform;
+
+        mat = GetComponent<SpriteRenderer>().material;
+        fade = 1.0f;
 
 
         if (environmentHitboxLayer == 0)
@@ -67,7 +73,8 @@ public class Enemy : MonoBehaviour
         {
             FacePlayer();
         }
-        
+
+        DeathDissolve();
     }
 
     private void OnValidate()
@@ -274,7 +281,7 @@ public class Enemy : MonoBehaviour
 
 
         // Destroy enemy after delay
-        StartCoroutine(DestroyAfterDelay(2f));
+        StartCoroutine(DestroyAfterDelay(1f));
 
         //Destroy(gameObject);
     }
@@ -282,7 +289,27 @@ public class Enemy : MonoBehaviour
     private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        isDissolving = true;
+    }
+
+    protected virtual void DeathDissolve()
+    {
+        //dissolve effect on death
+        if (isDissolving)
+        {
+            fade -= Time.deltaTime;
+            //avoid negatives
+            if (fade < 0)
+            {
+                fade = 0;
+                isDissolving = false;
+                Destroy(this.gameObject);
+            }
+
+            //update attached material
+            mat.SetFloat("_Fade", fade);
+        }
     }
 
     protected void Stunned()

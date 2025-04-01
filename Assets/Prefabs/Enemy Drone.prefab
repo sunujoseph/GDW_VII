@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 502f909eb91ab1840b0a383c4f290967, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,15 +172,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc33f907bea84e349bab001d2a636c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: 12.94, y: -3.67, z: 0}
+  pointA: {x: -5.85, y: 0.18, z: 0}
   pointB: {x: 17.9, y: -3.67, z: 0}
   patrolSpeed: 2
   health: 1
+  toughness: 1
   isPatrolActive: 1
   canDamagePlayer: 1
   damageSound: {fileID: 8300000, guid: d4cd3d4daa7f92140abb45bcd325c36a, type: 3}
   deathSound: {fileID: 8300000, guid: def0d12e78add214fb3d485aa4317c47, type: 3}
   attackSound: {fileID: 8300000, guid: a074c459981124949945666263395d6c, type: 3}
+  respectEnvironmentHitbox: 1
+  environmentHitboxLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isFacingRight: 1
+  isStunned: 0
+  playerHealth: {fileID: 0}
+  playerFindTransform: {fileID: 0}
+  isAlive: 1
 --- !u!95 &1061524873159075655
 Animator:
   serializedVersion: 5

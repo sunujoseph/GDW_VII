@@ -63,6 +63,8 @@ public class FlyingEnemy : Enemy
         {
             Attack();
         }
+
+        base.DeathDissolve();
     }
 
 
