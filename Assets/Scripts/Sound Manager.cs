@@ -16,8 +16,6 @@ public class SoundManager : MonoBehaviour
         {
             instance = this;
         }
-
-        musicPlaying = false;
     }
 
     public void Play(AudioClip clip, Transform spawn, float volume)
