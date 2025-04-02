@@ -13,6 +13,7 @@ public class FlyingEnemy : Enemy
 
     private bool isHostile = false; // Whether enemy is Hostile State
     private bool movingRightToLeft;
+    private bool isHurt = false;
 
     private Camera mainCamera;                  
 
@@ -143,7 +144,12 @@ public class FlyingEnemy : Enemy
     }
 
 
+    public override void TakeDamage(int amount, float knockbackForce, float breakDamage)
+    {
+        base.TakeDamage(amount, knockbackForce, breakDamage);
 
+
+    }
 
 
 
@@ -163,6 +169,30 @@ public class FlyingEnemy : Enemy
             // Handle damage to the player here
             Debug.Log("Player hit by Flying Enemy!");
         }
+
+
+        if (other.CompareTag("Player"))
+        {
+            // If the player is invulnerable
+            if (canDamagePlayer && other.gameObject.layer != LayerMask.NameToLayer("Invulnerable"))
+            {
+                Debug.Log("Player hit by enemy!");
+
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(1);
+                }
+            }
+            else
+            {
+                Debug.Log("Player is invulnerable, no damage taken.");
+            }
+        }
+        else if (other.CompareTag("PlayerProjectile"))
+        {
+            TakeDamage(1, 1f, 1f);
+        }
+
     }
 
 }
