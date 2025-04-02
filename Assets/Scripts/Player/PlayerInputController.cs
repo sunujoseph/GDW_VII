@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 public class PlayerInputController : MonoBehaviour
 {
     //components
-    protected Animator animator;
+    [SerializeField] Animator animator;
+    [SerializeField] Animator attackAnimator;
     private Rigidbody2D rb;
     public static PlayerInputController instance;
 
@@ -95,6 +96,7 @@ public class PlayerInputController : MonoBehaviour
     public bool hitBelow;
     public int attackNumber;
     public float direction;
+    //states for attack projectile
 
     [Header("Attack Parameters")]
     public float attackCooldown = 0.5f; // Time between attacks
@@ -176,7 +178,6 @@ public class PlayerInputController : MonoBehaviour
         lastCheckpoint = transform.position;
 
         //animation states
-        animator = GetComponent<Animator>();
         direction = 1;
         wasHit = false;
         isAlive = true;
@@ -616,6 +617,7 @@ public class PlayerInputController : MonoBehaviour
         animator.SetBool("Reflect", reflect);
         animator.SetBool("hitBelow", hitBelow);
         //animator.SetInteger("attackNumber", attackNumber);
+        attackAnimator.SetBool("onGround", !inAir);
 
 
         if (attacking)
@@ -673,6 +675,7 @@ public class PlayerInputController : MonoBehaviour
         }
 
         animator.SetInteger("attackNumber", attackNumber);
+        attackAnimator.SetBool("isAttacking", attacking);
 
         // Reset the combo reset timer
         if (comboResetCoroutine != null) StopCoroutine(comboResetCoroutine);
@@ -720,12 +723,18 @@ public class PlayerInputController : MonoBehaviour
 
     }
 
+    public void StopBeam()
+    {
+        attackAnimator.SetBool("isAttacking", false);
+    }
+
     private IEnumerator ResetComboAfterDelay()
     {
         yield return new WaitForSeconds(comboResetTime);
         attackNumber = 0;
         animator.SetInteger("attackNumber", 0); // Reset animation state
         attacking = false; // Return to idle state
+        attackAnimator.SetBool("isAttacking", false);
         uiCooldownManager.ResetAttackImageAfterDelay();
     }
 
