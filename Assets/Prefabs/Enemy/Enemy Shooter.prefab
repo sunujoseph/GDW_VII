@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 502f909eb91ab1840b0a383c4f290967, type: 2}
+  - {fileID: 2100000, guid: fbbee7d07c219d6439019749c70ae048, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -191,6 +191,7 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   playerFindTransform: {fileID: 0}
   isAlive: 1
+  dissolveMaterial: {fileID: 2100000, guid: 502f909eb91ab1840b0a383c4f290967, type: 2}
   projectilePrefab: {fileID: 8473217642505165313, guid: 1ce2dbb4c07481141b20c85e4635fc5f, type: 3}
   agroRange: 8
   fireRate: 1

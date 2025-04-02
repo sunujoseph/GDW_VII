@@ -59,7 +59,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 502f909eb91ab1840b0a383c4f290967, type: 2}
+  - {fileID: 2100000, guid: fbbee7d07c219d6439019749c70ae048, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -194,6 +194,7 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   playerFindTransform: {fileID: 0}
   isAlive: 1
+  dissolveMaterial: {fileID: 2100000, guid: 502f909eb91ab1840b0a383c4f290967, type: 2}
   agroSize: {x: 7, y: 3}
   attackRange: 1.5
   attackCooldown: 2

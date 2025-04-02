@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
 
     public bool isAlive = true;
     Material mat;
+    [SerializeField] Material dissolveMaterial;
     float fade;
     bool isDissolving;
 
@@ -262,6 +263,9 @@ public class Enemy : MonoBehaviour
     protected void Die(float knockbackForce)
     {
         isAlive = false;
+        //swap from outline to dissolve
+        gameObject.GetComponent<SpriteRenderer>().material = dissolveMaterial;
+        mat = dissolveMaterial;
 
         // Disable enemy behavior
         isPatrolActive = false;
