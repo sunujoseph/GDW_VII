@@ -207,6 +207,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  animatorFighter: {fileID: 4311224803705433995}
   enemyMelee: {fileID: 3389430196305450130}
   swordTransform: {fileID: 7495989276658413103}
   swordIdlePosition: {x: 0.28, y: 0.36, z: 0}
@@ -224,7 +225,7 @@ Animator:
   m_GameObject: {fileID: 232517220980387920}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bba093c2cfe5a0e4bbd0be803ec0071b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

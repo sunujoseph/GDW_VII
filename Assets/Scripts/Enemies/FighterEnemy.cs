@@ -15,6 +15,7 @@ public class FighterEnemy : Enemy
     [SerializeField] private Transform attackHitbox;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] Animator animatorFighter;
 
     [Header("Collider Settings")]
     [SerializeField] private EnemyMelee enemyMelee;
@@ -45,6 +46,8 @@ public class FighterEnemy : Enemy
             swordIdlePosition = swordTransform.localPosition;
             swordIdleEuler = swordTransform.localEulerAngles;
         }
+
+        HandleFighterAnimations();
     }
 
     protected override void Update()
@@ -132,8 +135,12 @@ public class FighterEnemy : Enemy
 
         Debug.Log("Hitbox Off");
 
+        animatorFighter.SetFloat("attackTime", attackWindUpTime);
+
         // Attack wind-up delay (preparing attack, hitbox inactive)
         yield return new WaitForSeconds(attackWindUpTime);
+
+        animatorFighter.SetBool("isAttacking", isAttacking);
 
         // STEP 2: Attack - Slash sword
         if (swordTransform != null)
@@ -166,6 +173,7 @@ public class FighterEnemy : Enemy
             yield return null;
         }
 
+
         // Reset position
         attackHitbox.localPosition = originalPosition;
 
@@ -190,6 +198,7 @@ public class FighterEnemy : Enemy
 
         // Attack is now on cooldown
         isAttacking = false;
+        animatorFighter.SetBool("isAttacking", isAttacking);
     }
 
     public override void TakeBreakDmage(float breakDamage)
@@ -241,7 +250,12 @@ public class FighterEnemy : Enemy
     }
 
     
-   
+   private void HandleFighterAnimations()
+    {
+        animatorFighter.SetFloat("xSpeed", Mathf.Abs(patrolSpeed));
+        animatorFighter.SetFloat("attackTime", attackWindUpTime);
+        animatorFighter.SetBool("isAttacking", isAttacking);
+    }
     
 
 

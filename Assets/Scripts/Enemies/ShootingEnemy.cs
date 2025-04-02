@@ -42,6 +42,8 @@ public class ShootingEnemy : Enemy
                 ShootAtPlayer();
                 timeSinceLastShot = 0f;  // Reset timer after shooting
             }
+
+            CheckAgro();
         }
     }
 
