@@ -36,7 +36,7 @@ public class BossEnemy : Enemy
     [SerializeField] private BossAOE bossAOEScript;
 
     private Transform playerTransform;
-    private bool isBlinking = false;
+    private bool isBlinking2 = false;
     private bool isAttacking = false;
     private Vector3 originalPosition;
     private bool isExecutingAttackPattern = false;
@@ -68,9 +68,15 @@ public class BossEnemy : Enemy
             ChasePlayer();
         }
 
-        base.HandleAnimation();
-        base.animator.SetBool("isAttacking", isAttacking);
+        HandleAnimation();
+        animator.SetBool("isAttacking", isAttacking);
         base.DeathDissolve();
+
+    }
+
+    protected override void HandleAnimation()
+    {
+        base.HandleAnimation();
 
     }
 
@@ -255,7 +261,7 @@ public class BossEnemy : Enemy
 
 
             // Start blinking effect
-            if (!isBlinking)
+            if (!isBlinking2)
             {
                 StartCoroutine(BlinkRed());
             }
@@ -266,7 +272,7 @@ public class BossEnemy : Enemy
 
     private IEnumerator BlinkRed()
     {
-        isBlinking = true;
+        isBlinking2 = true;
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null) yield break;
@@ -292,7 +298,7 @@ public class BossEnemy : Enemy
         }
 
         canDamagePlayer = true; // Re-enable damage after blinking
-        isBlinking = false;
+        isBlinking2 = false;
     }
 
     private void Flip()

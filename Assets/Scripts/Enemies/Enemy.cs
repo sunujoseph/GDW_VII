@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Material dissolveMaterial;
     float fade;
     bool isDissolving;
+    private bool isBlinking = false;
 
 
     // Start is called before the first frame update
@@ -179,7 +180,12 @@ public class Enemy : MonoBehaviour
             StartCoroutine(KnockbackEffect(knockbackForce));
 
             // Start blinking effect
-            StartCoroutine(BlinkRed());
+            //StartCoroutine(BlinkRed());
+
+            if (!isBlinking)
+            {
+                StartCoroutine(BlinkRed());
+            }
 
         }
     }
@@ -246,6 +252,8 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator BlinkRed()
     {
+        isBlinking = true;
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null) yield break;
 
@@ -270,6 +278,7 @@ public class Enemy : MonoBehaviour
         }
 
         canDamagePlayer = true; // Re-enable damage after blinking
+        isBlinking = false;
     }
 
     public virtual void TakeBreakDmage(float breakDamage)
