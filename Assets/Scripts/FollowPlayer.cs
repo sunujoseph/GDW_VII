@@ -20,7 +20,13 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] float horizontalOffset = 0f;  // Horizontal offset from the player's position
 
     public Vector3 startingPosition;
+    private float defaultVerticalOffset;
+    private float lookOffsetAmount = 2f;
 
+    private void Awake()
+    {
+        defaultVerticalOffset = verticalOffset;
+    }
 
     private void Start()
     {
@@ -109,6 +115,18 @@ public class FollowPlayer : MonoBehaviour
         {
             
             transform.position = startingPosition;
+        }
+    }
+
+    public void AdjustVerticalOffset(float inputY)
+    {
+        if (Mathf.Abs(inputY) > 0.1f)
+        {
+            verticalOffset = defaultVerticalOffset + Mathf.Sign(inputY) * lookOffsetAmount;
+        }
+        else
+        {
+            verticalOffset = defaultVerticalOffset;
         }
     }
 

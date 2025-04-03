@@ -12,8 +12,8 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] Animator attackAnimator;
     private Rigidbody2D rb;
     public static PlayerInputController instance;
+    private float verticalLookInput = 0f;
 
-    
 
     // Ground check variables
     [SerializeField] Transform groundCheck;
@@ -267,8 +267,12 @@ public class PlayerInputController : MonoBehaviour
             direction = -1f;
         }
 
+        FollowPlayer followCam = FindObjectOfType<FollowPlayer>();
+        if (followCam != null)
+        {
+            followCam.AdjustVerticalOffset(verticalLookInput);
+        }
 
-        
 
         HandleAnimations();
 
@@ -408,6 +412,8 @@ public class PlayerInputController : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
         horizontal = moveInput.x;
 
+        verticalLookInput = context.ReadValue<Vector2>().y;
+
         if (horizontal > 0 && !isFacingRight)
         {
             Flip();
@@ -446,6 +452,7 @@ public class PlayerInputController : MonoBehaviour
 
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         coyoteTimeCounter = 0f; // Reset to avoid double jump
+        canJump = false;
         jumpPressed = false;
     }
 

@@ -27460,9 +27460,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 1794857759608892343, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2403626782786907416, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: m_Name
       value: Boss Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903755015489180117, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.0625
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903755015489180117, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 3240322300564144612, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27524,6 +27536,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5587784139391741589, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587784139391741589, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7450159836829478503, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: m_Controller
       value: 
@@ -27531,6 +27551,22 @@ PrefabInstance:
     - target: {fileID: 7485942493654468174, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: m_FlipX
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485942493654468174, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eb400c588406bde4baa7cbd78687e142, type: 3}
+    - target: {fileID: 7485942493654468174, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485942493654468174, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485942493654468174, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: m_Enabled
@@ -27565,8 +27601,32 @@ PrefabInstance:
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: laserActiveColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: laserActiveColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: laserActiveColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: playerLayer.m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: laserWarningColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: laserWarningColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: laserWarningColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: environmentHitboxLayer.m_Bits
