@@ -20,6 +20,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] public AudioClip deathSound;
     [SerializeField] public AudioClip attackSound;
 
+    //animation variables
+    protected Animator animator;
+    private bool attacking;
+
+
     // Ground Layer hitbox
     [SerializeField] private bool respectEnvironmentHitbox = true;
     [SerializeField] private LayerMask environmentHitboxLayer;
@@ -44,6 +49,8 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        attacking = false;
         //pointA = transform.position;
         playerHealth = FindObjectOfType<PlayerHealth>();
         playerFindTransform = GameObject.FindWithTag("Player").transform;
@@ -75,7 +82,22 @@ public class Enemy : MonoBehaviour
             FacePlayer();
         }
 
+        HandleAnimation();
+
         DeathDissolve();
+    }
+
+    private void HandleAnimation()
+    {
+        if (isPatrolActive)
+        {
+            animator.SetInteger("xSpeed", (int)patrolSpeed);
+        }
+        else
+        {
+            animator.SetInteger("xSpeed", 0);
+        }
+        animator.SetBool("isAttacking", attacking);
     }
 
     private void OnValidate()
@@ -306,7 +328,7 @@ public class Enemy : MonoBehaviour
             //avoid negatives
             if (fade < 0)
             {
-                fade = 0;
+                fade = 1;
                 isDissolving = false;
                 Destroy(this.gameObject);
             }
