@@ -343,7 +343,8 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   playerFindTransform: {fileID: 0}
   isAlive: 1
-  agroRange: 8
+  dissolveMaterial: {fileID: 0}
+  moveRange: 1
   agroSize: {x: 10, y: 5}
   attackRange: 2
   attackWindUpTime: 1
@@ -351,8 +352,12 @@ MonoBehaviour:
   attackDamage: 2
   knockbackForce: 5
   movementSpeed: 2
-  stunDuration: 3
-  bossHealth: 100
+  laserWarningDuration: 1
+  laserWarningColor: {r: 1, g: 0, b: 0, a: 0.3}
+  laserActiveColor: {r: 1, g: 0, b: 0, a: 1}
+  chargePrepareTime: 1
+  chargeSpeed: 10
+  chargeDuration: 0.5
   attackHitbox: {fileID: 0}
   playerLayer:
     serializedVersion: 2
@@ -362,6 +367,7 @@ MonoBehaviour:
     m_Bits: 0
   spriteRenderer: {fileID: 0}
   controllerAOE: {fileID: 0}
+  bossAOEScript: {fileID: 0}
 --- !u!1 &2403626782786907416
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,8 +498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ca47263d11b3445a73a5f267083dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AOE1: {fileID: 0}
-  AOE2: {fileID: 0}
-  AOE3: {fileID: 0}
+  AOE_List: []
   AOE_Damage: 1
   Boss: {fileID: 1794857759608892343}
