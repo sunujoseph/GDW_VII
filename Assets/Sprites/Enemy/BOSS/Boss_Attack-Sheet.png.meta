@@ -100,10 +100,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 0
         y: 0
-        width: 34
-        height: 40
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,10 +121,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_1
       rect:
         serializedVersion: 2
-        x: 71
+        x: 64
         y: 0
-        width: 34
-        height: 39
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,10 +142,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_2
       rect:
         serializedVersion: 2
-        x: 135
+        x: 128
         y: 0
-        width: 34
-        height: 40
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_3
       rect:
         serializedVersion: 2
-        x: 199
+        x: 192
         y: 0
-        width: 34
-        height: 42
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_4
       rect:
         serializedVersion: 2
-        x: 264
+        x: 256
         y: 0
-        width: 34
-        height: 42
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +205,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_5
       rect:
         serializedVersion: 2
-        x: 328
+        x: 320
         y: 0
-        width: 34
-        height: 42
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +226,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_6
       rect:
         serializedVersion: 2
-        x: 392
+        x: 384
         y: 0
-        width: 35
-        height: 41
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +247,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_7
       rect:
         serializedVersion: 2
-        x: 456
+        x: 448
         y: 0
-        width: 41
-        height: 42
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,10 +268,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_8
       rect:
         serializedVersion: 2
-        x: 520
+        x: 512
         y: 0
-        width: 36
-        height: 41
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,10 +289,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_9
       rect:
         serializedVersion: 2
-        x: 584
+        x: 576
         y: 0
-        width: 37
-        height: 41
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -310,10 +310,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_10
       rect:
         serializedVersion: 2
-        x: 648
+        x: 640
         y: 0
-        width: 44
-        height: 41
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,10 +331,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_11
       rect:
         serializedVersion: 2
-        x: 710
-        y: 31
-        width: 4
-        height: 6
+        x: 704
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -352,10 +352,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_12
       rect:
         serializedVersion: 2
-        x: 712
+        x: 768
         y: 0
-        width: 45
-        height: 41
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -373,10 +373,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_13
       rect:
         serializedVersion: 2
-        x: 774
-        y: 31
-        width: 5
-        height: 9
+        x: 832
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -394,10 +394,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_14
       rect:
         serializedVersion: 2
-        x: 775
+        x: 896
         y: 0
-        width: 38
-        height: 42
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -415,10 +415,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_15
       rect:
         serializedVersion: 2
-        x: 838
+        x: 960
         y: 0
-        width: 43
-        height: 42
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -436,10 +436,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_16
       rect:
         serializedVersion: 2
-        x: 902
+        x: 1024
         y: 0
-        width: 50
-        height: 42
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -457,10 +457,10 @@ TextureImporter:
       name: Boss_Attack-Sheet_17
       rect:
         serializedVersion: 2
-        x: 966
+        x: 1088
         y: 0
-        width: 58
-        height: 42
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -470,90 +470,6 @@ TextureImporter:
       bones: []
       spriteID: 88b5b22407bc9b248b47232af528e287
       internalID: -701130913
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Boss_Attack-Sheet_18
-      rect:
-        serializedVersion: 2
-        x: 1030
-        y: 0
-        width: 58
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 23886d15593b7f34a94551e8c55fcf24
-      internalID: 1061978921
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Boss_Attack-Sheet_19
-      rect:
-        serializedVersion: 2
-        x: 1094
-        y: 0
-        width: 58
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 76b702ad1c9d0764e8dd0f69bd610141
-      internalID: 1227076183
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Boss_Attack-Sheet_20
-      rect:
-        serializedVersion: 2
-        x: 556
-        y: 0
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7b693ceaf9b8c9043bc974f211e16b42
-      internalID: 2128597274
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Boss_Attack-Sheet_21
-      rect:
-        serializedVersion: 2
-        x: 621
-        y: 1
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3e76d32965a6e3748bf13fe01c1238b1
-      internalID: -1202504800
       vertices: []
       indices: 
       edges: []
@@ -579,11 +495,7 @@ TextureImporter:
       Boss_Attack-Sheet_15: 1509861128
       Boss_Attack-Sheet_16: -827154410
       Boss_Attack-Sheet_17: -701130913
-      Boss_Attack-Sheet_18: 1061978921
-      Boss_Attack-Sheet_19: 1227076183
       Boss_Attack-Sheet_2: -956948695
-      Boss_Attack-Sheet_20: 2128597274
-      Boss_Attack-Sheet_21: -1202504800
       Boss_Attack-Sheet_3: -767811562
       Boss_Attack-Sheet_4: 167396102
       Boss_Attack-Sheet_5: -306943707

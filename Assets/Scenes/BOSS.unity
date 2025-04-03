@@ -25790,6 +25790,10 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 838007894}
+    - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: dissolveMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 502f909eb91ab1840b0a383c4f290967, type: 2}
     - target: {fileID: 8906108463460613844, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: playerHealth
       value: 

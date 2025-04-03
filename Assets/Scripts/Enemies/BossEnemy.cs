@@ -68,6 +68,10 @@ public class BossEnemy : Enemy
             ChasePlayer();
         }
 
+        base.HandleAnimation();
+        base.animator.SetBool("isAttacking", isAttacking);
+        base.DeathDissolve();
+
     }
 
     private void PerpareLaserAttack()

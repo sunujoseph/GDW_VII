@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     //animation variables
     protected Animator animator;
-    private bool attacking;
+    public bool attacking;
 
 
     // Ground Layer hitbox
@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
         DeathDissolve();
     }
 
-    private void HandleAnimation()
+    protected virtual void HandleAnimation()
     {
         if (isPatrolActive)
         {
