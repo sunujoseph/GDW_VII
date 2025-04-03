@@ -6,6 +6,11 @@ public class Checkpoint : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
 
+    [SerializeField] private AudioClip checkpointGet;
+
+    protected Animator animator;
+    private bool activated;
+
    
 
     private void Awake()
@@ -15,8 +20,16 @@ public class Checkpoint : MonoBehaviour
             playerPrefab = GameObject.FindWithTag("Player");
         }
 
+        animator = GetComponent<Animator>();
+        activated = false;
+
         spawnPlayer();
 
+    }
+
+    private void Update()
+    {
+        animator.SetBool("isActivated", activated);
     }
 
     private void spawnPlayer()
@@ -33,7 +46,14 @@ public class Checkpoint : MonoBehaviour
             PlayerInputController player = other.GetComponent<PlayerInputController>();
             if (player != null)
             {
+                //checkpoint sound
+                if (!activated)
+                {
+                    SoundManager.instance.Play(checkpointGet, transform, 1.0f);
+                }
+
                 playerHealth.SetCheckpoint(this.transform.position);
+                activated = true;
                 //player.SetCheckpoint(transform.position); // Update the player's checkpoint
                 Debug.Log("Checkpoint Updated to: " + transform.position);
                 
