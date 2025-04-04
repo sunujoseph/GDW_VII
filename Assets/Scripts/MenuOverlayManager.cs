@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
+
+
 
 
 public class MenuOverlayManager : MonoBehaviour
@@ -15,6 +21,8 @@ public class MenuOverlayManager : MonoBehaviour
 
     private bool isPaused = false;
 
+    [SerializeField] private UnityEngine.UI.Button pauseFirstButton;
+    [SerializeField] private UnityEngine.UI.Button gameOverFirstButton;
 
     private void Start()
     {
@@ -47,7 +55,7 @@ public class MenuOverlayManager : MonoBehaviour
         }
 
         // Pause Menu Toggle
-        if (Input.GetKeyDown(KeyCode.Escape) && gameOverMenu.activeSelf == false)
+        if ( (Input.GetKeyDown(KeyCode.Escape) || Gamepad.current?.startButton.wasPressedThisFrame == true)  && gameOverMenu.activeSelf == false)
         {
             TogglePause();
         }
@@ -63,6 +71,11 @@ public class MenuOverlayManager : MonoBehaviour
 
     }
 
+    private void SetSelectedButton(UnityEngine.UI.Button button)
+    {
+        EventSystem.current.SetSelectedGameObject(null); // Clear current selection
+        EventSystem.current.SetSelectedGameObject(button.gameObject); // Select new button
+    }
 
     public void TogglePause()
     {
@@ -70,6 +83,13 @@ public class MenuOverlayManager : MonoBehaviour
         pauseMenu.SetActive(isPaused);
 
         Time.timeScale = isPaused ? 0f : 1f;
+
+        if (isPaused && pauseFirstButton != null)
+        {
+            //SetSelectedButton(pauseFirstButton);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(pauseFirstButton.gameObject);
+        }
     }
 
     public void OpenGameOverMenu()
@@ -78,6 +98,14 @@ public class MenuOverlayManager : MonoBehaviour
         {
             gameOverMenu.SetActive(true);
             Time.timeScale = 0f; // Pause 
+
+            if (gameOverFirstButton != null)
+            {
+                //SetSelectedButton(gameOverFirstButton);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(gameOverFirstButton.gameObject);
+            }
+
         }
     }
 
