@@ -21993,10 +21993,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 707466144}
     m_Modifications:
-    - target: {fileID: 1997597111659700029, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4478942857023103741, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
       propertyPath: m_Name
       value: Enemy Soldier
@@ -22010,20 +22006,8 @@ PrefabInstance:
       value: -2.745559
       objectReference: {fileID: 0}
     - target: {fileID: 4894207721834546313, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
-      propertyPath: pointB.x
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4894207721834546313, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
-      propertyPath: pointB.y
-      value: -2.745559
-      objectReference: {fileID: 0}
-    - target: {fileID: 4894207721834546313, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
-      propertyPath: patrolSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4894207721834546313, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
-      propertyPath: isFacingRight
-      value: 1
+      propertyPath: pointA.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6800062949426460652, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28183,6 +28167,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 707466144}
     m_Modifications:
+    - target: {fileID: 786033498339393626, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4478942857023103741, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
       propertyPath: m_Name
       value: Enemy Soldier (3)
@@ -28510,6 +28498,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 707466144}
     m_Modifications:
+    - target: {fileID: 786033498339393626, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4478942857023103741, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
       propertyPath: m_Name
       value: Enemy Soldier (1)
@@ -29137,6 +29129,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 707466144}
     m_Modifications:
+    - target: {fileID: 786033498339393626, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4478942857023103741, guid: f9f94b1ed74e81a4faeee082c1f0feaf, type: 3}
       propertyPath: m_Name
       value: Enemy Soldier (2)

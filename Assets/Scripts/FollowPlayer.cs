@@ -21,7 +21,7 @@ public class FollowPlayer : MonoBehaviour
 
     public Vector3 startingPosition;
     private float defaultVerticalOffset;
-    private float lookOffsetAmount = 2f;
+    private float lookOffsetAmount = 4f;
 
     private void Awake()
     {
