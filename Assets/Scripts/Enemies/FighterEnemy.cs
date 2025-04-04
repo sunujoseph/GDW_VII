@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 public class FighterEnemy : Enemy
 {
@@ -35,7 +36,11 @@ public class FighterEnemy : Enemy
 
     private bool isChasing = false;
     private bool isAttacking = false;
+    private bool isCharge = false;
     private float lastAttackTime = 0f;
+    private string originalTag;
+    private int originalLayer;
+
 
     protected override void Start()
     {
@@ -48,6 +53,9 @@ public class FighterEnemy : Enemy
         }
 
         HandleFighterAnimations();
+        originalTag = gameObject.tag;
+        originalLayer = gameObject.layer;
+
     }
 
     protected override void Update()
@@ -77,7 +85,8 @@ public class FighterEnemy : Enemy
 
         if (isChasing && !isAttacking && Vector2.Distance(transform.position, playerFindTransform.position) <= attackRange && Time.time >= lastAttackTime + attackCooldown)
         {
-            StartCoroutine(PerformAttack());
+            StartCoroutine(PerformAttack());     
+
         }
 
         ApplyManualGravity();
@@ -107,6 +116,18 @@ public class FighterEnemy : Enemy
             newPosition.x = Mathf.MoveTowards(transform.position.x, playerFindTransform.position.x, patrolSpeed * Time.deltaTime);
             transform.position = newPosition;
         }
+
+    }
+
+
+    private void ChargePlayer()
+    {
+        if (playerFindTransform == null) return;
+
+
+            Vector3 newPosition = transform.position;
+            newPosition.x = Mathf.MoveTowards(transform.position.x, playerFindTransform.position.x, patrolSpeed * Time.deltaTime);
+            transform.position = newPosition;
     }
 
     private bool IsAtEdge()
@@ -150,10 +171,12 @@ public class FighterEnemy : Enemy
             
         }
 
+        //this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
         // Enable attack hitbox
         attackHitbox.gameObject.SetActive(true);
-        
+        gameObject.layer = LayerMask.NameToLayer("Hazard");
+        gameObject.tag = "Hazard";
 
         Debug.Log("Hitbox ON");
 
@@ -170,10 +193,11 @@ public class FighterEnemy : Enemy
             float offset = Mathf.Sin(Time.time * moveSpeed) * moveAmount;
             attackHitbox.localPosition = originalPosition + new Vector3(offset, 0, 0);
             elapsed += Time.deltaTime;
+            ChargePlayer();
             yield return null;
         }
 
-
+        //this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
         // Reset position
         attackHitbox.localPosition = originalPosition;
 
@@ -183,7 +207,9 @@ public class FighterEnemy : Enemy
 
         // Disable attack hitbox after attack is completed
         attackHitbox.gameObject.SetActive(false);
-
+        isCharge = false;
+        gameObject.layer = LayerMask.NameToLayer("Enemies");
+        gameObject.tag = "Enemy";
 
         if (swordTransform != null)
         {

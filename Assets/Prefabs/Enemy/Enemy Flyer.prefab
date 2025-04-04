@@ -191,6 +191,9 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   playerFindTransform: {fileID: 0}
   isAlive: 1
+  mat: {fileID: 0}
   dissolveMaterial: {fileID: 2100000, guid: 502f909eb91ab1840b0a383c4f290967, type: 2}
+  fade: 0
+  isDissolving: 0
   parabolaHeight: -4
   agroRange: 7
