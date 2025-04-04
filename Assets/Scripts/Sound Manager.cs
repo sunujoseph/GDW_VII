@@ -1,20 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
+using UnityEngine.UI; 
 
 public class SoundManager : MonoBehaviour
 {
     //using a singleton
     public static SoundManager instance;
 
-
+   
     [SerializeField] private AudioSource soundObject;
+    [SerializeField] private Slider volumeSlider;
+    private float volumeLevel = 1f; 
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+        }
+
+        if (volumeSlider != null)
+        {
+            volumeSlider.onValueChanged.AddListener(UpdateVolume);
+            volumeLevel = volumeSlider.value;
+
         }
     }
 
@@ -34,5 +45,10 @@ public class SoundManager : MonoBehaviour
         float clipLength = audiosource.clip.length;
         //destroy object at the end
         Destroy(audiosource.gameObject, clipLength);
+    }
+
+    private void UpdateVolume(float newVolume)
+    {
+        volumeLevel = newVolume; 
     }
 }
