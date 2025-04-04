@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     private SpriteRenderer playerSpriteRenderer;
 
     public Vector3 lastCheckpoint; // Last checkpoint position
+    [SerializeField] public Checkpoint checkpoint;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip damageSound;
@@ -47,6 +48,8 @@ public class PlayerHealth : MonoBehaviour
     {
         currentLives = maxLives;
         uiManager = FindObjectOfType<UIManager>();
+        checkpoint = FindAnyObjectByType<Checkpoint>();
+        lastCheckpoint = checkpoint.transform.position;
         uiManager?.UpdateHealth(currentLives);
 
         TryReassignPlayerObject();
@@ -61,6 +64,8 @@ public class PlayerHealth : MonoBehaviour
         {
             TryReassignPlayerObject();
         }
+
+        lastCheckpoint = checkpoint.transform.position;
     }
 
     public void Respawn(GameObject player)
@@ -94,6 +99,7 @@ public class PlayerHealth : MonoBehaviour
         if (newCheckpoint != Vector3.zero)
         {
             lastCheckpoint = newCheckpoint;
+
             Debug.Log("Checkpoint updated: " + lastCheckpoint);
         }
     }

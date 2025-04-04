@@ -45,6 +45,7 @@ public class BossEnemy : Enemy
     private bool isAttacking = false;
     private Vector3 originalPosition;
     private bool isExecutingAttackPattern = false;
+    bool isBossAlive = true;
 
     //unique anims
     private bool charging;
@@ -57,6 +58,7 @@ public class BossEnemy : Enemy
         bossAOEScript = controllerAOE.GetComponent<BossAOE>();
 
         charging = false;
+        isBossAlive = true;
     }
 
     protected override void Update()
@@ -64,22 +66,26 @@ public class BossEnemy : Enemy
         //base.Update();
 
         //ChasePlayer();
-
-        float playerDistance = Vector2.Distance(transform.position, playerFindTransform.position);
-
-        if (!isExecutingAttackPattern && playerDistance <= attackRange)
+        if (isBossAlive) 
         {
-            StartCoroutine(AttackPattern());
-            isExecutingAttackPattern = true;
+            float playerDistance = Vector2.Distance(transform.position, playerFindTransform.position);
+
+            if (!isExecutingAttackPattern && playerDistance <= attackRange)
+            {
+                StartCoroutine(AttackPattern());
+                isExecutingAttackPattern = true;
+            }
+
+            if (!isAttacking)
+            {
+                ChasePlayer();
+            }
+
+            HandleAnimation();        
+
         }
 
-        if (!isAttacking)
-        {
-            ChasePlayer();
-        }
-
-        HandleAnimation();
-        base.DeathDissolve();
+        DeathDissolve();
 
     }
 
@@ -315,6 +321,19 @@ public class BossEnemy : Enemy
 
         canDamagePlayer = true; // Re-enable damage after blinking
         isBlinking2 = false;
+    }
+
+    protected override void DeathDissolve()
+    {
+        if (isDissolving)
+        {
+            isBossAlive = false;
+            Destroy(controllerAOE);
+        }
+
+        base.DeathDissolve();
+        
+
     }
 
     private void Flip()

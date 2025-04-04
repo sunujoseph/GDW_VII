@@ -11,7 +11,7 @@ public class Checkpoint : MonoBehaviour
     protected Animator animator;
     private bool activated;
 
-   
+    public static Checkpoint currentCheckpoint;
 
     private void Awake()
     {

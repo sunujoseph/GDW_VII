@@ -39,10 +39,10 @@ public class Enemy : MonoBehaviour
     public Transform playerFindTransform; // Reference to the player's transform
 
     public bool isAlive = true;
-    Material mat;
+    public Material mat;
     [SerializeField] Material dissolveMaterial;
-    float fade;
-    bool isDissolving;
+    public float fade;
+    public bool isDissolving;
     private bool isBlinking = false;
 
 

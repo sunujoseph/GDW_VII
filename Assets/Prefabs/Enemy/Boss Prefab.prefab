@@ -779,7 +779,10 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   playerFindTransform: {fileID: 0}
   isAlive: 1
+  mat: {fileID: 0}
   dissolveMaterial: {fileID: 0}
+  fade: 0
+  isDissolving: 0
   moveRange: 1
   agroSize: {x: 10, y: 5}
   attackRange: 5

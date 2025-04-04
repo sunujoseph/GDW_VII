@@ -47,7 +47,7 @@ public class PlayerInputController : MonoBehaviour
     private float groundedBufferCounter = 0f;
 
 
-
+    private Checkpoint checkpoint;
 
     // For jumping
     private bool jumpPressed;
@@ -154,13 +154,16 @@ public class PlayerInputController : MonoBehaviour
             Destroy(gameObject);
         }
 
-
+        checkpoint = FindAnyObjectByType<Checkpoint>();
+        this.gameObject.transform.position = checkpoint.transform.position;
         
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        checkpoint = FindAnyObjectByType<Checkpoint>();
+        this.gameObject.transform.position = checkpoint.transform.position;
 
         TryReassign();
 

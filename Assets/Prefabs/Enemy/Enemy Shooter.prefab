@@ -192,7 +192,10 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   playerFindTransform: {fileID: 0}
   isAlive: 1
+  mat: {fileID: 0}
   dissolveMaterial: {fileID: 2100000, guid: 502f909eb91ab1840b0a383c4f290967, type: 2}
+  fade: 0
+  isDissolving: 0
   projectilePrefab: {fileID: 8473217642505165313, guid: 1ce2dbb4c07481141b20c85e4635fc5f, type: 3}
   agroRange: 8
   fireRate: 1
