@@ -27230,7 +27230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: health
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: AOEsound

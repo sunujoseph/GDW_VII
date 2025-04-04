@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b025f27f672c2494baaf23c4123f5077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: 5.55, y: -3.33, z: 0}
+  pointA: {x: -7.08, y: 3.67, z: 0}
   pointB: {x: 8.61, y: -3.33, z: 0}
   patrolSpeed: 3
   health: 5
