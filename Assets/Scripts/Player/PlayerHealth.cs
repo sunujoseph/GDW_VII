@@ -65,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
             TryReassignPlayerObject();
         }
 
-        lastCheckpoint = checkpoint.transform.position;
+        //lastCheckpoint = checkpoint.transform.position;
     }
 
     public void Respawn(GameObject player)
