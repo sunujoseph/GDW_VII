@@ -3,7 +3,17 @@ guid: 36f41414eeb0057479335cecde526b44
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - damageSound: {instanceID: 0}
+  - deathSound: {instanceID: 0}
+  - attackSound: {instanceID: 0}
+  - playerHealth: {instanceID: 0}
+  - playerFindTransform: {instanceID: 0}
+  - dissolveMaterial: {fileID: 2100000, guid: 502f909eb91ab1840b0a383c4f290967, type: 2}
+  - attackHitbox: {instanceID: 0}
+  - spriteRenderer: {instanceID: 0}
+  - controllerAOE: {instanceID: 0}
+  - bossAOEScript: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

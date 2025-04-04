@@ -41,12 +41,17 @@ public class BossEnemy : Enemy
     private Vector3 originalPosition;
     private bool isExecutingAttackPattern = false;
 
+    //unique anims
+    private bool charging;
+
 
     protected override void Start()
     {
         base.Start();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         bossAOEScript = controllerAOE.GetComponent<BossAOE>();
+
+        charging = false;
     }
 
     protected override void Update()
@@ -69,7 +74,6 @@ public class BossEnemy : Enemy
         }
 
         HandleAnimation();
-        animator.SetBool("isAttacking", isAttacking);
         base.DeathDissolve();
 
     }
@@ -77,7 +81,8 @@ public class BossEnemy : Enemy
     protected override void HandleAnimation()
     {
         base.HandleAnimation();
-
+        animator.SetBool("isAttacking", isAttacking);
+        animator.SetBool("isCharging", charging);
     }
 
     private void PerpareLaserAttack()
@@ -171,6 +176,7 @@ public class BossEnemy : Enemy
 
         // Step 3: Return to original position or stop
         isAttacking = false;
+        charging = false;
     }
 
     private IEnumerator AttackPattern()
@@ -187,10 +193,12 @@ public class BossEnemy : Enemy
         }  
         else if (rand == 1)
         {
+            charging = true;
             yield return StartCoroutine(PerformChargeAttack());
         }  
         else if (rand == 2)
         {
+            charging = true;
             bossAOEScript.TriggerAOEAttack();
         }
             
