@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealth(int currentHealth)
     {
-        healthText.text = "HEALTH: " + currentHealth.ToString();
+        healthText.text = "X" + currentHealth.ToString();
     }
 
 
