@@ -9,6 +9,7 @@ public class Goal : MonoBehaviour
     [SerializeField] public PlayerHealth playerHealth;
 
     [SerializeField] public bool thisFix = false;
+    [SerializeField] public bool isDoneGame = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,14 +35,21 @@ public class Goal : MonoBehaviour
     void NextLevel()
     {
 
-        
+        if (!isDoneGame)
+        {
+            SceneManager.LoadScene(SceneNumber);
+            //playerHealth.checkpoint = FindAnyObjectByType<Checkpoint>();
+            Debug.Log("LOADING NEXT LEVEL?");
+        }
+        else
+        {
+            Application.Quit();
+        }
 
         // Intermission Screen?
         // Level up/Upgrade Screen?
         // Level Summary menu pops up?
-        SceneManager.LoadScene(SceneNumber);
-        //playerHealth.checkpoint = FindAnyObjectByType<Checkpoint>();
-        Debug.Log("LOADING NEXT LEVEL?");
+        
 
         // Load next scene
         //SceneManager.LoadScene(+1);
