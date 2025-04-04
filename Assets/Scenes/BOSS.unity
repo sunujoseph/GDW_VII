@@ -25819,13 +25819,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 838007894}
     - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: AOEsound
+      value: 
+      objectReference: {fileID: 8300000, guid: f1afa137147ae3c428488f3798f0cbcd, type: 3}
+    - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: pointA.y
       value: -1.91
       objectReference: {fileID: 0}
     - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: LaserSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 23893f7c125bf3c4faa665a0795508f7, type: 3}
+    - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: patrolSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
+      propertyPath: BossDashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 011c84957fab6ba4790fd6bff3b9da15, type: 3}
     - target: {fileID: 7724189806093714046, guid: 3d908cf3b121d9f4b9fa0d8663dcbd10, type: 3}
       propertyPath: dissolveMaterial
       value: 

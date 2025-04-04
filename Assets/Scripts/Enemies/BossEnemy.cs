@@ -35,6 +35,11 @@ public class BossEnemy : Enemy
     [SerializeField] private GameObject controllerAOE;
     [SerializeField] private BossAOE bossAOEScript;
 
+    [Header("Sounds")]
+    [SerializeField] public AudioClip AOEsound;
+    [SerializeField] public AudioClip BossDashSound;
+    [SerializeField] public AudioClip LaserSound;
+
     private Transform playerTransform;
     private bool isBlinking2 = false;
     private bool isAttacking = false;
@@ -119,6 +124,7 @@ public class BossEnemy : Enemy
             // Step 2: Activate laser fully
             laserSprite.color = laserActiveColor;
             laserCollider.enabled = true;
+            SoundManager.instance.Play(LaserSound, transform, 1.0f);
 
             yield return new WaitForSeconds(1f); // Laser active duration
 
@@ -166,6 +172,7 @@ public class BossEnemy : Enemy
         // Step 2: Charge
         float timer = 0f;
         Vector2 direction = (playerFindTransform.position.x > transform.position.x) ? Vector2.right : Vector2.left;
+        SoundManager.instance.Play(BossDashSound, transform, 1.0f);
 
         while (timer < chargeDuration)
         {
@@ -200,6 +207,7 @@ public class BossEnemy : Enemy
         {
             charging = true;
             bossAOEScript.TriggerAOEAttack();
+            SoundManager.instance.Play(AOEsound, transform, 1.0f);
         }
             
         yield return new WaitForSeconds(attackCooldown);

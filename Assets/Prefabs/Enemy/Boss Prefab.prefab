@@ -804,6 +804,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8801725395854967997}
   controllerAOE: {fileID: 4203613810490341839}
   bossAOEScript: {fileID: 3329520469419235614}
+  AOEsound: {fileID: 0}
+  BossDashSound: {fileID: 0}
+  LaserSound: {fileID: 0}
 --- !u!1 &2403626782786907416
 GameObject:
   m_ObjectHideFlags: 0

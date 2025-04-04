@@ -9,7 +9,7 @@ public class Finish : MonoBehaviour
     { 
         if (collision.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Level 2"); 
+            SceneManager.LoadScene("Level 2");
         }
     }
 }

@@ -96,7 +96,7 @@ public class FighterEnemy : Enemy
         if (playerFindTransform == null) return;
 
         // Stop at platform edges
-        if (IsAtEdge()) return;
+        //if (IsAtEdge()) return;
 
         float playerDistance = Vector2.Distance(transform.position, playerFindTransform.position);
 
